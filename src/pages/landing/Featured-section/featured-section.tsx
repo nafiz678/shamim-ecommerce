@@ -1,55 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
 import ProductsCard from '../Best-Deals/products-card';
 import type { ProductProps } from '../../../lib/type';
 import Button from '../../../components/ui/Button';
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
 
-export default function FeaturedSection() {
-  const [products, setProducts] = useState<ProductProps[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function fetchProducts() {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        const res = await fetch('/dummy_data/products.json', {
-          signal: controller.signal,
-        });
-
-        if (!res.ok) {
-          throw new Error('Failed to fetch products');
-        }
-
-        const data: ProductProps[] = await res.json();
-        setProducts(data);
-      } catch (err) {
-        if (err instanceof DOMException && err.name === 'AbortError') return;
-        setError(err instanceof Error ? err.message : 'Something went wrong');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchProducts();
-
-    return () => controller.abort();
-  }, []);
-
-  const productList = useMemo(() => products.slice(0, 8), [products]);
-
-  if (isLoading) {
-    return <div className="pt-5">Loading</div>;
-  }
-
-  if (error) {
-    return <div className="pt-5 text-red-500">{error}</div>;
-  }
-
+export default function FeaturedSection({
+  productList,
+}: {
+  productList: ProductProps[];
+}) {
   return (
     <section className="pt-16">
       <div className="grid grid-cols-12 gap-6">
@@ -69,17 +27,19 @@ export default function FeaturedSection() {
             </p>
 
             <div className="mb-8 flex items-center justify-center gap-1">
-              <span className="text-[10px] font-medium ">
-                Offers ends in:
-              </span>
+              <span className="text-[10px] font-medium ">Offers ends in:</span>
 
               <span className="rounded-sm bg-background px-1 py-0.5 text-[10px] font-medium uppercase ">
                 Ends of Christmas
               </span>
             </div>
 
-            <Button variant='secondary' rightIcon={ArrowRight02FreeIcons} className='px-7 py-5 rounded-sm uppercase'>
-                Shop Now
+            <Button
+              variant="secondary"
+              rightIcon={ArrowRight02FreeIcons}
+              className="px-7 py-5 rounded-sm uppercase"
+            >
+              Shop Now
             </Button>
 
             <img
