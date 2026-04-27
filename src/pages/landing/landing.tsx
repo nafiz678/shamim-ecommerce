@@ -7,6 +7,9 @@ import FeaturedSection from './Featured-section/featured-section';
 import Hero from './Hero/hero';
 import ProductBannerFirst from './Product-banner/product-banner-first';
 import ProductBannerSecond from './Product-banner/product-banner-second';
+import ProductBanner from './Product-banner/product-banner';
+import BLogs from './blog/blogs';
+import NewsLatter from './new-latter';
 
 export default function Landing() {
   const [products, setProducts] = useState<ProductProps[]>([]);
@@ -62,8 +65,13 @@ export default function Landing() {
         <FeaturedSection productList={productList} />
         <ProductBannerFirst />
         <ComputerAccessories productList={productList} />
-        <ProductBannerSecond />
       </div>
+      <ProductBannerSecond />
+      <div className="w-[70%] mx-auto">
+        <ProductBanner />
+      </div>
+      <BLogs />
+      <NewsLatter />
     </main>
   );
 }
