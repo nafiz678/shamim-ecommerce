@@ -3,8 +3,13 @@ import { Badge } from '../../../components/ui/badge';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 import ProductsPage from './products-page';
+import type { ProductProps } from '../../../lib/type';
 
-export default function BestDeals() {
+export default function BestDeals({
+  productList,
+}: {
+  productList: ProductProps[];
+}) {
   return (
     <div className="">
       <div className="flex items-center justify-between">
@@ -25,7 +30,7 @@ export default function BestDeals() {
         </Link>
       </div>
 
-      <ProductsPage />  
+      <ProductsPage products={productList}/>  
     </div>
   );
 }
