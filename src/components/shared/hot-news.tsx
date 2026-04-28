@@ -1,11 +1,17 @@
 import Button from '../ui/Button';
 import { useState } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link, useRouterState } from '@tanstack/react-router';
 import { ArrowRight02Icon, X } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 export default function HotNews() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
   const [visible, setVisible] = useState(true);
+
+  if (pathname !== '/') return null;
+
   return (
     <div
       className={`overflow-hidden transition-all duration-500 ease-linear ${
@@ -28,16 +34,20 @@ export default function HotNews() {
             <span className="font-medium">OFF</span>
           </div>
           {/* cta */}
-          <Link to='/shop'>
-            <Button rightIcon={ArrowRight02Icon} variant="accent" className="cursor-pointer rounded-xs text-xs font-semibold">
-              SHOP NOW 
+          <Link to="/shop">
+            <Button
+              rightIcon={ArrowRight02Icon}
+              variant="accent"
+              className="cursor-pointer rounded-xs text-xs font-semibold"
+            >
+              SHOP NOW
             </Button>
           </Link>
         </div>
 
         <button
           onClick={() => setVisible(false)}
-          className="p-1 bg-[#303639] mr-0 rounded-sm cursor-pointer absolute right-1" 
+          className="p-1 bg-[#303639] mr-0 rounded-sm cursor-pointer absolute right-1"
         >
           <HugeiconsIcon icon={X} className="size-4" />
         </button>
