@@ -9,7 +9,7 @@ import ProductBannerFirst from './Product-banner/product-banner-first';
 import ProductBannerSecond from './Product-banner/product-banner-second';
 import ProductBanner from './Product-banner/product-banner';
 import BLogs from './blog/blogs';
-import NewsLatter from './new-latter';
+import NewsLatter from './news-latter';
 
 export default function Landing() {
   const [products, setProducts] = useState<ProductProps[]>([]);
