@@ -75,7 +75,7 @@ const BannerCard = React.memo(function BannerCard({
 
 export default function ProductBannerFirst() {
   return (
-    <section className="grid grid-cols-1 gap-8 md:grid-cols-2 pt-16">
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 pt-16">
       <BannerCard
         image="/assets/images/products/apple.png"
         theme="light"
