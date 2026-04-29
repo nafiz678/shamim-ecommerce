@@ -17,7 +17,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
       {product.discount_percent && (
         <Badge
           className="absolute left-2.5 top-3 z-10 text-[10px] font-semibold"
-          variant="default"
+          variant="discount"
         >
           {product.discount_percent}% OFF
         </Badge>

@@ -16,7 +16,7 @@ export default function BestDeals({
         <div className="flex items-center justify-start gap-5">
           <h2 className="text-lg font-semibold">Best Deals</h2>
           <p className="text-xs">Deal ends in </p>
-          <Badge variant="default" className="text-xs font-base">
+          <Badge variant="discount" className="text-xs font-base">
             16d : 21h : 57m : 23s
           </Badge>
         </div>
