@@ -1,7 +1,7 @@
-import ProductsCard from '../Best-Deals/products-card';
 import type { ProductProps } from '../../../lib/type';
 import Button from '../../../components/ui/Button';
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
+import ProductsCard from '../../../components/ui/products-card';
 
 export default function FeaturedSection({
   productList,
