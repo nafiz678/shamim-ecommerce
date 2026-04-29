@@ -1,4 +1,4 @@
-import ProductsCard from './products-card';
+import ProductsCard from '../../../components/ui/products-card';
 import type { ProductProps } from '../../../lib/type';
 import { FeaturedProductCard } from './featured-product-card';
 
