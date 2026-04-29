@@ -23,9 +23,9 @@ export default function ProductBannerSecond() {
           <Button
             variant="secondary"
             rightIcon={ArrowRight02FreeIcons}
-            size='lg'
+            size="lg"
             className=""
-            iconClass='size-6'
+            iconClass="size-6"
           >
             Shop Now
           </Button>
