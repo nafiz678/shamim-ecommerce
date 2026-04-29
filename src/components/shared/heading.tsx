@@ -11,7 +11,7 @@ import {
   UserIcon,
 } from '@hugeicons/core-free-icons';
 import TopHeading from './top-header';
-import { SearchInput } from '../ui/search-input';
+import { SearchInput } from '../ui/Search-input';
 import Dropdown from '../ui/Dropdown';
 import { useState } from 'react';
 import type { Option } from '../../lib/type';
