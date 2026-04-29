@@ -30,7 +30,7 @@ export default function BestDeals({
         </Link>
       </div>
 
-      <ProductsPage products={productList}/>  
+      <ProductsPage products={productList} />
     </div>
   );
 }
