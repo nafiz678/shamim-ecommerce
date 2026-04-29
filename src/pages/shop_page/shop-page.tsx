@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import ShopHeading from './shop-heading';
 
 import type { ProductProps } from '../../lib/type';
-import ProductsCard from '../landing/Best-Deals/products-card';
 import SearchAndSort from './search-sort';
 import ShopSidebar from './shop-sidebar';
+import ProductsCard from '../../components/ui/products-card';
 
 export type SortBy = 'popular' | 'price-low-high' | 'price-high-low' | 'rating';
 
