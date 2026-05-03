@@ -16,10 +16,10 @@ export default function ProductsPage({ products }: ProductsPageProps) {
 
   return (
     <section className="pt-5">
-      <div className="grid grid-cols-12 items-center justify-center border border-border">
+      <div className="grid grid-cols-12 items-start justify-center border border-border">
         <FeaturedProductCard product={featuredProduct} />
 
-        <div className="col-span-9 grid grid-cols-4">
+        <div className="md:col-span-9 col-span-6 grid md:grid-cols-4 grid-cols-2">
           {productList.map((product) => (
             <ProductsCard key={product.id} product={product} />
           ))}
