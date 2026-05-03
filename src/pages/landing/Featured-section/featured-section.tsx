@@ -14,7 +14,7 @@ export default function FeaturedSection({
         {/* Left featured banner */}
         <div className="md:col-span-3 col-span-5">
           <div className="relative h-full min-h-full overflow-hidden rounded-sm bg-[#F2DC6D] px-6 pt-12 text-center space-y-2.5">
-            <p className="text-xxs font-semibold uppercase tracking-wide text-[#BE4646]">
+            <p className="text-xxs font-semibold uppercase tracking-wide #BE4646]">
               Computer & Accessories
             </p>
 
@@ -65,8 +65,8 @@ export default function FeaturedSection({
                     key={label}
                     className={
                       active
-                        ? 'border-b-2 cursor-pointer  border-secondary pb-1 px-1 font-semibold text-foreground md:text-xs sm:text-xxs text-[8px] text-nowrap'
-                        : 'text-foreground/40 md:text-xs sm:text-xxs text-[8px] pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary text-nowrap'
+                        ? 'border-b-2 cursor-pointer  border-secondary pb-1 px-1 font-semibold text-foreground md:text-xs sm:text-xxs text-sxs text-nowrap'
+                        : 'text-foreground/40 md:text-xs sm:text-xxs text-sxs pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary text-nowrap'
                     }
                   >
                     {label}
