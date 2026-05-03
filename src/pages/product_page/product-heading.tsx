@@ -21,7 +21,7 @@ export default function ProductHeading() {
   return (
     <div className="bg-muted w-full">
       <nav className="md:w-[70%] w-[95%] mx-auto py-5">
-        <ol className="flex items-center md:gap-2 gap-1 sm:text-xxs text-[8px] font-medium text-foreground/60">
+        <ol className="flex items-center md:gap-2 gap-1 sm:text-xxs text-sxs font-medium text-foreground/60">
           {breadcrumbs.map((item, index) => (
             <li
               key={item.href}
