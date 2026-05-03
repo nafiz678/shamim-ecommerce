@@ -111,7 +111,7 @@ export default function FeatureBar() {
 
   return (
     <div className="w-full pt-6 pb-18">
-      <div className="mx-auto flex w-full flex-col overflow-hidden rounded-lg border border-[#d9d9d9] sm:flex-row py-5 ">
+      <div className="mx-auto grid gap-2 md:grid-cols-4 grid-cols-2 w-full overflow-hidden rounded-lg border border-[#d9d9d9] py-5 ">
         {items.map((item) => (
           <FeatureCard item={item} />
         ))}
@@ -124,17 +124,15 @@ function FeatureCard({ item }: { item: FeatureItemProps }) {
   return (
     <div
       key={item.title}
-      className={`flex flex-1 items-center justify-center gap-5 px-4 border-r border-[#d9d9d9] w-2`}
+      className={`flex flex-1 items-center justify-center gap-5 px-4 border-r border-[#d9d9d9]`}
     >
-      <div className="flex items-center justify-center w-8">
-        {item.icon}
-      </div>
+      <div className="flex items-center justify-center lg:size-8 size-6">{item.icon}</div>
 
       <div className="">
-        <h3 className="text-xs tracking-[0.02em] leading-none uppercase">
+        <h3 className="md:text-xs text-xxs tracking-[0.02em] leading-none uppercase">
           {item.title}
         </h3>
-        <p className="mt-1 text-[10px] text-foreground/60 truncate">
+        <p className="mt-1 text-xxs text-foreground/60 truncate">
           {item.subtitle}
         </p>
       </div>
