@@ -7,6 +7,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import type { ProductProps } from '../../lib/type';
 import { Badge, type BadgeVariant } from './badge';
+import { Link } from '@tanstack/react-router';
 
 type ProductCardProps = {
   product: ProductProps;
@@ -59,10 +60,16 @@ export default function ProductsCard({
             icon={ShoppingCart02Icon}
             className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
           />
-          <HugeiconsIcon
-            icon={ViewIcon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
-          />
+          <Link
+            to={'/shop/$productId'}
+            params={{ productId: 'product_details' }}
+            className="inline-flex"
+          >
+            <HugeiconsIcon
+              icon={ViewIcon}
+              className="size-7 cursor-pointer rounded-full bg-background p-2 transition-colors duration-200 ease-in-out hover:bg-secondary hover:text-background md:size-10"
+            />
+          </Link>
         </div>
       </div>
 
