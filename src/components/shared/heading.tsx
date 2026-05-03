@@ -82,7 +82,7 @@ function BottomHeader() {
   return (
     <div className="flex md:items-center items-end flex-col md:flex-row justify-between py-2">
       {/* all menus */}
-      <div className="flex items-center flex-wrap sm:justify-center justify-end md:gap-4 gap-1.5 md:text-xs sm:text-xxs text-[8px]">
+      <div className="flex items-center flex-wrap sm:justify-center justify-end md:gap-4 gap-1.5 md:text-xs sm:text-xxs text-sxs">
         <Dropdown
           label=""
           value={category}
