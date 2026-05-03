@@ -102,7 +102,7 @@ export default function BLogs() {
         Latest News
       </h2>
 
-      <div className="w-[70%] mx-auto mt-10 grid grid-cols-1 justify-items-center gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="md:w-[70%] w-[95%] mx-auto mt-10 grid grid-cols-1 justify-items-center gap-4 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
           <NewsCard key={post.author} post={post} />
         ))}
