@@ -34,7 +34,7 @@ export default function ProductBannerSecond() {
         </div>
 
         <div className="relative mt-8 md:mt-0 flex h-full w-full flex-1 items-center justify-center md:justify-end">
-          <div className="absolute left-2 top-0 z-20 grid size-20 sm:size-24 md:size-32 place-items-center rounded-full border-4 sm:border-[5px] md:border-[6px] border-white bg-[#ffc8a3] text-base sm:text-lg md:text-[22px] font-bold tracking-[-0.04em] text-[#151515] md:-left-6 md:top-0.75">
+          <div className="absolute left-2 top-0 z-20 grid size-20 sm:size-24 md:size-32 place-items-center rounded-full border-4 sm:border-[5px] md:border-[6px] border-background bg-[#ffc8a3] text-base sm:text-lg md:text-[22px] font-bold tracking-[-0.04em] text-foreground md:-left-6 md:top-0.75">
             $1999
           </div>
 
