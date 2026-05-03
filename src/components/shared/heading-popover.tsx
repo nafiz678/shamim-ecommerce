@@ -249,14 +249,14 @@ function UserPopover({ isOpen }: { isOpen: boolean }) {
           <div className="mb-2 flex items-center justify-between">
             <label
               htmlFor="password"
-              className="block text-xs font-medium text-gray-700"
+              className="block text-xs font-medium text-foreground/80"
             >
               Password
             </label>
 
             <button
               type="button"
-              className="text-xs cursor-pointer font-medium text-[#2da5f3] hover:underline"
+              className="text-xs cursor-pointer font-medium text-primary hover:underline"
             >
               Forgot Password
             </button>
