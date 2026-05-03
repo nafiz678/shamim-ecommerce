@@ -5,17 +5,17 @@ import FeatureBar from './feature-bar';
 export default function Hero() {
   return (
     <>
-      <div className="flex items-center justify-between gap-5">
+      <div className="flex items-center flex-col md:flex-row justify-between gap-5">
         {/* left box */}
-        <div className="w-70% bg-muted rounded-md relative">
-          <div className="pl-14 pr-8 py-12 flex items-center justify-center">
+        <div className="bg-muted rounded-md relative">
+          <div className="md:pl-14 pl-8 md:pr-8 pr-4 py-8 md:py-16 lg:py-16 xl:py-8 flex md:items-center items-end justify-center">
             {/* text section */}
             <div className="space-y-3 w-[50%]">
               <div className="flex items-center justify-start gap-2 text-xs text-[#2484C2]">
                 <span className="w-6 bg-[#2484C2] h-0.5" />
                 <p>THE BEST PLACE TO PLAY</p>
               </div>
-              <h2 className="text-4xl font-semibold">Xbox Consoles</h2>
+              <h2 className="md:text-4xl sm:text-2xl text-xl font-semibold">Xbox Consoles</h2>
               <p className="text-[13px] text-foreground/80">
                 Save up to 50% on select Xbox games. Get 3 months of PC Game
                 Pass for $2 USD.
@@ -24,7 +24,7 @@ export default function Hero() {
               <Button
                 rightIcon={ArrowRight02Icon}
                 variant="secondary"
-                className="px-5"
+                className="px-5 whitespace-nowrap"
               >
                 SHOP NOW
               </Button>
@@ -50,7 +50,7 @@ export default function Hero() {
         </div>
 
         {/* right side */}
-        <div className="space-y-5 w-2/5">
+        <div className="space-y-5 lg:w-2/5 w-full">
           {/* top */}
           <div className="relative flex items-center justify-center bg-[#191C1F] text-white rounded-md overflow-hidden px-4">
             {/* title section */}
@@ -88,7 +88,7 @@ export default function Hero() {
           </div>
 
           {/* bottom */}
-          <div className="flex items-center justify-center gap-2 bg-muted py-7 px-6">
+          <div className="flex items-center justify-center md:gap-2 gap-10 bg-muted py-7 px-6">
             {/* image section */}
             <div className="">
               <img
