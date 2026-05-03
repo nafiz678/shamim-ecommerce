@@ -65,7 +65,7 @@ const BannerCard = React.memo(function BannerCard({
       />
 
       {badge ? (
-        <div className="absolute right-6 top-6 z-30 flex size-16 items-center justify-center rounded-full bg-text-primary text-lg font-medium tracking-[-.03em] text-white">
+        <div className="absolute right-6 top-6 z-30 flex size-16 items-center justify-center rounded-full bg-text-primary text-lg font-medium tracking-[-.03em] text-background">
           {badge}
         </div>
       ) : null}
