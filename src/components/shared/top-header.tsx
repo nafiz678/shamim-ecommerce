@@ -55,7 +55,7 @@ function Socials() {
   return (
     <>
       <div className="flex flex-wrap items-center justify-center gap-2.5">
-        <p className="md:text-xs text-xxs whitespace-nowrap">Follow us:</p>
+        <p className="md:text-xs text-xxs text-nowrap">Follow us:</p>
 
         <div className="flex flex-wrap items-center justify-center md:gap-2.5 gap-1.5">
           {topHeaderSocialLinks.map(({ name, href, Icon }) => (
