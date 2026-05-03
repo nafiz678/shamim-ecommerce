@@ -15,7 +15,7 @@ export default function Footer() {
             </a>
 
             <div>
-              <p className="text-xs font-medium leading-5 text-[#7f8a91]">
+              <p className="text-xs font-medium leading-5 text-background/50">
                 Customer Supports:
               </p>
               <p className="text-sm font-medium leading-6 cursor-pointer">
@@ -150,9 +150,15 @@ function StoreButton({ type }: { type: string }) {
   return (
     <button className="flex items-center gap-4 rounded-[3px] bg-[#30373b] px-3 py-3 text-left transition hover:bg-[#353d42] min-w-full cursor-pointer">
       {isApple ? (
-        <HugeiconsIcon icon={Apple} className="size-8 fill-white text-white" />
+        <HugeiconsIcon
+          icon={Apple}
+          className="size-8 fill-background text-background"
+        />
       ) : (
-        <HugeiconsIcon icon={Play} className="size-8 fill-white text-white" />
+        <HugeiconsIcon
+          icon={Play}
+          className="size-8 fill-background text-background"
+        />
       )}
       <span className="leading-none">
         <span className="block text-xxs">Get it now</span>
