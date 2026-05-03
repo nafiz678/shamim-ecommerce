@@ -13,10 +13,10 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
   const rating = Math.round(product.rating ?? 0);
   const tag = product.tags?.[0];
   return (
-    <article className="relative col-span-3 border-r border-border p-5">
+    <article className="relative md:col-span-3 col-span-6 border-r border-border md:p-5 p-2">
       {product.discount_percent && (
         <Badge
-          className="absolute left-2.5 top-3 z-10 text-[10px] font-semibold"
+          className="absolute left-2.5 top-3 z-10 text-xxs font-semibold"
           variant="discount"
         >
           {product.discount_percent}% OFF
@@ -25,7 +25,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
 
       {tag && (
         <Badge
-          className="absolute left-3 top-10 z-10 text-[10px] font-semibold"
+          className="absolute left-3 top-10 z-10 text-xxs font-semibold"
           variant="hot"
         >
           {tag}
@@ -48,7 +48,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
             <HugeiconsIcon
               key={index}
               icon={StarIcon}
-              className="size-4 text-accent"
+              className="md:size-4 size-3 text-accent"
               fill={index < rating ? 'currentColor' : 'transparent'}
             />
           ))}
@@ -62,37 +62,37 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
 
         <div className=" flex items-center gap-2">
           {product.original_price !== null && (
-            <span className="text-base text-foreground/60 line-through">
+            <span className="md:text-base text-sm text-foreground/60 line-through">
               ${product.original_price.toFixed(2)}
             </span>
           )}
 
-          <span className="text-base font-semibold text-text-primary">
+          <span className="md:text-base text-sm font-semibold text-text-primary">
             ${product.price.toFixed(2)}
           </span>
         </div>
 
         {product.description && (
-          <p className="line-clamp-3 text-[11px] text-foreground/50">
+          <p className="line-clamp-3 md:text-[11px] text-xxs text-foreground/50">
             {product.description}
           </p>
         )}
 
-        <div className="mt-2 flex items-center justify-between gap-3">
+        <div className="mt-2 flex items-center justify-between md:gap-3 gap-1">
           <Button
             className="rounded bg-secondary/30 hover:bg-secondary/40"
             size="sm"
           >
-            <HugeiconsIcon icon={FavouriteIcon} className="size-4" />
+            <HugeiconsIcon
+              icon={FavouriteIcon}
+              className="md:size-4 size-3.5"
+            />
           </Button>
 
-          <Button
-            variant="secondary"
-            className="rounded text-[10px] font-medium "
-          >
-            <span className="flex items-center justify-center gap-2">
+          <Button variant="secondary" className="rounded text-xxs font-medium">
+            <span className="flex items-center justify-center md:gap-2 gap-1">
               <HugeiconsIcon icon={ShoppingCart02Icon} className="size-4" />
-              ADD TO CARD
+              <span className="text-xxs ">ADD TO CARD</span>
             </span>
           </Button>
 
@@ -100,7 +100,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
             className="rounded bg-secondary/30 hover:bg-secondary/40"
             size="sm"
           >
-            <HugeiconsIcon icon={ViewIcon} className="size-4" />
+            <HugeiconsIcon icon={ViewIcon} className="md:size-4 size-3.5" />
           </Button>
         </div>
       </div>
