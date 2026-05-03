@@ -52,7 +52,7 @@ export default function SearchAndSort({
             value={sortBy}
             options={sortOptions}
             onChange={(value) => setSortBy(value as SortBy)}
-            className="w-full text-xs border border-[#dfe6ea] bg-white  text-foreground/70 text-nowrap md:py-2.5 py-2"
+            className="w-full text-xs border border-[#dfe6ea] bg-background  text-foreground/70 text-nowrap md:py-2.5 py-2"
           />
         </div>
       </div>
