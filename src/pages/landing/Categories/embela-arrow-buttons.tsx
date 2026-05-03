@@ -76,7 +76,7 @@ export const PrevButton = (props: PropType) => {
       type="button"
       {...restProps}
     >
-      <div className="size-8 flex items-center justify-center rounded-full bg-secondary">
+      <div className="sm:size-8 size-5 p-1 sm:p-0 flex items-center justify-center rounded-full bg-secondary">
         <HugeiconsIcon icon={ArrowLeft02FreeIcons} />
       </div>
       {children}
@@ -95,7 +95,7 @@ export const NextButton = (props: PropType) => {
       type="button"
       {...restProps}
     >
-      <div className="size-8 flex items-center justify-center rounded-full bg-secondary">
+      <div className="sm:size-8 size-5 p-1 sm:p-0 flex items-center justify-center rounded-full bg-secondary">
         <HugeiconsIcon icon={ArrowRight02FreeIcons} />
       </div>
       {children}
