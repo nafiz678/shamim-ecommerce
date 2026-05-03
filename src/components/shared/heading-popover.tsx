@@ -240,7 +240,8 @@ function UserPopover({ isOpen }: { isOpen: boolean }) {
             id="email"
             type="email"
             autoComplete="email"
-            className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border placeholder:text-foreground/45"
+            placeholder='Email'
+            className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border text-foreground placeholder:text-foreground/45"
           />
         </div>
 
@@ -265,8 +266,9 @@ function UserPopover({ isOpen }: { isOpen: boolean }) {
             <input
               id="password"
               type="password"
+              placeholder='Password'
               autoComplete="current-password"
-              className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border placeholder:text-foreground/45"
+              className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border text-foreground placeholder:text-foreground/45"
             />
 
             <button
