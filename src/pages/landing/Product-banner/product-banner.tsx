@@ -1,6 +1,6 @@
 export default function ProductBanner() {
   return (
-    <section className="w-full bg-white pt-6 font-sans text-[#222]">
+    <section className="w-full bg-background pt-6 font-sans text-foreground">
       <div className="mx-auto grid grid-cols-1 gap-x-5 gap-y-8 px-4 sm:grid-cols-2 xl:grid-cols-4 xl:px-0">
         {columns.map((column) => (
           <div key={column.title} className="min-w-0">
