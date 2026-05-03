@@ -12,11 +12,11 @@ export default function BestDeals({
 }) {
   return (
     <div className="">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center justify-start gap-5">
-          <h2 className="text-lg font-semibold">Best Deals</h2>
-          <p className="text-xs">Deal ends in </p>
-          <Badge variant="discount" className="text-xs font-base">
+      <div className="flex items-center justify-between gap-1">
+        <div className="flex items-center justify-start sm:gap-5 gap-3">
+          <h2 className="md:text-lg text-base font-semibold">Best Deals</h2>
+          <p className="md:text-xs text-xxs">Deal ends in </p>
+          <Badge variant="discount" className="md:text-xs text-xxs font-base">
             16d : 21h : 57m : 23s
           </Badge>
         </div>
