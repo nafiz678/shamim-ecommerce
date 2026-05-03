@@ -98,7 +98,7 @@ function NewsCard({ post }: { post: PostProp }) {
 export default function BLogs() {
   return (
     <section className="mt-12 bg-muted py-16">
-      <h2 className="text-center text-[28px] font-extrabold tracking-[-0.02em] text-[#1f2329]">
+      <h2 className="text-center text-2xl font-extrabold tracking-[-0.02em]">
         Latest News
       </h2>
 
