@@ -21,11 +21,11 @@ export default function ProductsCard({
 }: ProductCardProps) {
   return (
     <article
-      className={`group relative font-sans border border-border p-3 space-y-2 rounded ${className} ${featured ? 'hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)] transition-shadow duration-200 ease-linear' : 'border-t-0'}`}
+      className={`group relative font-sans border border-border p-3 space-y-2 ${className} ${featured ? 'hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)] transition-shadow duration-200 ease-linear' : 'border-t-0'}`}
     >
       <div className="absolute left-2.5 top-3 z-10 flex flex-col gap-1">
         {product.discount_percent !== null && (
-          <Badge className="text-[10px] font-semibold" variant="discount">
+          <Badge className="text-xxs font-semibold" variant="discount">
             {product.discount_percent}% OFF
           </Badge>
         )}
@@ -33,7 +33,7 @@ export default function ProductsCard({
         {product.tags?.map((tag) => (
           <Badge
             key={tag}
-            className="text-[10px] font-semibold"
+            className="text-xxs font-semibold"
             variant={tag.toLowerCase().replaceAll(' ', '_') as BadgeVariant}
           >
             {tag}
@@ -53,15 +53,15 @@ export default function ProductsCard({
         <div className="absolute top-1/2 -translate-1/2 left-1/2 size-8 flex items-center justify-center rounded-full w-fit gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-linear">
           <HugeiconsIcon
             icon={FavouriteIcon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full size-10 transition-colors duration-200 ease-in-out"
+            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
           />
           <HugeiconsIcon
             icon={ShoppingCart02Icon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full size-10 transition-colors duration-200 ease-in-out"
+            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
           />
           <HugeiconsIcon
             icon={ViewIcon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full size-10 transition-colors duration-200 ease-in-out"
+            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
           />
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function ProductsCard({
           {product.title}
         </h3>
 
-        <div className=" flex items-center gap-2 text-xs">
+        <div className="flex flex-col sm:flex-row items-center gap-2 text-xs">
           {product.original_price !== null && (
             <span className="text-xs font-semibold text-foreground/50 line-through">
               ${product.original_price.toFixed(2)}
