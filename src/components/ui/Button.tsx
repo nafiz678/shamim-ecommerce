@@ -34,10 +34,10 @@ export default function Button({
 
   const variants: Record<Variant, string> = {
     accent: 'bg-accent/95 text-black hover:bg-accent',
-    secondary: 'bg-secondary/95 text-white hover:bg-secondary',
+    secondary: 'bg-secondary/95 text-background hover:bg-secondary',
     outline: 'border border-gray-300 text-gray-800 hover:bg-gray-100',
     ghost: 'text-gray-800 hover:bg-gray-100',
-    dark: 'bg-black text-white hover:bg-gray-900',
+    dark: 'bg-black text-background hover:bg-gray-900',
   };
 
   const sizes: Record<Size, string> = {
