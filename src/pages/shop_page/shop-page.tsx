@@ -88,9 +88,9 @@ export default function ShopPage() {
     <section>
       <ShopHeading />
 
-      <div className="w-[70%] mx-auto pt-10 min-h-screen">
+      <div className="md:w-[70%] w-[95%] mx-auto pt-10 min-h-screen">
         <div className="grid grid-cols-12 items-start justify-center gap-5">
-          <aside className="col-span-3">
+          <aside className="md:col-span-3 col-span-4">
             <ShopSidebar
               onCategoryChange={setSelectedCategory}
               selectedCategory={selectedCategory}
@@ -99,7 +99,7 @@ export default function ShopPage() {
             />
           </aside>
 
-          <main className="col-span-9">
+          <main className="md:col-span-9 col-span-8">
             <div className="mb-6">
               <SearchAndSort
                 query={query}
@@ -133,7 +133,7 @@ export default function ShopPage() {
             )}
 
             {!isLoading && !error && finalProducts.length > 0 && (
-              <div className="grid grid-cols-4 items-center justify-center gap-3 py-4">
+              <div className="grid lg:grid-cols-4 grid-cols-2 items-center justify-center gap-3 py-4">
                 {finalProducts.slice(0, 24).map((product) => (
                   <ProductsCard key={product.id} product={product} featured />
                 ))}
