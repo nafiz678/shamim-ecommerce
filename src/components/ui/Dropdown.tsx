@@ -15,7 +15,7 @@ type Option = {
 };
 
 type DropdownProps = {
-  label: string;
+  label?: string;
   value: string;
   options: Option[];
   onChange: (value: string) => void;
@@ -138,11 +138,12 @@ export default function Dropdown({
         aria-expanded={open}
         aria-controls={listboxId}
         onClick={() => (open ? close() : openMenu())}
-        className="inline-flex items-center md:gap-2 gap-1.5 rounded-md md:px-1.5 px-0.5 font-medium outline-none transition-all duration-300"
+        className="flex items-start md:gap-2 gap-1.5 rounded-md md:px-1.5 px-0.5 font-medium outline-none transition-all duration-300 cursor-pointer w-full justify-between"
       >
-        <span>{label}</span>
-        <span className="sr-only">Selected value:</span>
-        <span>{selectedOption?.label}</span>
+        <span className="min-w-0 flex-1 truncate text-left">
+          <span className="sr-only">Selected value:</span>
+          {selectedOption?.label || label}
+        </span>
         <HugeiconsIcon
           icon={ChevronDown}
           className={`md:size-4 size-3 transition-transform duration-200 ease-out ${open ? 'rotate-180' : 'rotate-0'}`}
@@ -151,7 +152,7 @@ export default function Dropdown({
       </button>
 
       <div
-        className={`absolute left-0 top-[calc(100%+8px)] z-20 min-w-42 origin-top rounded-xl border border-white/10 bg-[#0f4f85] p-1.5 shadow-2xl shadow-black/20 ring-1 ring-black/10 transition-all duration-200 ease-out will-change-transform ${
+        className={`absolute right-0 top-[calc(100%+8px)] z-20 min-w-42 origin-top rounded-xl border border-white/10 bg-primary p-1.5 shadow-2xl shadow-black/20 ring-1 ring-black/10 transition-all duration-200 ease-out will-change-transform ${
           open
             ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
             : 'pointer-events-none -translate-y-1 scale-[0.98] opacity-0'
@@ -178,8 +179,10 @@ export default function Dropdown({
                     onChange(option.value);
                     close();
                   }}
-                  className={`flex w-full items-center rounded-lg px-3 py-2 text-left transition-colors duration-150 ${
-                    isActive ? 'bg-background/12 text-white' : 'text-white/85'
+                  className={`flex w-full items-center rounded-lg px-3 py-2 text-left transition-colors duration-150 cursor-pointer ${
+                    isActive
+                      ? 'bg-background/12 text-background'
+                      : 'text-background/85'
                   } ${isSelected ? 'font-semibold' : 'font-normal'}`}
                 >
                   {option.label}
