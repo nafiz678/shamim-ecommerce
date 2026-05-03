@@ -15,7 +15,9 @@ export default function Hero() {
                 <span className="w-6 bg-[#2484C2] h-0.5" />
                 <p>THE BEST PLACE TO PLAY</p>
               </div>
-              <h2 className="md:text-4xl sm:text-2xl text-xl font-semibold">Xbox Consoles</h2>
+              <h2 className="md:text-4xl sm:text-2xl text-xl font-semibold">
+                Xbox Consoles
+              </h2>
               <p className="text-[13px] text-foreground/80">
                 Save up to 50% on select Xbox games. Get 3 months of PC Game
                 Pass for $2 USD.
@@ -24,7 +26,7 @@ export default function Hero() {
               <Button
                 rightIcon={ArrowRight02Icon}
                 variant="secondary"
-                className="px-5 whitespace-nowrap"
+                className="px-5 text-nowrap"
               >
                 SHOP NOW
               </Button>
@@ -44,7 +46,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <span className="bg-text-primary text-white size-18 absolute top-10 right-10 flex items-center justify-center rounded-full font-semibold">
+          <span className="bg-text-primary text-background size-18 absolute top-10 right-10 flex items-center justify-center rounded-full font-semibold">
             $299
           </span>
         </div>
@@ -52,7 +54,7 @@ export default function Hero() {
         {/* right side */}
         <div className="space-y-5 lg:w-2/5 w-full">
           {/* top */}
-          <div className="relative flex items-center justify-center bg-[#191C1F] text-white rounded-md overflow-hidden px-4">
+          <div className="relative flex items-center justify-center bg-[#191C1F] text-background rounded-md overflow-hidden px-4">
             {/* title section */}
             <div className="p-3 space-y-4 py-8">
               <span className="uppercase text-xs tracking-tight text-accent">
