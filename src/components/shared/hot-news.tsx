@@ -18,11 +18,11 @@ export default function HotNews() {
         visible ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
-      <div className="relative bg-[#191C1F] text-white flex items-center justify-between">
+      <div className="relative bg-foreground text-background flex items-center justify-between">
         <div className="lg:w-[70%] w-[85%] mx-auto sm:flex-row flex-col gap-1 flex items-center justify-between py-3 ">
           {/* black friday */}
           <div className="flex items-center gap-2 self-start">
-            <div className="bg-[#F3DE6D] text-foreground md:px-2 md:py-2 px-1 py-1.5 -rotate-4 flex items-center justify-center">
+            <div className="bg-badge text-foreground md:px-2 md:py-2 px-1 py-1.5 -rotate-4 flex items-center justify-center">
               <span className="md:font-medium text-sm md:text-base leading-[100%]">
                 Black
               </span>
@@ -31,7 +31,7 @@ export default function HotNews() {
           </div>
           {/* offer */}
           <div className="flex items-center justify-center gap-1.5 self-center">
-            <span className="md:text-[11px] text-xxs">Up to</span>
+            <span className="md:text-xs text-xxs">Up to</span>
             <span className="md:text-3xl text-xl font-medium text-accent">
               59%
             </span>
