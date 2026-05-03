@@ -9,26 +9,28 @@ export default function NewsLatter() {
           Subscribe to our newsletter
         </h2>
 
-        <p className="mt-3 w-2/6 text-[10px] font-medium leading-[1.45] tracking-[0.01em] text-white/55 sm:text-xs">
+        <p className="mt-3 md:w-2/6 w-4/6 text-xxs font-medium leading-[1.45] tracking-[0.01em] text-white/55 sm:text-xs">
           Praesent fringilla erat a lacinia egestas. Donec vehicula tempor
           libero et cursus. Donec non quam urna. Quisque vitae porta ipsum.
         </p>
 
-        <form className="mt-7 w-full overflow-hidden rounded bg-white shadow-[0_1px_2px_rgba(0,0,0,0.08)] sm:h-11 lg:mt-8 lg:h-14 max-w-3/8 flex items-center justify-center pr-2">
+        <form className="mt-7 flex w-full max-w-full items-center justify-center overflow-hidden rounded bg-white pr-2 shadow-[0_1px_2px_rgba(0,0,0,0.08)] sm:h-11 md:max-w-130 lg:mt-8 lg:h-14 lg:max-w-3/8">
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
           </label>
+
           <input
             id="newsletter-email"
             type="email"
             placeholder="Email address"
-            className="min-w-0 flex-1 border-0 bg-white px-4 text-[11px] font-medium text-slate-700 outline-none placeholder:text-[#7b8b96] sm:px-7 sm:text-[16px]"
+            className="min-w-0 flex-1 border-0 bg-background px-4 text-xxs font-medium text-foreground/70 outline-none placeholder:text-[#7b8b96] sm:px-7 sm:text-base py-4"
           />
+
           <Button
             rightIcon={ArrowRight02FreeIcons}
-            className="rounded"
+            className="shrink-0 whitespace-nowrap rounded px-3 text-xxs sm:px-4 sm:text-xs md:text-sm"
             variant="secondary"
-            iconClass="size-6"
+            iconClass="size-4 md:size-6"
           >
             SUBSCRIBE
           </Button>
@@ -36,9 +38,10 @@ export default function NewsLatter() {
 
         <div className="mt-8 h-px w-full max-w-110 bg-white/15 lg:mt-8" />
 
-        <div className="mt-5 flex w-full max-w-150 items-center justify-center gap-6 text-white/50 sm:gap-10 lg:gap-12">
-          <span className="opacity-60">
+        <div className="mt-5 flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-4 text-white/50 sm:gap-x-8 sm:gap-y-5 lg:flex-nowrap lg:gap-12">
+          <span className="flex shrink-0 opacity-60">
             <svg
+              className="h-auto w-13.5 sm:w-16 lg:w-18"
               width="72"
               height="24"
               viewBox="0 0 72 24"
@@ -54,6 +57,7 @@ export default function NewsLatter() {
 
           <span className="opacity-60">
             <svg
+              className="h-auto w-13 sm:w-16 lg:w-18"
               width="72"
               height="62"
               viewBox="0 0 72 72"
@@ -77,6 +81,7 @@ export default function NewsLatter() {
 
           <span className="opacity-60">
             <svg
+              className="h-auto w-13 sm:w-16 lg:w-18"
               width="72"
               height="62"
               viewBox="0 0 72 72"
@@ -92,6 +97,7 @@ export default function NewsLatter() {
 
           <span className="opacity-60">
             <svg
+              className="h-auto w-13 sm:w-16 lg:w-18"
               width="71"
               height="11"
               viewBox="0 0 71 11"
@@ -109,6 +115,7 @@ export default function NewsLatter() {
 
           <span className="opacity-60">
             <svg
+              className="h-auto w-13 sm:w-16 lg:w-18"
               width="72"
               height="24"
               viewBox="0 0 72 24"
