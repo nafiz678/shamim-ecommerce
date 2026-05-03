@@ -16,8 +16,8 @@ const breadcrumbs = [
 export default function ShopHeading() {
   return (
     <div className="bg-muted w-full">
-      <nav aria-label="Breadcrumb" className="w-[70%] mx-auto py-5">
-        <ol className="flex items-center gap-3 text-xs font-medium text-foreground/60">
+      <nav className="md:w-[70%] w-[95%] mx-auto py-5">
+        <ol className="flex items-center md:gap-3 gap-1 text-xs font-medium text-foreground/60">
           {breadcrumbs.map((item, index) => (
             <li key={item.href} className="flex items-center gap-3">
               {index > 0 && (
