@@ -73,7 +73,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
         </div>
 
         {product.description && (
-          <p className="line-clamp-3 md:text-[11px] text-xxs text-foreground/50">
+          <p className="line-clamp-3 md:text-xs text-xxs text-foreground/50">
             {product.description}
           </p>
         )}
