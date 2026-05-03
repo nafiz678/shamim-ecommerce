@@ -1,6 +1,7 @@
 import { Apple, ArrowRight02FreeIcons, Play } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { cn } from '../../lib/utils';
+import { FooterLogo } from '../icons/Icon';
 
 export default function Footer() {
   return (
@@ -9,20 +10,7 @@ export default function Footer() {
         <div className=" items-start grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-between gap-10 py-18">
           <section className="space-y-4 text-background">
             <a href="/" className="mb-3 flex items-center gap-3 cursor-pointer">
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M48 24c0 13.255-10.745 24-24 24S0 37.255 0 24 10.745 0 24 0s24 10.745 24 24m-12 0c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12m-12 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16"
-                  fill="#fa8232"
-                />
-              </svg>
+              <FooterLogo />
               <h2 className="text-2xl font-bold ">SHAMIM</h2>
             </a>
 
