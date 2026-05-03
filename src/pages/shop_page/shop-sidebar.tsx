@@ -47,7 +47,7 @@ export default function ShopSidebar({
                 key={category}
                 type="button"
                 onClick={() => onCategoryChange(isActive ? null : category)}
-                className="flex w-full items-center gap-3 text-left text-xs font-medium text-foreground/60 transition-colors duration-300
+                className="flex w-full items-center gap-3 text-left md:text-xs text-xxs font-medium text-foreground/60 transition-colors duration-300
                hover:text-foreground"
               >
                 <span
@@ -88,7 +88,7 @@ export default function ShopSidebar({
                 key={range}
                 type="button"
                 onClick={() => onPriceRangeChange(isActive ? null : range)}
-                className="flex w-full items-center gap-3 text-left text-xs font-medium text-foreground/60 transition-colors duration-300
+                className="flex w-full items-center gap-3 text-left md:text-xs text-xxs font-medium text-foreground/60 transition-colors duration-300
                hover:text-foreground"
               >
                 <span
@@ -129,7 +129,7 @@ export default function ShopSidebar({
                       : [...prev, brand],
                   )
                 }
-                className="flex items-center gap-2 text-xs text-foreground/70 hover:text-foreground"
+                className="flex items-center gap-2 md:text-xs text-xxs text-foreground/70 hover:text-foreground"
               >
                 <span
                   className={`flex size-4 items-center justify-center rounded border transition-colors ${
@@ -139,7 +139,7 @@ export default function ShopSidebar({
                   }`}
                 >
                   {isActive && (
-                    <span className="text-background text-[10px]">
+                    <span className="text-background text-xxs">
                       <HugeiconsIcon icon={CheckSquare} />
                     </span>
                   )}
@@ -173,10 +173,10 @@ export default function ShopSidebar({
                     isActive ? prev.filter((t) => t !== tag) : [...prev, tag],
                   )
                 }
-                className={`px-2.5 py-1 text-[10px] rounded-xs border transition-all duration-200
+                className={`px-2.5 py-1 text-xxs rounded-xs border transition-all duration-200
             ${
               isActive
-                ? 'border-secondary text-secoborder-secondary bg-orange-50'
+                ? 'border-secondary text-secondary bg-orange-50'
                 : 'border-border text-foreground/70 hover:border-gray-400'
             }`}
               >
@@ -189,7 +189,7 @@ export default function ShopSidebar({
 
       {/* apple banner */}
       <div className="w-full mt-5">
-        <article className="border-4 border-secondary/30 bg-white p-8 flex items-center justify-center flex-col">
+        <article className="border-4 border-secondary/30 p-1 sm:p-6 lg:p-8 flex items-center justify-center flex-col">
           <img
             src="/assets/images/brands/apple-watch.png"
             alt="Apple Watch Series 7"
@@ -200,38 +200,40 @@ export default function ShopSidebar({
             className="mb-3 object-contain"
           />
 
-          <div className="mb-2 flex items-center justify-center flex-col ">
-            <h3 className="text-2xl uppercase flex items-center justify-center font-bold size-full gap-1">
+          <div className="mb-2 flex items-center justify-center flex-col">
+            <h3 className="text-lg sm:text-2xl uppercase flex items-center justify-center font-bold size-full gap-1">
               <HugeiconsIcon
-                className="size-6 mb-1"
+                className="size-5 sm:size-6 mb-1"
                 fill="var(--color-foreground)"
                 icon={Apple}
               />{' '}
               <span>Watch</span>
             </h3>
-            <p className="mt-3 text-xs uppercase font-bold text-[#ef3b2d]">
+
+            <p className="mt-2 sm:mt-3 sm:text-xs text-xxs uppercase font-bold text-[#ef3b2d]">
               Series 7
             </p>
           </div>
 
-          <h2 className="mx-auto mb-3 text-lg text-center font-semibold leading-[1.2] text-[#1f2328]">
+          <h2 className="mx-auto mb-3 text-base sm:text-lg text-center font-semibold leading-[1.2] text-[#1f2328]">
             Heavy on Features. Light on Price.
           </h2>
 
-          <div className="mb-8 flex items-center justify-center gap-4">
-            <span className="text-[10px] font-normal text-[#5f6670]">
+          <div className="mb-6 sm:mb-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+            <span className="text-xxs font-normal text-[#5f6670]">
               Only for:
             </span>
-            <span className="rounded bg-badge px-2 py-1 text-xs font-semibold text-black">
+
+            <span className="rounded bg-badge px-2 py-1 text-xs font-semibold whitespace-nowrap">
               $299 USD
             </span>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4 w-full">
             <Button
               variant="secondary"
               leftIcon={ShoppingCart02Icon}
-              className="uppercase px-10 text-[10px] font-semibold text-nowrap"
+              className="uppercase w-full md:w-auto md:px-10 text-[8px] rounded-xs sm:text-xxs font-semibold text-nowrap"
               iconClass="size-4"
             >
               Add to cart
@@ -240,7 +242,7 @@ export default function ShopSidebar({
             <Button
               rightIcon={ArrowRight02FreeIcons}
               variant="outline"
-              className="border-2 border-secondary/70 w-full text-secondary font-semibold uppercase text-[10px] hover:bg-secondary/20"
+              className="border-2 border-secondary/70 w-full text-secondary font-semibold uppercase sm:text-xxs text-[8px] rounded-xs hover:bg-secondary/20 text-nowrap"
             >
               View details
             </Button>
