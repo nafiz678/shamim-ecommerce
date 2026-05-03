@@ -11,18 +11,18 @@ import {
   UserIcon,
 } from '@hugeicons/core-free-icons';
 import TopHeading from './top-header';
-import { SearchInput } from '../ui/Search-input';
 import Dropdown from '../ui/Dropdown';
 import { useState } from 'react';
 import type { Option } from '../../lib/type';
 import { HeaderLogo } from '../icons/Icon';
+import { SearchInput } from '../ui/search-input';
 
 export default function Heading() {
   return (
     <div>
       <TopHeading />
 
-      <div className="bg-primary text-white flex items-center justify-between border-t border-white/20">
+      <div className="bg-primary text-background flex items-center justify-between border-t border-border">
         <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
           <Link to="/" className="flex items-center justify-center gap-2">
