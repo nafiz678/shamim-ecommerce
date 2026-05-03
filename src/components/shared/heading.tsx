@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import {
   AlertCircleIcon,
   Calling02Icon,
@@ -22,7 +22,7 @@ export default function Heading() {
       <TopHeading />
 
       <div className="bg-primary text-white flex items-center justify-between border-t border-white/20">
-        <div className="md:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 gap-8">
+        <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
           <Link to="/" className="flex items-center justify-center gap-2">
             <svg
@@ -37,7 +37,7 @@ export default function Heading() {
                 fill="#fff"
               />
             </svg>
-            <h2 className="text-2xl font-semibold">SHAMIM</h2>
+            <h2 className="md:text-2xl text-xl font-semibold">SHAMIM</h2>
           </Link>
 
           {/* search */}
@@ -46,16 +46,27 @@ export default function Heading() {
           </div>
 
           {/* profile cart */}
-          <div className="flex items-center justify-center gap-6">
-            <HugeiconsIcon icon={ShoppingCart02Icon} />
-            <HugeiconsIcon icon={FavouriteIcon} />
-            <HugeiconsIcon icon={UserIcon} />
+          <div className="flex items-center justify-center gap-2 md:gap-5">
+            <div className="relative">
+              <HugeiconsIcon
+                className="size-5 md:size-6"
+                icon={ShoppingCart02Icon}
+              />
+
+              <span className="absolute -right-2 -top-2 flex size-3 sm:size-4 md:size-5 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-[#1f6f98]">
+                2
+              </span>
+            </div>
+
+            <HugeiconsIcon className="size-5 md:size-6" icon={FavouriteIcon} />
+
+            <HugeiconsIcon className="size-5 md:size-6" icon={UserIcon} />
           </div>
         </div>
       </div>
 
       <div className="flex items-center justify-between border-b border-foreground/10 py-1">
-        <div className="w-[70%] mx-auto">
+        <div className="lg:w-[70%] w-[95%] mx-auto">
           <BottomHeader />
         </div>
       </div>
@@ -80,39 +91,51 @@ export const categoryOptions: Option[] = [
 function BottomHeader() {
   const [category, setCategory] = useState('all');
   return (
-    <div className="flex items-center justify-between py-2 ">
+    <div className="flex md:items-center items-end flex-col md:flex-row justify-between py-2">
       {/* all menus */}
-      <div className="flex items-center justify-center gap-4 text-xs">
+      <div className="flex items-center flex-wrap sm:justify-center justify-end md:gap-4 gap-1.5 md:text-xs sm:text-xxs text-[8px]">
         <Dropdown
           label=""
           value={category}
           options={categoryOptions}
           onChange={setCategory}
-          className="flex items-center text-foreground px-3.5 py-2.5 bg-muted rounded-xs"
+          className="flex items-center text-foreground md:px-3.5 px-1.5 md:py-2.5 py-1.5 bg-muted rounded-xs text-nowrap"
         />
-        <div className="flex items-center justify-center gap-1 text-foreground/60">
-          <HugeiconsIcon className="size-5" icon={Location04Icon} />
-          <p>Track Order</p>
-        </div>
-        <div className="flex items-center justify-center gap-1 text-foreground/60">
-          <HugeiconsIcon className="size-5" icon={ReloadIcon} />
-          <p>Compare</p>
-        </div>
-        <div className="flex items-center justify-center gap-1 text-foreground/60">
-          <HugeiconsIcon className="size-5" icon={HeadphonesIcon} />
-          <p>Customer support</p>
-        </div>
-        <div className="flex items-center justify-center gap-1 text-foreground/60">
-          <HugeiconsIcon className="size-5" icon={AlertCircleIcon} />
-          <p>Need Help</p>
-        </div>
+        {quickLinks.map(({ label, icon }) => (
+          <div
+            key={label}
+            className="flex items-center justify-center gap-1 text-foreground/60 cursor-pointer"
+          >
+            <HugeiconsIcon className="md:size-5 size-3" icon={icon} />
+            <p className="text-nowrap">{label}</p>
+          </div>
+        ))}
       </div>
 
       {/* cta call */}
-      <div className="flex items-center justify-center gap-2 text-sm">
-        <HugeiconsIcon icon={Calling02Icon} className="size-5" />
-        <p>+1-202-555-0104</p>
+      <div className="flex items-center justify-center gap-2 md:text-sm cursor-pointer text-xs">
+        <HugeiconsIcon icon={Calling02Icon} className="md:size-5 size-4" />
+        <p className="text-nowrap">+1-202-555-0104</p>
       </div>
     </div>
   );
 }
+
+const quickLinks: { label: string; icon: IconSvgElement }[] = [
+  {
+    label: 'Track Order',
+    icon: Location04Icon,
+  },
+  {
+    label: 'Compare',
+    icon: ReloadIcon,
+  },
+  {
+    label: 'Customer support',
+    icon: HeadphonesIcon,
+  },
+  {
+    label: 'Need Help',
+    icon: AlertCircleIcon,
+  },
+];
