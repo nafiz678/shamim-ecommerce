@@ -50,12 +50,12 @@ export default function Button({
     <button
       disabled={disabled || loading}
       className={cn(
+        className,
         base,
         variants[variant],
         sizes[size],
         fullWidth && 'w-full',
         'disabled:cursor-not-allowed disabled:opacity-50',
-        className,
       )}
       {...props}
     >
