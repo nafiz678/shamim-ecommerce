@@ -19,26 +19,32 @@ export default function HotNews() {
       }`}
     >
       <div className="relative bg-[#191C1F] text-white flex items-center justify-between">
-        <div className="md:w-[70%] w-[85%] mx-auto flex items-center justify-between py-3">
+        <div className="lg:w-[70%] w-[85%] mx-auto sm:flex-row flex-col gap-1 flex items-center justify-between py-3 ">
           {/* black friday */}
-          <div className="flex items-center gap-2">
-            <div className="bg-[#F3DE6D] text-foreground px-2 py-1 -rotate-4">
-              <span className="md:font-medium text-sm md:text-base">Black</span>
+          <div className="flex items-center gap-2 self-start">
+            <div className="bg-[#F3DE6D] text-foreground md:px-2 md:py-2 px-1 py-1.5 -rotate-4 flex items-center justify-center">
+              <span className="md:font-medium text-sm md:text-base leading-[100%]">
+                Black
+              </span>
             </div>
-            <p className="text-lg">Friday</p>
+            <p className="md:text-lg text-sm">Friday</p>
           </div>
           {/* offer */}
-          <div className="flex items-center justify-center gap-1.5">
-            <span className="text-[11px]">Up to</span>
-            <span className="text-3xl font-medium text-accent">59%</span>
-            <span className="font-medium">OFF</span>
+          <div className="flex items-center justify-center gap-1.5 self-center">
+            <span className="md:text-[11px] text-xxs">Up to</span>
+            <span className="md:text-3xl text-xl font-medium text-accent">
+              59%
+            </span>
+            <span className="font-medium md:text-base sm:text-sm text-xxs">
+              OFF
+            </span>
           </div>
           {/* cta */}
-          <Link to="/shop">
+          <Link to="/shop" className="self-end">
             <Button
               rightIcon={ArrowRight02Icon}
               variant="accent"
-              className="cursor-pointer rounded-xs text-xs font-semibold"
+              className="cursor-pointer rounded-xs sm:text-xs text-xxs font-semibold md:px-4 sm:px-3! px-2! md:h-12 h-8!"
             >
               SHOP NOW
             </Button>
@@ -49,7 +55,7 @@ export default function HotNews() {
           onClick={() => setVisible(false)}
           className="p-1 bg-[#303639] mr-0 rounded-sm cursor-pointer absolute right-1"
         >
-          <HugeiconsIcon icon={X} className="size-4" />
+          <HugeiconsIcon icon={X} className="md:size-4 size-3" />
         </button>
       </div>
     </div>
