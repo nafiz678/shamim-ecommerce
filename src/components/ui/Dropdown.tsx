@@ -152,7 +152,7 @@ export default function Dropdown({
       </button>
 
       <div
-        className={`absolute right-0 top-[calc(100%+8px)] z-20 min-w-42 origin-top rounded-xl border border-white/10 bg-primary p-1.5 shadow-2xl shadow-black/20 ring-1 ring-black/10 transition-all duration-200 ease-out will-change-transform ${
+        className={`absolute right-0 top-[calc(100%+8px)] z-20 min-w-42 origin-top rounded-xl border border-background/10 bg-primary p-1.5 shadow-2xl shadow-black/20 ring-1 ring-black/10 transition-all duration-200 ease-out will-change-transform ${
           open
             ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
             : 'pointer-events-none -translate-y-1 scale-[0.98] opacity-0'
