@@ -54,11 +54,11 @@ export default function ShopSidebar({
                   className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isActive
                       ? 'border-secondary bg-secondary'
-                      : 'border-[#c7d0d6] bg-white'
+                      : 'border-[#c7d0d6] bg-background'
                   }`}
                 >
                   {isActive && (
-                    <span className="size-2 rounded-full bg-white" />
+                    <span className="size-2 rounded-full bg-background" />
                   )}
                 </span>
 
@@ -95,7 +95,7 @@ export default function ShopSidebar({
                   className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isActive
                       ? 'border-secondary border-2'
-                      : 'border-[#c7d0d6] bg-white'
+                      : 'border-[#c7d0d6] bg-background'
                   }`}
                 ></span>
 
@@ -215,7 +215,7 @@ export default function ShopSidebar({
             </p>
           </div>
 
-          <h2 className="mx-auto mb-3 text-base sm:text-lg text-center font-semibold leading-[1.2] text-[#1f2328]">
+          <h2 className="mx-auto mb-3 text-base sm:text-lg text-center font-semibold leading-[1.2] text-foreground/70">
             Heavy on Features. Light on Price.
           </h2>
 
@@ -224,7 +224,7 @@ export default function ShopSidebar({
               Only for:
             </span>
 
-            <span className="rounded bg-badge px-2 py-1 text-xs font-semibold whitespace-nowrap">
+            <span className="rounded bg-badge px-2 py-1 text-xs font-semibold text-nowrap">
               $299 USD
             </span>
           </div>
@@ -233,7 +233,7 @@ export default function ShopSidebar({
             <Button
               variant="secondary"
               leftIcon={ShoppingCart02Icon}
-              className="uppercase w-full md:w-auto md:px-10 text-[8px] rounded-xs sm:text-xxs font-semibold text-nowrap"
+              className="uppercase w-full md:w-auto md:px-10 text-sxs rounded-xs sm:text-xxs font-semibold text-nowrap"
               iconClass="size-4"
             >
               Add to cart
@@ -242,7 +242,7 @@ export default function ShopSidebar({
             <Button
               rightIcon={ArrowRight02FreeIcons}
               variant="outline"
-              className="border-2 border-secondary/70 w-full text-secondary font-semibold uppercase sm:text-xxs text-[8px] rounded-xs hover:bg-secondary/20 text-nowrap"
+              className="border-2 border-secondary/70 w-full text-secondary font-semibold uppercase sm:text-xxs text-sxs rounded-xs hover:bg-secondary/20 text-nowrap"
             >
               View details
             </Button>
@@ -287,11 +287,11 @@ function PriceRangeFilter() {
       <div className="my-2 flex items-center justify-center gap-3">
         <input
           placeholder="Min price"
-          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-white px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
+          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-background px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
         />
         <input
           placeholder="Max price"
-          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-white px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
+          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-background px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
         />
       </div>
     </div>
