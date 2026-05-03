@@ -3,12 +3,9 @@ import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import {
   AlertCircleIcon,
   Calling02Icon,
-  FavouriteIcon,
   HeadphonesIcon,
   Location04Icon,
   ReloadIcon,
-  ShoppingCart02Icon,
-  UserIcon,
 } from '@hugeicons/core-free-icons';
 import TopHeading from './top-header';
 import Dropdown from '../ui/Dropdown';
@@ -16,13 +13,14 @@ import { useState } from 'react';
 import type { Option } from '../../lib/type';
 import { HeaderLogo } from '../icons/Icon';
 import { SearchInput } from '../ui/search-input';
+import HeaderActions from './heading-popover';
 
 export default function Heading() {
   return (
     <div>
       <TopHeading />
 
-      <div className="bg-primary text-background flex items-center justify-between border-t border-border">
+      <div className="bg-primary text-background flex items-center justify-between border-t border-border/20 ">
         <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
           <Link to="/" className="flex items-center justify-center gap-2">
@@ -36,22 +34,23 @@ export default function Heading() {
           </div>
 
           {/* profile cart */}
-          <div className="flex items-center justify-center gap-2 md:gap-5">
+          {/* <div className="flex items-center justify-center gap-2 md:gap-5">
             <div className="relative">
               <HugeiconsIcon
-                className="size-5 md:size-6"
+                className="size-5 md:size-6 cursor-pointer"
                 icon={ShoppingCart02Icon}
               />
 
-              <span className="absolute -right-2 -top-2 flex size-3 sm:size-4 md:size-5 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-[#1f6f98]">
+              <span className="absolute -right-2 -top-2 flex size-3 sm:size-4 md:size-5 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-primary">
                 2
               </span>
             </div>
 
-            <HugeiconsIcon className="size-5 md:size-6" icon={FavouriteIcon} />
+            <HugeiconsIcon className="size-5 md:size-6 cursor-pointer" icon={FavouriteIcon} />
 
-            <HugeiconsIcon className="size-5 md:size-6" icon={UserIcon} />
-          </div>
+            <HugeiconsIcon className="size-5 md:size-6 cursor-pointer" icon={UserIcon} />
+          </div> */}
+          <HeaderActions />
         </div>
       </div>
 
