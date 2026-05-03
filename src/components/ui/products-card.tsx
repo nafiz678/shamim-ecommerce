@@ -82,7 +82,7 @@ export default function ProductsCard({
             </span>
           </div>
         )}
-        <h3 className="text-xs font-normal text-[#202833] overflow-hidden text-ellipsis line-clamp-2">
+        <h3 className="text-xs font-normal text-foreground/90 overflow-hidden text-ellipsis line-clamp-2">
           {product.title}
         </h3>
 
