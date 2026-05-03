@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="bg-[#191C1F]">
       <div className="w-[70%] mx-auto">
-        <div className="flex items-start justify-between gap-10 py-18">
+        <div className=" items-start grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-between gap-10 py-18">
           <section className="space-y-4 text-background">
-            <div className="mb-3 flex items-center gap-3">
+            <a href="/" className="mb-3 flex items-center gap-3 cursor-pointer">
               <svg
                 width="38"
                 height="38"
@@ -24,20 +24,22 @@ export default function Footer() {
                 />
               </svg>
               <h2 className="text-2xl font-bold ">SHAMIM</h2>
-            </div>
+            </a>
 
             <div>
               <p className="text-xs font-medium leading-5 text-[#7f8a91]">
                 Customer Supports:
               </p>
-              <p className="text-sm font-medium leading-6 ">(629) 555-0129</p>
+              <p className="text-sm font-medium leading-6 cursor-pointer">
+                (629) 555-0129
+              </p>
             </div>
             <p className="text-xs font-medium text-background/50">
               4517 Washington Ave.
               <br />
               <span className="text-nowrap">Manchester, Kentucky 39495</span>
             </p>
-            <p className="text-sm font-medium ">info@kinbo.com</p>
+            <p className="text-sm font-medium cursor-pointer">info@kinbo.com</p>
           </section>
 
           <section className="text-background">
@@ -46,7 +48,7 @@ export default function Footer() {
               {categories.map((item) => (
                 <li
                   key={item}
-                  className={`${item === 'Accessories' ? 'flex items-center gap-1' : ''}`}
+                  className={`cursor-pointer ${item === 'Accessories' ? 'flex items-center gap-1' : ''}`}
                 >
                   {item === 'Accessories' && (
                     <span className="h-px w-5 bg-badge" />
@@ -77,7 +79,9 @@ export default function Footer() {
             <h3 className="mb-6 text-sm uppercase text-nowrap">Quick Links</h3>
             <ul className="space-y-4 text-xs text-background/50">
               {links.map((item) => (
-                <li key={item}>{item}</li>
+                <li className="cursor-pointer" key={item}>
+                  {item}
+                </li>
               ))}
             </ul>
           </section>
@@ -156,14 +160,14 @@ const links: string[] = [
 function StoreButton({ type }: { type: string }) {
   const isApple = type === 'apple';
   return (
-    <button className="flex items-center gap-4 rounded-[3px] bg-[#30373b] px-3 py-3 text-left transition hover:bg-[#353d42] min-w-full">
+    <button className="flex items-center gap-4 rounded-[3px] bg-[#30373b] px-3 py-3 text-left transition hover:bg-[#353d42] min-w-full cursor-pointer">
       {isApple ? (
         <HugeiconsIcon icon={Apple} className="size-8 fill-white text-white" />
       ) : (
         <HugeiconsIcon icon={Play} className="size-8 fill-white text-white" />
       )}
       <span className="leading-none">
-        <span className="block text-[10px]">Get it now</span>
+        <span className="block text-xxs">Get it now</span>
         <span className="mt-1 block text-base text-nowrap">
           {isApple ? 'App Store' : 'Google Play'}
         </span>
