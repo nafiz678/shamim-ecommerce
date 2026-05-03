@@ -15,6 +15,7 @@ import { SearchInput } from '../ui/Search-input';
 import Dropdown from '../ui/Dropdown';
 import { useState } from 'react';
 import type { Option } from '../../lib/type';
+import { HeaderLogo } from '../icons/Icon';
 
 export default function Heading() {
   return (
@@ -25,18 +26,7 @@ export default function Heading() {
         <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
           <Link to="/" className="flex items-center justify-center gap-2">
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0m0 12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12m0 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16"
-                fill="#fff"
-              />
-            </svg>
+            <HeaderLogo />
             <h2 className="md:text-2xl text-xl font-semibold">SHAMIM</h2>
           </Link>
 
