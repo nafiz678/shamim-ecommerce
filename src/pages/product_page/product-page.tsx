@@ -15,7 +15,10 @@ import './carousal/carousal.css';
 import { Badge } from '../../components/ui/badge';
 import Dropdown from '../../components/ui/Dropdown';
 import Button from '../../components/ui/Button';
-import { ProductShareFacebookIcon, ProductSharePinterestIcon } from '../../components/icons/Icon';
+import {
+  ProductShareFacebookIcon,
+  ProductSharePinterestIcon,
+} from '../../components/icons/Icon';
 
 export default function ProductsDetailsPage() {
   const [selectedSize, setSelectedSize] = useState(
@@ -49,7 +52,7 @@ export default function ProductsDetailsPage() {
             <div className="flex text-secondary text-lg leading-none tracking-[1px]">
               ★★★★★
             </div>
-            <div className="text-xs text-[#27313d] font-semibold ml-0.5">
+            <div className="text-xs text-foreground/80 font-semibold ml-0.5">
               4.7 Star Rating
             </div>
             <div className="text-xxs text-foreground/60">
@@ -57,7 +60,7 @@ export default function ProductsDetailsPage() {
             </div>
           </div>
 
-          <h1 className="mt-1.5 text-base font-normal text-[#1d2733]">
+          <h1 className="mt-1.5 text-base font-normal text-foreground">
             2020 Apple MacBook Pro with Apple M1 Chip (13-inch, 8GB RAM,
             <br />
             256GB SSD Storage) -Space Gray
@@ -66,7 +69,7 @@ export default function ProductsDetailsPage() {
           <div className="mt-3.5 grid grid-cols-2 gap-2 text-xxs leading-none">
             <div>
               <span className="text-foreground/60">Sku:</span>{' '}
-              <span className="font-semibold text-[#1d2733]">A264671</span>
+              <span className="font-semibold text-foreground/80">A264671</span>
             </div>
             <div>
               <span className="text-foreground/60">Availability:</span>{' '}
@@ -74,21 +77,21 @@ export default function ProductsDetailsPage() {
             </div>
             <div>
               <span className="text-foreground/60">Brand:</span>{' '}
-              <span className="font-semibold text-[#1d2733]">Apple</span>
+              <span className="font-semibold text-foreground/80">Apple</span>
             </div>
             <div>
               <span className="text-foreground/60">Category:</span>{' '}
-              <span className="font-semibold text-[#1d2733]">
+              <span className="font-semibold text-foreground/80">
                 Electronics Devices
               </span>
             </div>
           </div>
 
           <div className="mt-4 flex items-center gap-2">
-            <span className="text-[18px] leading-none font-semibold text-[#1787e8]">
+            <span className="text-lg leading-none font-semibold text-text-primary">
               $1699
             </span>
-            <span className="text-[12px] line-through text-[#9ba3ad]">
+            <span className="text-xs line-through text-foreground/60">
               $1999.00
             </span>
             <Badge variant="discount" className="bg-accent text-xxs font-bold">
@@ -122,7 +125,7 @@ export default function ProductsDetailsPage() {
             </div>
 
             <div>
-              <div className="text-xxs font-medium text-[#34404d] mb-2">
+              <div className="text-xxs font-medium text-foreground/70 mb-2">
                 Memory
               </div>
               <Dropdown
@@ -134,7 +137,7 @@ export default function ProductsDetailsPage() {
             </div>
 
             <div>
-              <div className="text-xxs font-medium text-[#34404d] mb-2">
+              <div className="text-xxs font-medium text-foreground/70 mb-2">
                 Storage
               </div>
               <Dropdown
@@ -149,21 +152,21 @@ export default function ProductsDetailsPage() {
           <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
             <div className="border-2 border-border flex items-center justify-between gap-7 px-2.5 py-2.5 sm:w-auto w-full">
               <HugeiconsIcon icon={MinusSignIcon} size={13} strokeWidth={1.9} />
-              <span className="text-[12px]">01</span>
+              <span className="text-xs">01</span>
               <HugeiconsIcon icon={Add01Icon} size={13} strokeWidth={1.9} />
             </div>
 
             <Button
               variant="secondary"
               rightIcon={ShoppingCart02FreeIcons}
-              className="text-sm font-semibold px-6 sm:px-8 lg:px-6 xl:px-14 rounded-xs w-full sm:w-auto whitespace-nowrap"
+              className="text-sm font-semibold px-6 sm:px-8 lg:px-6 xl:px-14 rounded-xs w-full sm:w-auto text-nowrap"
             >
               ADD TO CART
             </Button>
 
             <Button
               variant="outline"
-              className="border-2 border-secondary/80 rounded-xs text-secondary font-semibold w-full sm:w-auto whitespace-nowrap"
+              className="border-2 border-secondary/80 rounded-xs text-secondary font-semibold w-full sm:w-auto text-nowrap"
             >
               BUY NOW
             </Button>
@@ -171,11 +174,11 @@ export default function ProductsDetailsPage() {
 
           <div className="mt-6 flex sm:flex-row flex-col sm:items-center items-end justify-between text-xxs text-foreground/70 gap-3">
             <div className="flex items-center sm:flex-row flex-col sm:gap-5 gap-3">
-              <div className="flex items-center gap-1 whitespace-nowrap">
+              <div className="flex items-center gap-1 text-nowrap">
                 <HugeiconsIcon icon={FavouriteIcon} className="size-4" /> Add to
                 Wishlist
               </div>
-              <div className="flex items-center gap-1 whitespace-nowrap">
+              <div className="flex items-center gap-1 text-nowrap">
                 <HugeiconsIcon
                   icon={ArrowReloadHorizontalIcon}
                   size={13}
@@ -184,7 +187,7 @@ export default function ProductsDetailsPage() {
                 Add to Compare
               </div>
             </div>
-            <div className="flex items-center gap-2 whitespace-nowrap">
+            <div className="flex items-center gap-2 text-nowrap">
               <span>Share product:</span>
 
               <HugeiconsIcon
@@ -204,7 +207,7 @@ export default function ProductsDetailsPage() {
           </div>
 
           <div className="mt-4.75 border border-border px-4 py-4">
-            <div className="text-[8px] font-semibold text-[#1f2a35] mb-2">
+            <div className="text-sxs font-semibold text-foreground/70 mb-2">
               100% Guarantee Safe Checkout
             </div>
             <img
