@@ -16,7 +16,7 @@ export function SearchInput() {
           icon={Search01Icon}
           size={24}
           strokeWidth={2.1}
-          className="shrink-0 text-foreground cursor-pointer"
+          className="shrink-0 text-foreground cursor-pointer md:size-6 size-5"
           aria-hidden="true"
         />
       </div>
