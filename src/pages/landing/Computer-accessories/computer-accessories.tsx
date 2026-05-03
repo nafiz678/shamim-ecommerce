@@ -87,26 +87,24 @@ export default function ComputerAccessories({
 
               {/* Summer sales banner */}
               <div className="overflow-hidden rounded-sm bg-[#124261] px-3 py-7 text-center">
-                <span className="inline-block rounded-sm bg-white/10 px-4 py-2 text-xxs font-medium uppercase text-background">
+                <span className="inline-block rounded-sm bg-background/10 px-4 py-2 text-xxs font-medium uppercase text-background">
                   Summer Sales
                 </span>
 
-                <h3 className="mt-5 text-xl font-semibold uppercase leading-none text-white">
+                <h3 className="mt-5 text-xl font-semibold uppercase leading-none text-background">
                   37% Discount
                 </h3>
 
-                <p className="mt-2 text-sm leading-6 text-white">
+                <p className="mt-2 text-sm leading-6 text-background">
                   only for{' '}
-                  <span className="font-semibold text-[#EBC80C]">
-                    SmartPhone
-                  </span>{' '}
+                  <span className="font-semibold text-badge">SmartPhone</span>{' '}
                   product.
                 </p>
 
                 <Button
                   variant="secondary"
                   rightIcon={ArrowRight02FreeIcons}
-                  className="mt-5 w-full rounded-sm bg-text-primary px-7 py-5 text-xs font-semibold uppercase tracking-wide text-white hover:bg-[#2DA5F3]/90"
+                  className="mt-5 w-full rounded-sm bg-text-primary px-7 py-5 text-xs font-semibold uppercase tracking-wide text-background hover:bg-text-primary/90"
                 >
                   Shop Now
                 </Button>
