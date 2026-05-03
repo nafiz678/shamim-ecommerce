@@ -38,7 +38,7 @@ export default function ProductDetailsTabs() {
             {navItems.map((item) => (
               <button
                 key={item}
-                className={`relative lg:h-full px-4 sm:px-5 pt-5 text-center text-xxs sm:text-xs font-medium tracking-[0.35px] whitespace-nowrap ${
+                className={`relative lg:h-full px-4 sm:px-5 pt-5 text-center text-xxs sm:text-xs font-medium tracking-[0.35px] text-nowrap ${
                   item === 'DESCRIPTION'
                     ? 'text-foreground'
                     : 'text-foreground/70'
