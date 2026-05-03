@@ -15,6 +15,7 @@ import './carousal/carousal.css';
 import { Badge } from '../../components/ui/badge';
 import Dropdown from '../../components/ui/Dropdown';
 import Button from '../../components/ui/Button';
+import { ProductShareFacebookIcon, ProductSharePinterestIcon } from '../../components/icons/Icon';
 
 export default function ProductsDetailsPage() {
   const [selectedSize, setSelectedSize] = useState(
@@ -185,62 +186,20 @@ export default function ProductsDetailsPage() {
             </div>
             <div className="flex items-center gap-2 whitespace-nowrap">
               <span>Share product:</span>
+
               <HugeiconsIcon
                 icon={Copy01Icon}
                 className="text-foreground/70 size-4 scale-y-[-1]"
               />
-              <div className="size-4">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clip-path="url(#a)">
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0"
-                      fill="#fa8232"
-                    />
-                    <path
-                      d="M9.041 15.933v-6.18h1.744l.231-2.176H9.041l.003-1.089c0-.567.054-.871.87-.871h1.09V3.441H9.26c-2.095 0-2.832 1.056-2.832 2.83v1.306H5.122v2.176h1.306v6.092a8 8 0 0 0 2.613.088"
-                      fill="#fff"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="a">
-                      <path fill="#fff" d="M0 0h16v16H0z" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </div>
+
+              <ProductShareFacebookIcon className="size-4" />
+
               <HugeiconsIcon
                 icon={TwitterIcon}
                 className="text-foreground/40 size-4 fill-foreground/60"
               />
-              <div className="size-4">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clip-path="url(#a)">
-                    <path
-                      d="M7.024.054C4.365.35 1.716 2.5 1.606 5.574c-.068 1.877.464 3.284 2.25 3.68.775-1.368-.25-1.67-.41-2.658C2.793 2.544 8.122-.22 10.91 2.609c1.93 1.96.66 7.986-2.452 7.36-2.981-.599 1.459-5.396-.92-6.338-1.935-.766-2.962 2.342-2.045 3.885C4.954 10.17 3.797 12.671 4.265 16c1.52-1.102 2.033-3.215 2.453-5.417.764.464 1.172.946 2.146 1.021 3.595.278 5.602-3.588 5.112-7.154C13.54 1.288 10.384-.321 7.024.054"
-                      fill="#5f6c72"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="a">
-                      <path fill="#fff" d="M0 0h16v16H0z" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </div>
+
+              <ProductSharePinterestIcon className="size-4" />
             </div>
           </div>
 
