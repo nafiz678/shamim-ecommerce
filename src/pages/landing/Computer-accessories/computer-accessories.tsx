@@ -15,35 +15,34 @@ export default function ComputerAccessories({
           {/* Right products section */}
           <div className="col-span-12 lg:col-span-9">
             {/* Header */}
-            <div className="mb-6 flex items-center justify-between">
+            <div className="md:mb-6 mb-2 flex md:items-center items-start justify-between flex-col md:flex-row ">
               <h2 className="text-lg text-nowrap font-semibold text-foreground">
                 Computer Accessories
               </h2>
 
-              <div className="hidden items-center gap-3 lg:flex">
-                <button className="border-b-2 cursor-pointer border-secondary pb-1 px-1 font-semibold text-foreground text-xs text-nowrap">
-                  All Product
-                </button>
-                <button className="text-foreground/40 text-xs pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary ">
-                  Keyboard & Mouse
-                </button>
-                <button className="text-foreground/40 text-xs pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary ">
-                  Headphone
-                </button>
-                <button className="text-foreground/40 text-xs pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary ">
-                  Webcam
-                </button>
-                <button className="text-foreground/40 text-xs pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary ">
-                  Printer
-                </button>
-                <button className="pb-1 cursor-pointer font-medium text-secondary text-xs">
+              <div className="sm:items-center items-end md:gap-3 gap-0 flex sm:flex-row flex-col">
+                <div className="flex items-center justify-center md:gap-3 gap-1.5">
+                  {productTabs.map((tab) => (
+                    <button
+                      key={tab}
+                      className={
+                        tab === 'All Product'
+                          ? 'border-b-2 cursor-pointer border-secondary pb-1 px-1 font-semibold text-foreground md:text-xs text-xxs pt-2 md:pt-0 text-nowrap'
+                          : 'text-foreground/40 md:text-xs text-xxs pt-2 md:pt-0 pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary text-nowrap'
+                      }
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </div>
+                <button className="pb-1 cursor-pointer font-medium text-secondary text-xs pt-2 md:pt-0">
                   Browse All Product →
                 </button>
               </div>
             </div>
 
             {/* Product grid */}
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {productList.map((product) => (
                 <ProductsCard featured key={product.id} product={product} />
               ))}
@@ -88,7 +87,7 @@ export default function ComputerAccessories({
 
               {/* Summer sales banner */}
               <div className="overflow-hidden rounded-sm bg-[#124261] px-3 py-7 text-center">
-                <span className="inline-block rounded-sm bg-white/10 px-4 py-2 text-[10px] font-medium uppercase text-background">
+                <span className="inline-block rounded-sm bg-white/10 px-4 py-2 text-xxs font-medium uppercase text-background">
                   Summer Sales
                 </span>
 
@@ -119,3 +118,11 @@ export default function ComputerAccessories({
     </div>
   );
 }
+
+const productTabs: string[] = [
+  'All Product',
+  'Keyboard & Mouse',
+  'Headphone',
+  'Webcam',
+  'Printer',
+];
