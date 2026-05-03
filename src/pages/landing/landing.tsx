@@ -58,7 +58,7 @@ export default function Landing() {
   }
   return (
     <main className="pt-6">
-      <div className="w-[70%] mx-auto">
+      <div className="lg:w-[70%] w-[95%] mx-auto">
         <Hero />
         <BestDeals productList={products} />
         <Categories />
@@ -67,7 +67,7 @@ export default function Landing() {
         <ComputerAccessories productList={productList} />
       </div>
       <ProductBannerSecond />
-      <div className="w-[70%] mx-auto">
+      <div className="md:w-[70%] w-[95%] mx-auto">
         <ProductBanner />
       </div>
       <BLogs />
