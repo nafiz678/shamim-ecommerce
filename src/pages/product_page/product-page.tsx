@@ -5,7 +5,6 @@ import {
   MinusSignIcon,
   ShoppingCart02FreeIcons,
   Copy01Icon,
-  TwitterIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useState } from 'react';
@@ -18,6 +17,7 @@ import Button from '../../components/ui/Button';
 import {
   ProductShareFacebookIcon,
   ProductSharePinterestIcon,
+  TwitterIcon,
 } from '../../components/icons/Icon';
 
 export default function ProductsDetailsPage() {
@@ -26,8 +26,18 @@ export default function ProductsDetailsPage() {
   );
   const [selectedMemory, setSelectedMemory] = useState('16gb-unified-memory');
   const [selectedStorage, setSelectedStorage] = useState('1tb-ssd-storage');
+  const [isFirstColorActive, setIsFirstColorActive] = useState<boolean>(true);
+  const [quantity, setQuantity] = useState<number>(1);
   const OPTIONS: EmblaOptionsType = { loop: true, dragFree: true };
-  // grid items-start gap-8 lg:gap-12 py-4 sm:py-6 box-border grid-cols-1 lg:grid-cols-12 w-full
+
+  const decreaseQuantity = () => {
+    setQuantity((prev) => Math.max(1, prev - 1));
+  };
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
   return (
     <div className="w-full md:w-[90%] lg:w-[85%] xl:w-[70%] mx-auto flex lg:p-0 px-2">
       <div className="grid items-start gap-8 lg:gap-12 py-4 sm:py-6 box-border grid-cols-1 lg:grid-cols-12 w-full">
@@ -103,57 +113,109 @@ export default function ProductsDetailsPage() {
 
           <div className="mt-4 grid grid-cols-2 gap-2">
             <div>
-              <div className="text-xxs font-medium mb-2">Color</div>
-              <div className="flex gap-2.5 items-center">
-                <div className="size-8 rounded-full border-2 border-secondary flex items-center justify-center">
-                  <div className="size-5.5 rounded-full bg-foreground/40" />
-                </div>
-                <div className="size-5.5 rounded-full bg-foreground/40" />
+              <div className="mb-2 text-xxs font-medium">Color</div>
+
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  aria-label="Select first color"
+                  aria-pressed={isFirstColorActive}
+                  onClick={() => setIsFirstColorActive(true)}
+                  className={`flex size-7 items-center justify-center rounded-full cursor-pointer ${
+                    isFirstColorActive ? 'ring-2 ring-secondary' : ''
+                  }`}
+                >
+                  <span className="size-5.5 rounded-full bg-foreground/40" />
+                </button>
+
+                <button
+                  type="button"
+                  aria-label="Select second color"
+                  aria-pressed={!isFirstColorActive}
+                  onClick={() => setIsFirstColorActive(false)}
+                  className={`flex size-7 cursor-pointer items-center justify-center rounded-full ${
+                    !isFirstColorActive ? 'ring-2 ring-secondary' : ''
+                  }`}
+                >
+                  <span className="size-5.5 rounded-full bg-foreground/40" />
+                </button>
               </div>
             </div>
 
-            <div className="">
-              <div className="text-xxs font-medium mb-2 text-foreground/80">
+            <div>
+              <div className="mb-2 text-xxs font-medium text-foreground/80">
                 Size
               </div>
+
               <Dropdown
                 onChange={(value) => setSelectedSize(value)}
                 options={sizeOptions}
                 value={selectedSize}
-                className="border border-border text-nowrap text-xxs text-foreground/60 py-2 rounded-xs"
+                dropdownWidth="auto"
+                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                itemClassName="text-xxs"
               />
             </div>
 
             <div>
-              <div className="text-xxs font-medium text-foreground/70 mb-2">
+              <div className="mb-2 text-xxs font-medium text-foreground/80">
                 Memory
               </div>
+
               <Dropdown
                 onChange={(value) => setSelectedMemory(value)}
                 options={memoryOptions}
                 value={selectedMemory}
-                className="border border-border text-nowrap text-xxs text-foreground/60 py-2 rounded-xs"
+                dropdownWidth="auto"
+                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                itemClassName="text-xxs"
               />
             </div>
 
             <div>
-              <div className="text-xxs font-medium text-foreground/70 mb-2">
+              <div className="mb-2 text-xxs font-medium text-foreground/80">
                 Storage
               </div>
+
               <Dropdown
                 onChange={(value) => setSelectedStorage(value)}
                 options={storageOptions}
                 value={selectedStorage}
-                className="border border-border text-nowrap text-xxs text-foreground/60 py-2 rounded-xs"
+                dropdownWidth="auto"
+                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                itemClassName="text-xxs"
               />
             </div>
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
-            <div className="border-2 border-border flex items-center justify-between gap-7 px-2.5 py-2.5 sm:w-auto w-full">
-              <HugeiconsIcon icon={MinusSignIcon} size={13} strokeWidth={1.9} />
-              <span className="text-xs">01</span>
-              <HugeiconsIcon icon={Add01Icon} size={13} strokeWidth={1.9} />
+            <div className="flex w-full items-center justify-between gap-7 border-2 border-border px-2.5 py-2.5 sm:w-auto">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                onClick={decreaseQuantity}
+                disabled={quantity === 1}
+                className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <HugeiconsIcon
+                  icon={MinusSignIcon}
+                  size={13}
+                  strokeWidth={1.9}
+                />
+              </button>
+
+              <span className="min-w-5 text-center text-xs">
+                {String(quantity).padStart(2, '0')}
+              </span>
+
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                onClick={increaseQuantity}
+                className="cursor-pointer"
+              >
+                <HugeiconsIcon icon={Add01Icon} size={13} strokeWidth={1.9} />
+              </button>
             </div>
 
             <Button
@@ -172,37 +234,66 @@ export default function ProductsDetailsPage() {
             </Button>
           </div>
 
-          <div className="mt-6 flex sm:flex-row flex-col sm:items-center items-end justify-between text-xxs text-foreground/70 gap-3">
-            <div className="flex items-center sm:flex-row flex-col sm:gap-5 gap-3">
-              <div className="flex items-center gap-1 text-nowrap">
-                <HugeiconsIcon icon={FavouriteIcon} className="size-4" /> Add to
-                Wishlist
-              </div>
-              <div className="flex items-center gap-1 text-nowrap">
+          <div className="mt-6 flex flex-col gap-3 text-xxs text-foreground/70 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+              <button
+                type="button"
+                className="flex cursor-pointer items-center gap-1 whitespace-nowrap "
+              >
+                <HugeiconsIcon icon={FavouriteIcon} className="size-4" />
+                <span>Add to Wishlist</span>
+              </button>
+
+              <button
+                type="button"
+                className="flex cursor-pointer items-center gap-1 whitespace-nowrap "
+              >
                 <HugeiconsIcon
                   icon={ArrowReloadHorizontalIcon}
                   size={13}
                   strokeWidth={1.7}
-                />{' '}
-                Add to Compare
-              </div>
+                />
+                <span>Add to Compare</span>
+              </button>
             </div>
-            <div className="flex items-center gap-2 text-nowrap">
-              <span>Share product:</span>
 
-              <HugeiconsIcon
-                icon={Copy01Icon}
-                className="text-foreground/70 size-4 scale-y-[-1]"
-              />
+            <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
+              <span className="whitespace-nowrap">Share product:</span>
 
-              <ProductShareFacebookIcon className="size-4" />
+              <button
+                type="button"
+                aria-label="Copy product link"
+                className="cursor-pointer text-foreground/70 "
+              >
+                <HugeiconsIcon
+                  icon={Copy01Icon}
+                  className="size-4 scale-y-[-1]"
+                />
+              </button>
 
-              <HugeiconsIcon
-                icon={TwitterIcon}
-                className="text-foreground/40 size-4 fill-foreground/60"
-              />
+              <button
+                type="button"
+                aria-label="Share on Facebook"
+                className="cursor-pointer"
+              >
+                <ProductShareFacebookIcon className="size-4" />
+              </button>
 
-              <ProductSharePinterestIcon className="size-4" />
+              <button
+                type="button"
+                aria-label="Share on Twitter"
+                className="cursor-pointer text-foreground/70 "
+              >
+                <TwitterIcon fill="color-mix(in srgb, var(--color-foreground) 65%, transparent)" />
+              </button>
+
+              <button
+                type="button"
+                aria-label="Share on Pinterest"
+                className="cursor-pointer"
+              >
+                <ProductSharePinterestIcon className="size-4" />
+              </button>
             </div>
           </div>
 
