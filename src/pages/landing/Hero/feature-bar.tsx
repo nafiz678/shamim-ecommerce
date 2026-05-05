@@ -31,31 +31,43 @@ export default function FeatureBar() {
   ];
 
   return (
-    <div className="w-full pt-6 pb-18">
-      <div className="mx-auto grid gap-2 md:grid-cols-4 grid-cols-2 w-full overflow-hidden rounded-lg border border-[#d9d9d9] py-5 ">
-        {items.map((item) => (
-          <FeatureCard item={item} />
+    <section className="w-full py-6 lg:pb-18">
+      <div className="mx-auto grid w-full grid-cols-1 overflow-hidden rounded-lg border border-border py-2 sm:grid-cols-2 sm:py-4 md:grid-cols-4 md:py-5">
+        {items.map((item, index) => (
+          <FeatureCard
+            key={item.title}
+            item={item}
+            isLast={index === items.length - 1}
+          />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
-function FeatureCard({ item }: { item: FeatureItemProps }) {
+function FeatureCard({
+  item,
+  isLast,
+}: {
+  item: FeatureItemProps;
+  isLast: boolean;
+}) {
   return (
     <div
-      key={item.title}
-      className={`flex flex-1 items-center justify-center gap-5 px-4 border-r border-[#d9d9d9]`}
+      className={`flex items-center gap-3 px-4 py-4 sm:justify-center sm:gap-4 md:gap-5 md:py-0 ${
+        isLast ? '' : 'border-b border-border sm:border-b-0 sm:border-r'
+      }`}
     >
-      <div className="flex items-center justify-center lg:size-8 size-6">
+      <div className="flex size-6 shrink-0 items-center justify-center lg:size-8">
         {item.icon}
       </div>
 
-      <div className="">
-        <h3 className="md:text-xs text-xxs tracking-[0.02em] leading-none uppercase">
+      <div className="min-w-0">
+        <h3 className="truncate text-xs leading-none tracking-wide uppercase">
           {item.title}
         </h3>
-        <p className="mt-1 text-xxs text-foreground/60 truncate">
+
+        <p className="mt-1 truncate text-xs text-muted-foreground">
           {item.subtitle}
         </p>
       </div>
