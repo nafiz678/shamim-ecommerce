@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../../components/ui/Button';
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
 import { Badge } from '../../../components/ui/badge';
+import { cn } from '../../../lib/utils';
 
 type BannerCardProps = {
   theme: 'light' | 'dark';
@@ -9,7 +10,7 @@ type BannerCardProps = {
   title: React.ReactNode;
   description: React.ReactNode;
   image: string;
-  imageClassName: string;
+  imageClassName?: string;
   imageAlt: string;
   badge?: string;
 };
@@ -28,21 +29,25 @@ const BannerCard = React.memo(function BannerCard({
 
   return (
     <article
-      className={`relative overflow-hidden rounded p-10 flex items-center justify-between ${isDark ? 'bg-foreground/95 ' : 'bg-muted'}`}
+      className={cn(
+        'relative flex flex-col gap-6 overflow-hidden rounded p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 md:p-10',
+        isDark ? 'bg-foreground text-background' : 'bg-muted text-foreground',
+      )}
     >
-      <div className={`relative z-20`}>
-        <Badge variant="best_deals" className="text-xs px-3 py-1.5">
+      <div className="relative z-20 flex-1">
+        <Badge variant="best_deals" className="px-3 py-1.5 text-xs">
           {label}
         </Badge>
 
-        <h2
-          className={`mt-3 text-2xl font-semibold tracking-[-.03em] ${isDark ? 'text-background' : 'text-foreground'}`}
-        >
+        <h2 className="mt-3 text-xl font-semibold tracking-tight sm:text-2xl">
           {title}
         </h2>
 
         <p
-          className={`mt-2 text-xs ${isDark ? 'text-background/85' : 'text-foreground/50'}`}
+          className={cn(
+            'mt-2 text-xs',
+            isDark ? 'text-background' : 'text-muted-foreground',
+          )}
         >
           {description}
         </p>
@@ -61,11 +66,14 @@ const BannerCard = React.memo(function BannerCard({
         alt={imageAlt}
         loading="lazy"
         decoding="async"
-        className={`pointer-events-none select-none object-contain size-44 ${imageClassName}`}
+        className={cn(
+          'pointer-events-none z-10 mx-auto size-40 select-none object-contain sm:mx-0 sm:size-44',
+          imageClassName,
+        )}
       />
 
       {badge ? (
-        <div className="absolute right-6 top-6 z-30 flex size-16 items-center justify-center rounded-full bg-text-primary text-lg font-medium tracking-[-.03em] text-background">
+        <div className="absolute right-4 top-4 z-30 flex size-14 items-center justify-center rounded-full bg-text-primary text-base font-medium tracking-tight text-background sm:right-6 sm:top-6 sm:size-16 sm:text-lg">
           {badge}
         </div>
       ) : null}
@@ -75,7 +83,7 @@ const BannerCard = React.memo(function BannerCard({
 
 export default function ProductBannerFirst() {
   return (
-    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 pt-16">
+    <section className="grid grid-cols-1 gap-4 pt-10 sm:gap-6 md:grid-cols-2 md:pt-16">
       <BannerCard
         image="/assets/images/products/apple.png"
         theme="light"
@@ -95,7 +103,6 @@ export default function ProductBannerFirst() {
           </>
         }
         imageAlt="Apple HomePod Mini"
-        imageClassName=""
       />
 
       <BannerCard
@@ -117,7 +124,7 @@ export default function ProductBannerFirst() {
           </>
         }
         imageAlt="Xiaomi Mi 11 Ultra"
-        imageClassName="absolute -bottom-1 -right-1 size-62"
+        imageClassName="sm:absolute sm:-bottom-1 sm:-right-1 sm:size-64"
         badge="$590"
       />
     </section>
