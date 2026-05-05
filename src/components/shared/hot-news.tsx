@@ -19,9 +19,9 @@ export default function HotNews() {
       }`}
     >
       <div className="relative bg-foreground text-background flex items-center justify-between">
-        <div className="lg:w-[70%] w-[85%] mx-auto sm:flex-row flex-col gap-1 flex items-center justify-between py-3 ">
+        <div className="lg:w-[70%] w-[85%] mx-auto min-[350px]:flex-row flex-col gap-1 flex items-center justify-between py-3 ">
           {/* black friday */}
-          <div className="flex items-center gap-2 self-start">
+          <div className="flex items-center gap-2 ">
             <div className="bg-badge text-foreground md:px-2 md:py-2 px-1 py-1.5 -rotate-4 flex items-center justify-center">
               <span className="md:font-medium text-sm md:text-base leading-[100%]">
                 Black
@@ -30,7 +30,7 @@ export default function HotNews() {
             <p className="md:text-lg text-sm">Friday</p>
           </div>
           {/* offer */}
-          <div className="flex items-center justify-center gap-1.5 self-center">
+          <div className="flex items-center justify-center gap-1.5 ">
             <span className="md:text-xs text-xxs">Up to</span>
             <span className="md:text-3xl text-xl font-medium text-accent">
               59%
@@ -40,7 +40,7 @@ export default function HotNews() {
             </span>
           </div>
           {/* cta */}
-          <Link to="/shop" className="self-end">
+          <Link to="/shop" className="">
             <Button
               rightIcon={ArrowRight02Icon}
               variant="accent"
