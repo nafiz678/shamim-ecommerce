@@ -5,14 +5,14 @@ import { cn } from '../../lib/utils';
 const breadcrumbs: { label: string; href: string; active?: boolean }[] = [
   { label: 'Home', href: '/' },
   { label: 'Shop', href: '/shop' },
-  { label: 'Shop Grid', href: '/shop/grid' },
+  { label: 'Shop Grid', href: '/shop' },
   {
     label: 'Electronics Devices',
-    href: '/shop/grid/electronics-devices',
+    href: '/shop',
   },
   {
     label: 'Macbook Pro',
-    href: '/shop/grid/electronics-devices',
+    href: '/shop',
     active: true,
   },
 ];
