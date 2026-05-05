@@ -17,7 +17,7 @@ type BadgeProps = {
 const badgeStyles: Record<BadgeVariant, string> = {
   discount: 'bg-badge text-gray-800',
   hot: 'bg-red-500 text-background',
-  sold_out: 'bg-slate-500 text-foreground',
+  sold_out: 'bg-slate-500 text-muted-foreground',
   sale: 'bg-[#2DB224] text-background',
   best_deals: 'bg-text-primary text-background',
 };
@@ -30,12 +30,12 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center justify-center rounded-xs px-2 py-1 text-sm  uppercase tracking-wide cursor-default',
+        'inline-flex max-w-full shrink-0 cursor-default items-center justify-center rounded-xs px-1.5 py-0.5 text-xxs uppercase tracking-wide sm:px-2 sm:py-1 sm:text-xs md:text-sm',
         badgeStyles[variant],
         className,
       )}
     >
-      {children}
+      <span className="truncate">{children}</span>
     </span>
   );
 }
