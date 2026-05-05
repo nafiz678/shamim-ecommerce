@@ -66,7 +66,7 @@ function BottomHeader() {
   const [category, setCategory] = useState('all');
   return (
     <div className="flex items-center justify-between border-b border-border py-1">
-      <div className="container mx-auto px-4">
+      <div className="lg:w-[70%] w-[95%] mx-auto">  
         <div className="flex flex-col gap-3 py-2 md:flex-row md:items-center md:justify-between">
           {/* all menus */}
           <div className="flex max-w-full flex-wrap items-center gap-2 sm:gap-3 text-xxs md:gap-4 md:text-xs">
