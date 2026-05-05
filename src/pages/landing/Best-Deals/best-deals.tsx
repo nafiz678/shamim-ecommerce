@@ -12,20 +12,23 @@ export default function BestDeals({
 }) {
   return (
     <div className="">
-      <div className="flex items-center justify-between gap-1">
-        <div className="flex items-center justify-start sm:gap-5 gap-3">
-          <h2 className="md:text-lg text-base font-semibold">Best Deals</h2>
-          <p className="md:text-xs text-xxs">Deal ends in </p>
-          <Badge variant="discount" className="md:text-xs text-xxs font-base">
+      <div className="flex flex-col gap-3 min-[450px]:flex-row min-[450px]:items-center min-[450px]:justify-between min-[450px]:gap-1">
+        <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 md:gap-5">
+          <h2 className="text-base font-semibold md:text-lg">Best Deals</h2>
+
+          <p className="text-xxs md:text-xs">Deal ends in</p>
+
+          <Badge variant="discount" className="text-xxs font-normal md:text-xs">
             16d : 21h : 57m : 23s
           </Badge>
         </div>
+
         {/* browse all products */}
         <Link
           to="/shop"
-          className="flex items-center justify-end gap-1 text-text-primary text-xs "
+          className="flex shrink-0 items-center justify-start gap-1 text-xs text-text-primary sm:justify-end "
         >
-          Browse All Products{' '}
+          <span className="whitespace-nowrap">Browse All Products</span>
           <HugeiconsIcon icon={ArrowRight02Icon} size={16} />
         </Link>
       </div>
