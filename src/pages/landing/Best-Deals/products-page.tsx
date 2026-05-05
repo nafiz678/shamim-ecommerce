@@ -19,7 +19,7 @@ export default function ProductsPage({ products }: ProductsPageProps) {
       <div className="grid grid-cols-12 items-start justify-center border border-border">
         <FeaturedProductCard product={featuredProduct} />
 
-        <div className="md:col-span-9 col-span-6 grid md:grid-cols-4 grid-cols-2">
+        <div className="md:col-span-9 col-span-12 grid md:grid-cols-4 grid-cols-2">
           {productList.map((product) => (
             <ProductsCard key={product.id} product={product} />
           ))}
