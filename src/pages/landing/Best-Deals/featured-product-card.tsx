@@ -13,7 +13,7 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
   const rating = Math.round(product.rating ?? 0);
   const tag = product.tags?.[0];
   return (
-    <article className="relative md:col-span-3 col-span-6 border-r border-border md:p-5 p-2">
+    <article className="relative md:col-span-3 col-span-12 border-r border-border md:p-5 p-2">
       {product.discount_percent && (
         <Badge
           className="absolute left-2.5 top-3 z-10 text-xxs font-semibold"
