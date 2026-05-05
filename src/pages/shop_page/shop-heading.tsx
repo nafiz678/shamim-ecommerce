@@ -17,9 +17,9 @@ export default function ShopHeading() {
   return (
     <div className="bg-muted w-full">
       <nav className="md:w-[70%] w-[95%] mx-auto py-5">
-        <ol className="flex items-center md:gap-3 gap-1 text-xs font-medium text-foreground/60">
+        <ol className="flex items-center md:gap-3 gap-1 sm:text-xs text-xxs font-medium text-foreground/60">
           {breadcrumbs.map((item, index) => (
-            <li key={item.href} className="flex items-center gap-3">
+            <li key={item.href} className="flex items-center sm:gap-3 gap-1.5 text-nowrap">
               {index > 0 && (
                 <HugeiconsIcon
                   icon={ArrowRight01Icon}
