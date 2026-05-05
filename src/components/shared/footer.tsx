@@ -6,8 +6,8 @@ import { FooterLogo } from '../icons/Icon';
 export default function Footer() {
   return (
     <footer className="bg-[#191C1F]">
-      <div className="w-[70%] mx-auto">
-        <div className=" items-start grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-between gap-10 py-18">
+      <div className="md:w-[70%] w-[85%] mx-auto">
+        <div className=" items-start grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-between gap-10 md:py-18 py-10">
           <section className="space-y-4 text-background">
             <a href="/" className="mb-3 flex items-center gap-3 cursor-pointer">
               <FooterLogo />
