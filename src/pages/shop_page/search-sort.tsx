@@ -31,12 +31,12 @@ export default function SearchAndSort({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for anything..."
-          className="w-full rounded-xs border border-border md:px-5.25 px-3 md:pr-16 pr-4 py-3 md:text-xs text-xxs font-normal text-[#22313a] shadow-sm outline-none transition-all duration-200 placeholder:text-xs placeholder:text-[#7b8f9b] focus:border-[#c7d3da] focus:shadow-lg"
+          className="w-full rounded-xs border border-border md:px-5.25 px-3 md:pr-16 pr-4 sm:py-3 py-2 md:text-xs text-xxs font-normal text-[#22313a] shadow-sm outline-none transition-all duration-200 placeholder:text-xs placeholder:text-[#7b8f9b]"
         />
 
         <HugeiconsIcon
           icon={Search}
-          className="absolute md:right-5.25 right-2 top-1/2 md:size-5 size-4 -translate-y-1/2 text-[#151f26] pointer-events-none"
+          className="absolute md:right-5.25 right-2 top-1/2 md:size-5 size-4 -translate-y-1/2 text-foreground pointer-events-none"
           strokeWidth={2}
         />
       </div>
@@ -52,7 +52,8 @@ export default function SearchAndSort({
             value={sortBy}
             options={sortOptions}
             onChange={(value) => setSortBy(value as SortBy)}
-            className="w-full text-xs border border-[#dfe6ea] bg-background  text-foreground/70 text-nowrap md:py-2.5 py-2"
+            className="w-full sm:text-xs text-xxs border border-[#dfe6ea] bg-background  text-foreground/70 text-nowrap md:py-2.5 py-2"
+            itemClassName='sm:text-xs text-xxs'
           />
         </div>
       </div>
