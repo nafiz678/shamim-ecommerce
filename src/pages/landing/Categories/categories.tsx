@@ -30,7 +30,7 @@ export const CATEGORY_DATA: CategoryProp[] = [
   },
   {
     id: 3,
-    title: 'Home & Living',
+    title: 'Living',
     image: '/placeholder.svg',
   },
   {
