@@ -22,7 +22,7 @@ export default function ProductsCard({
 }: ProductCardProps) {
   return (
     <article
-      className={`group relative font-sans border border-border p-3 space-y-2 ${className} ${featured ? 'hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)] transition-shadow duration-200 ease-linear' : 'border-t-0'}`}
+      className={`group relative font-sans border border-border p-3 space-y-2 ${className} ${featured ? 'hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)] transition-shadow duration-200 ease-linear' : ''}`}
     >
       <div className="absolute left-2.5 top-3 z-10 flex flex-col gap-1">
         {product.discount_percent !== null && (
@@ -93,7 +93,7 @@ export default function ProductsCard({
           {product.title}
         </h3>
 
-        <div className="flex flex-col sm:flex-row items-center gap-2 text-xs">
+        <div className="flex items-center gap-2 text-xs">
           {product.original_price !== null && (
             <span className="text-xs font-semibold text-foreground/50 line-through">
               ${product.original_price.toFixed(2)}
