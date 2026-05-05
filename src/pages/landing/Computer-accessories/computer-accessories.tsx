@@ -9,8 +9,8 @@ export default function ComputerAccessories({
   productList: ProductProps[];
 }) {
   return (
-    <div className="pt-10">
-      <section className="pt-16">
+    <div className="sm:pt-10 pt-4">
+      <section className="sm:pt-16 pt-4">
         <div className="grid grid-cols-12 gap-6">
           {/* Right products section */}
           <div className="col-span-12 lg:col-span-9">
@@ -42,7 +42,7 @@ export default function ComputerAccessories({
             </div>
 
             {/* Product grid */}
-            <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-2 sm:gap-5 gap-2 sm:grid-cols-2 xl:grid-cols-4">
               {productList.map((product) => (
                 <ProductsCard featured key={product.id} product={product} />
               ))}
