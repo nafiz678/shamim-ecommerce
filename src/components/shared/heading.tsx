@@ -20,45 +20,30 @@ export default function Heading() {
     <div>
       <TopHeading />
 
-      <div className="bg-primary text-background flex items-center justify-between border-t border-border/20 ">
+      <div className="bg-primary text-background flex items-center justify-between border-t border-border/20">
         <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
-          <Link to="/" className="flex items-center justify-center gap-2">
-            <HeaderLogo />
-            <h2 className="md:text-2xl text-xl font-semibold">SHAMIM</h2>
+          <Link
+            to="/"
+            className="flex shrink-0 items-center justify-center gap-2"
+          >
+            <HeaderLogo className="size-6 md:size-10" />
+            <h2 className="text-lg font-semibold md:text-2xl">SHAMIM</h2>
           </Link>
 
           {/* search */}
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex w-full flex-1 items-center justify-center sm:w-auto">
             <SearchInput />
           </div>
 
           {/* profile cart */}
-          {/* <div className="flex items-center justify-center gap-2 md:gap-5">
-            <div className="relative">
-              <HugeiconsIcon
-                className="size-5 md:size-6 cursor-pointer"
-                icon={ShoppingCart02Icon}
-              />
-
-              <span className="absolute -right-2 -top-2 flex size-3 sm:size-4 md:size-5 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-primary">
-                2
-              </span>
-            </div>
-
-            <HugeiconsIcon className="size-5 md:size-6 cursor-pointer" icon={FavouriteIcon} />
-
-            <HugeiconsIcon className="size-5 md:size-6 cursor-pointer" icon={UserIcon} />
-          </div> */}
-          <HeaderActions />
+          <div className="shrink-0">
+            <HeaderActions />
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-b border-foreground/10 py-1">
-        <div className="lg:w-[70%] w-[95%] mx-auto">
-          <BottomHeader />
-        </div>
-      </div>
+      <BottomHeader />
     </div>
   );
 }
@@ -80,31 +65,46 @@ export const categoryOptions: Option[] = [
 function BottomHeader() {
   const [category, setCategory] = useState('all');
   return (
-    <div className="flex md:items-center items-end flex-col md:flex-row justify-between py-2">
-      {/* all menus */}
-      <div className="flex items-center flex-wrap sm:justify-center justify-end md:gap-4 gap-1.5 md:text-xs sm:text-xxs text-sxs">
-        <Dropdown
-          label=""
-          value={category}
-          options={categoryOptions}
-          onChange={setCategory}
-          className="flex items-center text-foreground md:px-3.5 px-1.5 md:py-2.5 py-1.5 bg-muted rounded-xs text-nowrap"
-        />
-        {quickLinks.map(({ label, icon }) => (
-          <div
-            key={label}
-            className="flex items-center justify-center gap-1 text-foreground/60 cursor-pointer"
-          >
-            <HugeiconsIcon className="md:size-5 size-3" icon={icon} />
-            <p className="text-nowrap">{label}</p>
-          </div>
-        ))}
-      </div>
+    <div className="flex items-center justify-between border-b border-border py-1">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col gap-3 py-2 md:flex-row md:items-center md:justify-between">
+          {/* all menus */}
+          <div className="flex max-w-full flex-wrap items-center gap-2 sm:gap-3 text-xxs md:gap-4 md:text-xs">
+            <Dropdown
+              label=""
+              value={category}
+              options={categoryOptions}
+              onChange={setCategory}
+              className="flex items-center whitespace-nowrap rounded-xs bg-muted px-2 py-1.5 text-foreground sm:px-3 md:px-3.5 md:py-2.5"
+              itemClassName="text-xxs"
+              dropdownWidth="content"
+              align="left"
+            />
 
-      {/* cta call */}
-      <div className="flex items-center justify-center gap-2 md:text-sm cursor-pointer text-xs">
-        <HugeiconsIcon icon={Calling02Icon} className="md:size-5 size-4" />
-        <p className="text-nowrap">+1-202-555-0104</p>
+            {quickLinks.map(({ label, icon }) => (
+              <button
+                key={label}
+                type="button"
+                className="flex cursor-pointer items-center justify-center gap-1 whitespace-nowrap text-foreground/60 hover:text-foreground"
+              >
+                <HugeiconsIcon
+                  className="size-3 sm:size-4 md:size-5"
+                  icon={icon}
+                />
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* cta call */}
+          <button
+            type="button"
+            className="flex cursor-pointer items-center justify-start gap-2 text-xs md:justify-center md:text-sm"
+          >
+            <HugeiconsIcon icon={Calling02Icon} className="size-4 md:size-5" />
+            <span className="whitespace-nowrap">+1-202-555-0104</span>
+          </button>
+        </div>
       </div>
     </div>
   );
