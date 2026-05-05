@@ -28,7 +28,7 @@ const ProductCarousel = (props: PropType) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide, index) => (
-            <div className="embla__slide" key={index}>
+            <div className="embla__slide cursor-grab" key={index}>
               <div className="w-full flex flex-col items-center justify-center rounded">
                 <img
                   src={slide.image}
