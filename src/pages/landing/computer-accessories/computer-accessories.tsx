@@ -1,6 +1,6 @@
-import Button from '../../../components/ui/Button';
+import Button from '../../../components/ui/button';
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import type { ProductProps } from '../../../lib/type';
+import type { ProductProps } from '../../../lib/types';
 import ProductsCard from '../../../components/ui/products-card';
 
 export default function ComputerAccessories({
