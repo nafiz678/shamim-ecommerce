@@ -1,6 +1,6 @@
 import type { EmblaOptionsType } from 'embla-carousel';
 import './embela.css';
-import type { CategoryProp } from '../../../lib/type';
+import type { CategoryProp } from '../../../lib/types';
 import EmblaCarousel from './embela-carousel';
 
 export default function Categories() {
