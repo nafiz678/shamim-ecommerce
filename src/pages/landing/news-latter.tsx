@@ -1,5 +1,5 @@
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/button';
 import {
   AmazonLogoIcon,
   GoogleLogoIcon,
