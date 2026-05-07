@@ -2,8 +2,8 @@ import { Link } from '@tanstack/react-router';
 import { Badge } from '../../../components/ui/badge';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
+import type { ProductProps } from '../../../lib/types';
 import ProductsPage from './products-page';
-import type { ProductProps } from '../../../lib/type';
 
 export default function BestDeals({
   productList,
