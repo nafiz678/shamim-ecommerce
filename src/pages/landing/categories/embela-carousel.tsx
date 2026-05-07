@@ -1,6 +1,6 @@
 import type { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
-import type { CategoryProp } from '../../../lib/type';
+import type { CategoryProp } from '../../../lib/types';
 import {
   NextButton,
   PrevButton,
