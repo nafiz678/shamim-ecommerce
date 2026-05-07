@@ -1,6 +1,6 @@
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Search } from '@hugeicons/core-free-icons';
-import Dropdown from '../../components/ui/Dropdown';
+import Dropdown from '../../components/ui/dropdown';
 import type { Dispatch, SetStateAction } from 'react';
 import type { SortBy } from './shop-page';
 const sortOptions: { value: SortBy; label: string }[] = [
@@ -53,7 +53,7 @@ export default function SearchAndSort({
             options={sortOptions}
             onChange={(value) => setSortBy(value as SortBy)}
             className="w-full sm:text-xs text-xxs border border-[#dfe6ea] bg-background  text-foreground/70 text-nowrap md:py-2.5 py-2"
-            itemClassName='sm:text-xs text-xxs'
+            itemClassName="sm:text-xs text-xxs"
           />
         </div>
       </div>
