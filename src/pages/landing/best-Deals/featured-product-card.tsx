@@ -1,12 +1,12 @@
 import { HugeiconsIcon } from '@hugeicons/react';
-import type { ProductProps } from '../../../lib/type';
+import type { ProductProps } from '../../../lib/types';
 import {
   FavouriteIcon,
   ShoppingCart02Icon,
   StarIcon,
   ViewIcon,
 } from '@hugeicons/core-free-icons';
-import Button from '../../../components/ui/Button';
+import Button from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
 
 export function FeaturedProductCard({ product }: { product: ProductProps }) {
@@ -63,12 +63,12 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
         <div className=" flex items-center gap-2">
           {product.original_price !== null && (
             <span className="md:text-base text-sm text-foreground/60 line-through">
-              ${product.original_price.toFixed(2)}
+              {/* ${product.original_price.toFixed(2)} */}
             </span>
           )}
 
           <span className="md:text-base text-sm font-semibold text-text-primary">
-            ${product.price.toFixed(2)}
+            {/* ${product.price.toFixed(2)} */}
           </span>
         </div>
 
