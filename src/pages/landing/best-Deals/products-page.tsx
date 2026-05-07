@@ -1,5 +1,5 @@
 import ProductsCard from '../../../components/ui/products-card';
-import type { ProductProps } from '../../../lib/type';
+import type { ProductProps } from '../../../lib/types';
 import { FeaturedProductCard } from './featured-product-card';
 
 type ProductsPageProps = {
