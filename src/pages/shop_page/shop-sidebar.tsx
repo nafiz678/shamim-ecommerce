@@ -8,7 +8,7 @@ import {
   CheckSquare,
   ShoppingCart02Icon,
 } from '@hugeicons/core-free-icons';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/button';
 
 export type ShopSidebarProps = {
   selectedCategory: string | null;
