@@ -5,7 +5,7 @@ import {
   StarIcon,
   ViewIcon,
 } from '@hugeicons/core-free-icons';
-import type { ProductProps } from '../../lib/type';
+import type { ProductProps } from '../../lib/types';
 import { Badge, type BadgeVariant } from './badge';
 import { Link } from '@tanstack/react-router';
 
@@ -62,7 +62,7 @@ export default function ProductsCard({
           />
           <Link
             to={'/shop/$productId'}
-            params={{ productId: 'product_details' }}
+            params={{ productId: 'product' }}
             className="inline-flex"
           >
             <HugeiconsIcon
@@ -96,12 +96,12 @@ export default function ProductsCard({
         <div className="flex items-center gap-2 text-xs">
           {product.original_price !== null && (
             <span className="text-xs font-semibold text-foreground/50 line-through">
-              ${product.original_price.toFixed(2)}
+              {/* ${product.original_price.toFixed(2)} */}
             </span>
           )}
 
           <span className="text-xs font-semibold text-text-primary">
-            ${product.price.toFixed(2)}
+            {/* ${product.price.toFixed(2)} */}
           </span>
         </div>
       </div>
