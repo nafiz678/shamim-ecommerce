@@ -1,6 +1,6 @@
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
 import { Badge } from '../../../components/ui/badge';
-import Button from '../../../components/ui/Button';
+import Button from '../../../components/ui/button';
 
 export default function ProductBannerSecond() {
   return (
