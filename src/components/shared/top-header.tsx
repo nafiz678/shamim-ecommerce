@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Dropdown from '../ui/Dropdown';
-import type { Option } from '../../lib/type';
+import Dropdown from '../ui/dropdown';
+import type { Option } from '../../lib/types';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -16,16 +16,14 @@ export default function TopHeading() {
 
   return (
     <div className="bg-primary text-background">
-      <div className="lg:w-[70%] w-[95%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-2">
+      <div className="lg:w-[70%] w-[95%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-1">
         {/* left part */}
         <div className="text-center sm:text-left">
-          <p className="md:text-xs text-xxs">
-            Welcome to Clicon online eCommerce store.
-          </p>
+          <p className="text-xxs">Welcome to Clicon online eCommerce store.</p>
         </div>
 
         {/* right part */}
-        <div className="flex flex-wrap gap-5 items-center justify-center sm:justify-end gap-y-2">
+        <div className="flex flex-wrap items-center justify-center sm:justify-end gap-y-2">
           <Socials />
 
           <div className="flex items-center justify-center">
@@ -34,7 +32,7 @@ export default function TopHeading() {
               value={language}
               options={languages}
               onChange={setLanguage}
-              className="text-xs p-0"
+              className="text-xxs p-0"
             />
 
             <Dropdown
@@ -42,7 +40,7 @@ export default function TopHeading() {
               value={currency}
               options={currencies}
               onChange={setCurrency}
-              className="text-xs p-0"
+              className="text-xxs p-0"
             />
           </div>
         </div>
@@ -55,7 +53,7 @@ function Socials() {
   return (
     <>
       <div className="flex flex-wrap items-center justify-center gap-2.5">
-        <p className="md:text-xs text-xxs text-nowrap">Follow us:</p>
+        <p className="text-xxs text-nowrap">Follow us:</p>
 
         <div className="flex flex-wrap items-center justify-center md:gap-2.5 gap-1.5">
           {topHeaderSocialLinks.map(({ name, href, Icon }) => (
@@ -64,7 +62,7 @@ function Socials() {
               href={href}
               className="inline-flex rounded-sm transition-opacity hover:opacity-80"
             >
-              <Icon className="md:size-3.5 size-3 shrink-0" />
+              <Icon className="size-3 shrink-0" />
             </a>
           ))}
         </div>
