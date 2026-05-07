@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../components/ui/Button';
+import Button from '../../../components/ui/button';
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
 import { Badge } from '../../../components/ui/badge';
 import { cn } from '../../../lib/utils';
