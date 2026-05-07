@@ -2,7 +2,7 @@ import { Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { useEffect, useMemo, useState } from 'react';
 import ShopHeading from './shop-heading';
 
-import type { ProductProps } from '../../lib/type';
+import type { ProductProps } from '../../lib/types';
 import SearchAndSort from './search-sort';
 import ShopSidebar from './shop-sidebar';
 import ProductsCard from '../../components/ui/products-card';
