@@ -12,8 +12,8 @@ import ProductCarousel from './carousal/product-carousal';
 import type { EmblaOptionsType } from 'embla-carousel';
 import './carousal/carousal.css';
 import { Badge } from '../../components/ui/badge';
-import Dropdown from '../../components/ui/Dropdown';
-import Button from '../../components/ui/Button';
+import Dropdown from '../../components/ui/dropdown';
+import Button from '../../components/ui/button';
 import {
   ProductShareFacebookIcon,
   ProductSharePinterestIcon,
