@@ -4,7 +4,7 @@ import {
   SecurePaymentIcon,
   SupportIcon,
 } from '../../../components/icons/Icon';
-import type { FeatureItemProps } from '../../../lib/type';
+import type { FeatureItemProps } from '../../../lib/types';
 
 export default function FeatureBar() {
   const items: FeatureItemProps[] = [
