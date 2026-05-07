@@ -1,14 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { User } from '@supabase/supabase-js';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ShoppingCart02Icon,
   FavouriteIcon,
   UserIcon,
   Cancel01Icon,
-  ViewIcon,
   ArrowRight02FreeIcons,
 } from '@hugeicons/core-free-icons';
-import Button from '../ui/Button';
+
+import Button from '../ui/button';
+import { supabaseClient } from '../../lib/supabase-client';
+import LoginPopover from './login-popover';
 
 type PopoverType = 'cart' | 'user' | null;
 
@@ -31,16 +34,50 @@ const cartItems = [
 
 export default function HeaderActions() {
   const [activePopover, setActivePopover] = useState<PopoverType>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
+  const subtotal = useMemo(() => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
+  }, []);
 
   const togglePopover = (popover: Exclude<PopoverType, null>) => {
     setActivePopover((current) => (current === popover ? null : popover));
   };
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadSession() {
+      const {
+        data: { session },
+      } = await supabaseClient.auth.getSession();
+
+      if (!mounted) return;
+
+      setUser(session?.user ?? null);
+      setIsAuthLoading(false);
+    }
+
+    loadSession();
+
+    const {
+      data: { subscription },
+    } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setIsAuthLoading(false);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -72,7 +109,6 @@ export default function HeaderActions() {
       ref={wrapperRef}
       className="relative flex items-center justify-center gap-2 md:gap-5"
     >
-      {/* Cart Icon */}
       <div className="relative">
         <button
           type="button"
@@ -87,7 +123,7 @@ export default function HeaderActions() {
           />
 
           <span className="absolute -right-2 -top-2 flex size-3 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-primary sm:size-4 md:size-5">
-            2
+            {cartItems.length}
           </span>
         </button>
 
@@ -98,9 +134,9 @@ export default function HeaderActions() {
         />
       </div>
 
-      {/* Favourite Icon */}
       <button
         type="button"
+        aria-label="Open favourites"
         className="flex items-center justify-center outline-none transition-opacity hover:opacity-80"
       >
         <HugeiconsIcon
@@ -109,22 +145,30 @@ export default function HeaderActions() {
         />
       </button>
 
-      {/* User Icon */}
       <div className="relative">
         <button
           type="button"
           aria-label="Open account menu"
           aria-expanded={activePopover === 'user'}
           onClick={() => togglePopover('user')}
-          className="flex items-center justify-center outline-none transition-opacity hover:opacity-80"
+          className="relative flex items-center justify-center outline-none transition-opacity hover:opacity-80"
         >
           <HugeiconsIcon
             className="size-5 cursor-pointer md:size-6"
             icon={UserIcon}
           />
+
+          {user && (
+            <span className="absolute -right-1 -top-1 size-2 rounded-full bg-green-500" />
+          )}
         </button>
 
-        <UserPopover isOpen={activePopover === 'user'} />
+        <LoginPopover
+          isOpen={activePopover === 'user'}
+          user={user}
+          isAuthLoading={isAuthLoading}
+          onClose={() => setActivePopover(null)}
+        />
       </div>
     </div>
   );
@@ -142,14 +186,17 @@ function CartPopover({
   return (
     <div
       className={[
-        'absolute right-0 top-9 z-50 w-65 origin-top-right border border-border bg-background p-4 shadow-lg transition-all duration-300 ease-out sm:w-80 rounded-sm',
+        'absolute right-0 top-9 z-50 w-65 origin-top-right rounded-sm border border-border bg-background p-4 shadow-lg transition-all duration-300 ease-out sm:w-80',
         isOpen
           ? 'visible translate-y-0 scale-100 opacity-100'
           : 'invisible -translate-y-2 scale-95 opacity-0',
       ].join(' ')}
     >
       <h3 className="mb-4 text-sm font-medium text-foreground">
-        Shopping Cart <span className="text-foreground/60">(02)</span>
+        Shopping Cart{' '}
+        <span className="text-foreground/60">
+          ({String(cartItems.length).padStart(2, '0')})
+        </span>
       </h3>
 
       <div className="space-y-4">
@@ -179,7 +226,7 @@ function CartPopover({
             <button
               type="button"
               aria-label={`Remove ${item.title}`}
-              className="mt-1 flex size-5 shrink-0 items-center justify-center text-foreground/65 cursor-pointer transition-colors hover:text-foreground"
+              className="mt-1 flex size-5 shrink-0 cursor-pointer items-center justify-center text-foreground/65 transition-colors hover:text-foreground"
             >
               <HugeiconsIcon icon={Cancel01Icon} className="size-4" />
             </button>
@@ -198,7 +245,7 @@ function CartPopover({
         variant="secondary"
         onClick={onClose}
         rightIcon={ArrowRight02FreeIcons}
-        className="flex h-11 w-full items-center justify-center gap-2 bg-primary px-4 text-xs font-semibold uppercase tracking-wide transition-colors hover:bg-primary/90 flex-row"
+        className="flex h-11 w-full flex-row items-center justify-center gap-2 bg-primary px-4 text-xs font-semibold uppercase tracking-wide transition-colors hover:bg-primary/90"
       >
         Checkout Now
       </Button>
@@ -209,98 +256,6 @@ function CartPopover({
         className="mt-3 w-full border-2 border-secondary/60 uppercase text-secondary"
       >
         View Cart
-      </Button>
-    </div>
-  );
-}
-
-function UserPopover({ isOpen }: { isOpen: boolean }) {
-  return (
-    <div
-      className={[
-        'absolute right-0 top-9 z-50 w-65 origin-top-right border bg-background p-5 shadow-lg transition-all duration-300 ease-out sm:w-80',
-        isOpen
-          ? 'visible translate-y-0 scale-100 opacity-100'
-          : 'invisible -translate-y-2 scale-95 opacity-0',
-      ].join(' ')}
-    >
-      <h3 className="mb-5 text-center text-base font-semibold text-foreground">
-        Sign in to your account
-      </h3>
-
-      <form className="space-y-4">
-        <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block text-xs font-medium text-gray-700"
-          >
-            Email Address
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            placeholder='Email'
-            className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border text-foreground placeholder:text-foreground/45"
-          />
-        </div>
-
-        <div>
-          <div className="mb-2 flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="block text-xs font-medium text-foreground/80"
-            >
-              Password
-            </label>
-
-            <button
-              type="button"
-              className="text-xs cursor-pointer font-medium text-primary hover:underline"
-            >
-              Forgot Password
-            </button>
-          </div>
-
-          <div className="relative">
-            <input
-              id="password"
-              type="password"
-              placeholder='Password'
-              autoComplete="current-password"
-              className="h-10 w-full border px-3 text-sm outline-none transition-colors border-border text-foreground placeholder:text-foreground/45"
-            />
-
-            <button
-              type="button"
-              aria-label="Show password"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/50 cursor-pointer transition-colors hover:text-foreground"
-            >
-              <HugeiconsIcon icon={ViewIcon} className="size-4" />
-            </button>
-          </div>
-        </div>
-
-        <Button
-          variant="secondary"
-          rightIcon={ArrowRight02FreeIcons}
-          className="w-full uppercase font-semibold "
-        >
-          Login
-        </Button>
-      </form>
-
-      <div className="my-4 flex items-center gap-3">
-        <span className="h-px flex-1 bg-foreground/10" />
-        <span className="text-xs text-foreground/60">Don&apos;t have account</span>
-        <span className="h-px flex-1 bg-foreground/10" />
-      </div>
-
-      <Button
-        variant='outline'
-        className="w-full border-2 border-secondary/60 text-secondary"
-      >
-        Create Account
       </Button>
     </div>
   );
