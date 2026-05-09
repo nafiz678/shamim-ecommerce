@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import Dropdown from '../ui/dropdown';
-import type { Option } from '../../lib/types';
+import { useState } from "react";
+import Dropdown from "../ui/dropdown";
+import type { Option } from "../../lib/types";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -8,11 +8,11 @@ import {
   RedditIcon,
   TwitterIcon,
   YoutubeIcon,
-} from '../icons/Icon';
+} from "../icons/Icon";
 
 export default function TopHeading() {
-  const [language, setLanguage] = useState('en');
-  const [currency, setCurrency] = useState('usd');
+  const [language, setLanguage] = useState("en");
+  const [currency, setCurrency] = useState("usd");
 
   return (
     <div className="bg-primary text-background">
@@ -32,7 +32,9 @@ export default function TopHeading() {
               value={language}
               options={languages}
               onChange={setLanguage}
-              className="text-xxs p-0"
+              className="text-xxs p-0 "
+              itemClassName="text-xxs border-0"
+              triggerClassName="py-1"
             />
 
             <Dropdown
@@ -40,7 +42,9 @@ export default function TopHeading() {
               value={currency}
               options={currencies}
               onChange={setCurrency}
-              className="text-xxs p-0"
+              className="text-xxs p-0 "
+              itemClassName="text-xxs border-0"
+              triggerClassName="py-1"
             />
           </div>
         </div>
@@ -77,46 +81,46 @@ function Socials() {
 }
 
 const languages: Option[] = [
-  { value: 'en', label: 'Eng' },
-  { value: 'bn', label: 'Bng' },
-  { value: 'es', label: 'Esp' },
+  { value: "en", label: "Eng" },
+  { value: "bn", label: "Bng" },
+  { value: "es", label: "Esp" },
 ];
 
 const currencies: Option[] = [
-  { value: 'usd', label: 'USD' },
-  { value: 'eur', label: 'EUR' },
-  { value: 'gbp', label: 'GBP' },
+  { value: "usd", label: "USD" },
+  { value: "eur", label: "EUR" },
+  { value: "gbp", label: "GBP" },
 ];
 
 const topHeaderSocialLinks = [
   {
-    name: 'Twitter',
-    href: '#',
+    name: "Twitter",
+    href: "#",
     Icon: TwitterIcon,
   },
   {
-    name: 'Facebook',
-    href: '#',
+    name: "Facebook",
+    href: "#",
     Icon: FacebookIcon,
   },
   {
-    name: 'Pinterest',
-    href: '#',
+    name: "Pinterest",
+    href: "#",
     Icon: PinterestIcon,
   },
   {
-    name: 'Reddit',
-    href: '#',
+    name: "Reddit",
+    href: "#",
     Icon: RedditIcon,
   },
   {
-    name: 'YouTube',
-    href: '#',
+    name: "YouTube",
+    href: "#",
     Icon: YoutubeIcon,
   },
   {
-    name: 'Instagram',
-    href: '#',
+    name: "Instagram",
+    href: "#",
     Icon: InstagramIcon,
   },
 ] as const;
