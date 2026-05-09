@@ -3,7 +3,7 @@ import { useEffect, type ReactNode } from 'react';
 import { supabaseClient } from '../../lib/supabase-client';
 import { clearAuth, setAuth, setAuthLoading } from './auth-slice';
 import { useAppDispatch } from '../../store/hooks';
-import { queryClient } from '../../main';
+import { useQueryClient } from '@tanstack/react-query';
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -11,6 +11,7 @@ type AuthProviderProps = {
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     let mounted = true;
@@ -74,7 +75,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [dispatch]);
+  }, [dispatch, queryClient]);
 
   return children;
 }
