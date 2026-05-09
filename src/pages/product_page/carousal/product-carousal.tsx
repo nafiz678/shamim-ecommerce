@@ -1,11 +1,11 @@
-import type { EmblaOptionsType } from 'embla-carousel';
-import useEmblaCarousel from 'embla-carousel-react';
-import type { CategoryProp } from '../../../lib/types';
+import type { EmblaOptionsType } from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import type { CategoryProp } from "../../../lib/types";
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
-} from './product-arrow-buttons';
+} from "./product-arrow-buttons";
 
 type PropType = {
   slides: CategoryProp[];
@@ -40,10 +40,10 @@ const ProductCarousel = (props: PropType) => {
           ))}
         </div>
       </div>
-      <div className="absolute top-[calc((100%/2)-10px)] -translate-y-1/2 left-0 md:-left-5 text-background">
+      <div className="absolute sm:top-1/2 top-[calc((100%/2)-10px)] -translate-y-1/2 left-0 md:-left-4 text-background">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
       </div>
-      <div className="absolute top-[calc((100%/2)-10px)] -translate-y-1/2 right-0 md:-right-5 text-background">
+      <div className="absolute sm:top-1/2 top-[calc((100%/2)-10px)] -translate-y-1/2 right-0 md:-right-4 text-background">
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
       </div>
     </div>
