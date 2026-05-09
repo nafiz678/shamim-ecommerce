@@ -1,9 +1,9 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
 export const TwitterIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#ffffff', ...rest } = props;
+  const { width = 16, height = 16, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -26,7 +26,7 @@ export const FacebookIcon = (props: IconProps) => {
   const {
     width = 16,
     height = 16,
-    fill = '#ffffff',
+    fill = "#ffffff",
     ...rest
   } = props as IconProps & { secondaryFill?: string };
 
@@ -39,10 +39,10 @@ export const FacebookIcon = (props: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0"
           fill="#fff"
         />
@@ -61,7 +61,7 @@ export const FacebookIcon = (props: IconProps) => {
 };
 
 export const PinterestIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#ffffff', ...rest } = props;
+  const { width = 16, height = 16, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -84,7 +84,7 @@ export const RedditIcon = (props: IconProps) => {
   const {
     width = 16,
     height = 16,
-    fill = '#ffffff',
+    fill = "#ffffff",
     ...rest
   } = props as IconProps & { secondaryFill?: string };
 
@@ -97,7 +97,7 @@ export const RedditIcon = (props: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16" fill="#fff" />
         <path
           d="M13.336 8a1.17 1.17 0 0 1-.648 1.064 2 2 0 0 1 0 .352c0 1.792-2.088 3.248-4.664 3.248S3.36 11.208 3.36 9.416a2 2 0 0 1 0-.352 1.169 1.169 0 1 1 1.288-1.912 5.7 5.7 0 0 1 2.294-.911q.41-.067.826-.073l.592-2.776a.247.247 0 0 1 .296-.192l1.96.392a.8.8 0 1 1-.104.488L8.8 3.72l-.52 2.496a5.7 5.7 0 0 1 3.08.984 1.167 1.167 0 0 1 1.976.8m-7.94 1.106a.801.801 0 1 0 1.48-.614.801.801 0 0 0-1.48.614m4.583 1.92a.216.216 0 0 0-.148-.37.26.26 0 0 0-.159.056A2.62 2.62 0 0 1 8 11.2a2.6 2.6 0 0 1-1.664-.504.216.216 0 0 0-.304.304 3.07 3.07 0 0 0 1.976.616 3.1 3.1 0 0 0 1.53-.336q.234-.12.446-.28zm-.147-1.362a.8.8 0 0 0 .808-.832.8.8 0 1 0-.8.8z"
@@ -114,7 +114,7 @@ export const RedditIcon = (props: IconProps) => {
 };
 
 export const YoutubeIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#ffffff', ...rest } = props;
+  const { width = 16, height = 16, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -134,7 +134,7 @@ export const YoutubeIcon = (props: IconProps) => {
 };
 
 export const InstagramIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#ffffff', ...rest } = props;
+  const { width = 16, height = 16, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -154,7 +154,7 @@ export const InstagramIcon = (props: IconProps) => {
 };
 
 export const FooterLogo = (props: IconProps) => {
-  const { width = 38, height = 38, fill = '#fa8232', ...rest } = props;
+  const { width = 38, height = 38, fill = "#fa8232", ...rest } = props;
 
   return (
     <svg
@@ -176,7 +176,7 @@ export const FooterLogo = (props: IconProps) => {
 };
 
 export const HeaderLogo = (props: IconProps) => {
-  const { width = 38, height = 38, fill = '#ffffff', ...rest } = props;
+  const { width = 38, height = 38, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -196,7 +196,7 @@ export const HeaderLogo = (props: IconProps) => {
 };
 
 export const GoogleLogoIcon = (props: IconProps) => {
-  const { width = 72, height = 24, fill = '#ffffff', ...rest } = props;
+  const { width = 72, height = 24, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -216,7 +216,7 @@ export const GoogleLogoIcon = (props: IconProps) => {
 };
 
 export const AmazonLogoIcon = (props: IconProps) => {
-  const { width = 72, height = 72, fill = '#ffffff', ...rest } = props;
+  const { width = 72, height = 72, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -244,7 +244,7 @@ export const AmazonLogoIcon = (props: IconProps) => {
 };
 
 export const PhilipsLogoIcon = (props: IconProps) => {
-  const { width = 72, height = 72, fill = '#ffffff', ...rest } = props;
+  const { width = 72, height = 72, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -264,7 +264,7 @@ export const PhilipsLogoIcon = (props: IconProps) => {
 };
 
 export const ToshibaLogoIcon = (props: IconProps) => {
-  const { width = 71, height = 11, fill = '#ffffff', ...rest } = props;
+  const { width = 71, height = 11, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -286,7 +286,7 @@ export const ToshibaLogoIcon = (props: IconProps) => {
 };
 
 export const SamsungLogoIcon = (props: IconProps) => {
-  const { width = 72, height = 24, fill = '#ffffff', ...rest } = props;
+  const { width = 72, height = 24, fill = "#ffffff", ...rest } = props;
 
   return (
     <svg
@@ -308,7 +308,7 @@ export const SamsungLogoIcon = (props: IconProps) => {
 };
 
 export const FastDeliveryIcon = (props: IconProps) => {
-  const { width = 40, height = 40, stroke = '#191c1f', ...rest } = props;
+  const { width = 40, height = 40, stroke = "#191c1f", ...rest } = props;
 
   return (
     <svg
@@ -345,7 +345,7 @@ export const FastDeliveryIcon = (props: IconProps) => {
 };
 
 export const MoneyBackIcon = (props: IconProps) => {
-  const { width = 40, height = 40, stroke = '#191c1f', ...rest } = props;
+  const { width = 40, height = 40, stroke = "#191c1f", ...rest } = props;
 
   return (
     <svg
@@ -375,7 +375,7 @@ export const MoneyBackIcon = (props: IconProps) => {
 };
 
 export const SecurePaymentIcon = (props: IconProps) => {
-  const { width = 40, height = 40, stroke = '#191c1f', ...rest } = props;
+  const { width = 40, height = 40, stroke = "#191c1f", ...rest } = props;
 
   return (
     <svg
@@ -398,7 +398,7 @@ export const SecurePaymentIcon = (props: IconProps) => {
 };
 
 export const SupportIcon = (props: IconProps) => {
-  const { width = 40, height = 40, stroke = '#191c1f', ...rest } = props;
+  const { width = 40, height = 40, stroke = "#191c1f", ...rest } = props;
 
   return (
     <svg
@@ -421,7 +421,7 @@ export const SupportIcon = (props: IconProps) => {
 };
 
 export const ProductShareFacebookIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#fa8232', ...rest } = props;
+  const { width = 16, height = 16, fill = "#fa8232", ...rest } = props;
 
   return (
     <svg
@@ -432,10 +432,10 @@ export const ProductShareFacebookIcon = (props: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0"
           fill="#fa8232"
         />
@@ -454,7 +454,7 @@ export const ProductShareFacebookIcon = (props: IconProps) => {
 };
 
 export const ProductSharePinterestIcon = (props: IconProps) => {
-  const { width = 16, height = 16, fill = '#5f6c72', ...rest } = props;
+  const { width = 16, height = 16, fill = "#5f6c72", ...rest } = props;
 
   return (
     <svg
@@ -468,6 +468,60 @@ export const ProductSharePinterestIcon = (props: IconProps) => {
       <path
         d="M7.024.054C4.365.35 1.716 2.5 1.606 5.574c-.068 1.877.464 3.284 2.25 3.68.775-1.368-.25-1.67-.41-2.658C2.793 2.544 8.122-.22 10.91 2.609c1.93 1.96.66 7.986-2.452 7.36-2.981-.599 1.459-5.396-.92-6.338-1.935-.766-2.962 2.342-2.045 3.885C4.954 10.17 3.797 12.671 4.265 16c1.52-1.102 2.033-3.215 2.453-5.417.764.464 1.172.946 2.146 1.021 3.595.278 5.602-3.588 5.112-7.154C13.54 1.288 10.384-.321 7.024.054"
         fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const AppleIcon = (props: IconProps) => {
+  const { width = 16, height = 16, fill = "#111", ...rest } = props;
+
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="-52.01 0 560.035 560.035"
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <g stroke-width="0" />
+      <g stroke-linecap="round" stroke-linejoin="round" />
+      <path
+        d="M380.844 297.529c.787 84.752 74.349 112.955 75.164 113.314-.622 1.988-11.754 40.191-38.756 79.652-23.343 34.117-47.568 68.107-85.731 68.811-37.499.691-49.557-22.236-92.429-22.236-42.859 0-56.256 21.533-91.753 22.928-36.837 1.395-64.889-36.891-88.424-70.883-48.093-69.53-84.846-196.475-35.496-282.165 24.516-42.554 68.328-69.501 115.882-70.192 36.173-.69 70.315 24.336 92.429 24.336 22.1 0 63.59-30.096 107.208-25.676 18.26.76 69.517 7.376 102.429 55.552-2.652 1.644-61.159 35.704-60.523 106.559M310.369 89.418C329.926 65.745 343.089 32.79 339.498 0 311.308 1.133 277.22 18.785 257 42.445c-18.121 20.952-33.991 54.487-29.709 86.628 31.421 2.431 63.52-15.967 83.078-39.655"
+        fill={fill}
+      />
+    </svg>
+  );
+};
+
+export const GoogleIcon = (props: IconProps) => {
+  const { width = 16, height = 16, ...rest } = props;
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="-3 0 262 262"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid"
+      {...rest}
+    >
+      <g stroke-width="0" />
+      <g stroke-linecap="round" stroke-linejoin="round" />
+      <path
+        d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+        fill="#4285f4"
+      />
+      <path
+        d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+        fill="#34a853"
+      />
+      <path
+        d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602z"
+        fill="#fbbc05"
+      />
+      <path
+        d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+        fill="#eb4335"
       />
     </svg>
   );
