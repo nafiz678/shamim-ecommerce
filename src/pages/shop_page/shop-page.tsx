@@ -1,28 +1,38 @@
-import { Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
-import { useEffect, useMemo, useState } from 'react';
-import ShopHeading from './shop-heading';
+import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
+import { useEffect, useMemo, useState } from "react";
+import type { ProductProps } from "../../lib/types";
+import SearchAndSort from "./search-sort";
+import ShopSidebar from "./shop-sidebar";
+import ProductsCard from "../../components/ui/products-card";
+import { HugeiconsIcon } from "@hugeicons/react";
+import BreadcrumbHeading, { type BreadcrumbItemProps } from "./breadcumb-heading";
 
-import type { ProductProps } from '../../lib/types';
-import SearchAndSort from './search-sort';
-import ShopSidebar from './shop-sidebar';
-import ProductsCard from '../../components/ui/products-card';
-import { HugeiconsIcon } from '@hugeicons/react';
+export type SortBy = "popular" | "price-low-high" | "price-high-low" | "rating";
 
-export type SortBy = 'popular' | 'price-low-high' | 'price-high-low' | 'rating';
+const breadcrumbs: BreadcrumbItemProps[] = [
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop" },
+  { label: "Shop Grid", href: "/shop/grid" },
+  {
+    label: "Electronics Devices",
+    href: "/shop/grid/electronics-devices",
+    active: true,
+  },
+];
 
 export default function ShopPage() {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
-  const [sortBy, setSortBy] = useState<SortBy>('popular');
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState<SortBy>("popular");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
     useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    'Electronics Devices',
+    "Electronics Devices",
   );
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(
-    'All Price',
+    "All Price",
   );
 
   useEffect(() => {
@@ -31,9 +41,9 @@ export default function ShopPage() {
         setIsLoading(true);
         setError(null);
 
-        const res = await fetch('/dummy_data/shop-products.json', {
+        const res = await fetch("/dummy_data/shop-products.json", {
           headers: {
-            Accept: 'application/json',
+            Accept: "application/json",
           },
         });
 
@@ -44,12 +54,12 @@ export default function ShopPage() {
         const data: unknown = await res.json();
 
         if (!Array.isArray(data)) {
-          throw new Error('Invalid products JSON format');
+          throw new Error("Invalid products JSON format");
         }
 
         setProducts(data as ProductProps[]);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Something went wrong');
+        setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
         setIsLoading(false);
       }
@@ -62,17 +72,17 @@ export default function ShopPage() {
     if (!isMobileSidebarOpen) return;
 
     function handleEscapeKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsMobileSidebarOpen(false);
       }
     }
 
-    document.addEventListener('keydown', handleEscapeKey);
-    document.body.style.overflow = 'hidden';
+    document.addEventListener("keydown", handleEscapeKey);
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = "";
     };
   }, [isMobileSidebarOpen]);
 
@@ -83,34 +93,38 @@ export default function ShopPage() {
       if (!normalQuery) return true;
       return (
         product.title.toLowerCase().includes(normalQuery) ||
-        product.category.toLowerCase().includes(normalQuery) ||
+        product.category_id?.toLowerCase().includes(normalQuery) ||
         product.description?.toLowerCase().includes(normalQuery)
       );
     });
 
     return [...filteredProducts].sort((a, b) => {
       switch (sortBy) {
-        case 'price-low-high':
+        case "price-low-high":
           return a.price - b.price;
 
-        case 'price-high-low':
+        case "price-high-low":
           return b.price - a.price;
 
-        case 'rating':
+        case "rating":
           return (b.rating ?? 0) - (a.rating ?? 0);
 
-        case 'popular':
+        case "popular":
         default:
           return (b.reviews_count ?? 0) - (a.reviews_count ?? 0);
       }
     });
   }, [products, query, sortBy]);
 
-  const activeFilterText = query ? `Search: ${query}` : 'No active filters';
+  const activeFilterText = query ? `Search: ${query}` : "No active filters";
 
   return (
     <section>
-      <ShopHeading />
+      <BreadcrumbHeading
+        items={breadcrumbs}
+        className="max-w-7xl"
+        containerClassName="bg-background"
+      />
 
       <div className="md:w-[70%] w-[95%] mx-auto pt-10 min-h-screen">
         <div className="grid grid-cols-12 items-start justify-center gap-5">
@@ -189,8 +203,8 @@ export default function ShopPage() {
       <div
         className={`fixed inset-0 z-40 bg-foreground/40 transition-opacity duration-300 md:hidden ${
           isMobileSidebarOpen
-            ? 'pointer-events-auto opacity-100'
-            : 'pointer-events-none opacity-0'
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
         aria-hidden="true"
         onClick={() => setIsMobileSidebarOpen(false)}
@@ -202,7 +216,7 @@ export default function ShopPage() {
         aria-modal="true"
         aria-label="Product filters"
         className={`fixed left-0 top-0 z-50 h-dvh w-[85%] max-w-sm bg-background shadow-xl transition-transform duration-300 ease-out md:hidden ${
-          isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col">
