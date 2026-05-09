@@ -5,9 +5,9 @@ import {
   StarIcon,
   ViewIcon,
 } from '@hugeicons/core-free-icons';
+import { Link } from '@tanstack/react-router';
 import type { ProductProps } from '../../lib/types';
 import { Badge, type BadgeVariant } from './badge';
-import { Link } from '@tanstack/react-router';
 
 type ProductCardProps = {
   product: ProductProps;
@@ -15,19 +15,46 @@ type ProductCardProps = {
   featured?: boolean;
 };
 
+function getDiscountPercent(
+  price: number,
+  oldPrice: number | null,
+): number | null {
+  if (!oldPrice || oldPrice <= price) return null;
+
+  return Math.round(((oldPrice - price) / oldPrice) * 100);
+}
+
+function formatPrice(price: number): string {
+  return `$${price.toFixed(2)}`;
+}
+
 export default function ProductsCard({
   product,
   className = '',
-  featured,
+  featured = false,
 }: ProductCardProps) {
+  const imageUrl =
+    product.image ?? product.images?.[0]?.image_url ?? '/placeholder.svg';
+
+  const imageAlt =
+    product.image_alt ?? product.images?.[0]?.alt_text ?? product.title;
+
+  const discountPercent =
+    product.discount_percent ??
+    getDiscountPercent(product.price, product.old_price);
+
   return (
     <article
-      className={`group relative font-sans border border-border p-3 space-y-2 ${className} ${featured ? 'hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)] transition-shadow duration-200 ease-linear' : ''}`}
+      className={`group relative space-y-2 border border-border p-3 font-sans ${className} ${
+        featured
+          ? 'transition-shadow duration-200 ease-linear hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)]'
+          : ''
+      }`}
     >
       <div className="absolute left-2.5 top-3 z-10 flex flex-col gap-1">
-        {product.discount_percent !== null && (
+        {discountPercent !== null && (
           <Badge className="text-xxs font-semibold" variant="discount">
-            {product.discount_percent}% OFF
+            {discountPercent}% OFF
           </Badge>
         )}
 
@@ -42,27 +69,29 @@ export default function ProductsCard({
         ))}
       </div>
 
-      <div className="relative flex items-start justify-center ">
+      <div className="relative flex items-start justify-center">
         <img
-          src={product.image || '/placeholder.svg'}
-          alt={product.image}
+          src={imageUrl}
+          alt={imageAlt}
           loading="lazy"
           decoding="async"
-          className="max-w-full object-contain rounded-xs group-hover:brightness-80 transition-[filter] duration-200 ease-linear"
+          className="max-w-full rounded-xs object-contain transition-[filter] duration-200 ease-linear group-hover:brightness-80"
         />
 
-        <div className="absolute top-1/2 -translate-1/2 left-1/2 size-8 flex items-center justify-center rounded-full w-fit gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-linear">
+        <div className="absolute left-1/2 top-1/2 flex w-fit -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2 rounded-full opacity-0 transition-opacity duration-300 ease-linear group-hover:opacity-100">
           <HugeiconsIcon
             icon={FavouriteIcon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
+            className="size-7 cursor-pointer rounded-full bg-background p-2 transition-colors duration-200 ease-in-out hover:bg-secondary hover:text-background md:size-10"
           />
+
           <HugeiconsIcon
             icon={ShoppingCart02Icon}
-            className="bg-background hover:bg-secondary hover:text-background cursor-pointer p-2 rounded-full md:size-10 size-7 transition-colors duration-200 ease-in-out"
+            className="size-7 cursor-pointer rounded-full bg-background p-2 transition-colors duration-200 ease-in-out hover:bg-secondary hover:text-background md:size-10"
           />
+
           <Link
-            to={'/shop/$productId'}
-            params={{ productId: 'product' }}
+            to="/shop/$slug"
+            params={{ slug: product.slug }}
             className="inline-flex"
           >
             <HugeiconsIcon
@@ -80,28 +109,33 @@ export default function ProductsCard({
               <HugeiconsIcon
                 key={index}
                 icon={StarIcon}
-                className={`size-3 text-secondary ${product.rating ? 'fill-secondary' : 'fill-transparent'}`}
+                className={`size-3 text-secondary ${
+                  index < Math.round(product.rating)
+                    ? 'fill-secondary'
+                    : 'fill-transparent'
+                }`}
               />
             ))}
 
-            <span className="ml-0.5 text-xs text-text/50 leading-[100%]">
+            <span className="ml-0.5 text-xs leading-[100%] text-text/50">
               ({product.reviews_count?.toLocaleString() ?? 0})
             </span>
           </div>
         )}
-        <h3 className="text-xs font-normal text-foreground/90 overflow-hidden text-ellipsis line-clamp-2">
+
+        <h3 className="line-clamp-2 overflow-hidden text-ellipsis text-xs font-normal text-foreground/90">
           {product.title}
         </h3>
 
         <div className="flex items-center gap-2 text-xs">
-          {product.original_price !== null && (
+          {product.old_price !== null && product.old_price > product.price && (
             <span className="text-xs font-semibold text-foreground/50 line-through">
-              {/* ${product.original_price.toFixed(2)} */}
+              {formatPrice(product.old_price)}
             </span>
           )}
 
           <span className="text-xs font-semibold text-text-primary">
-            {/* ${product.price.toFixed(2)} */}
+            {formatPrice(product.price)}
           </span>
         </div>
       </div>
