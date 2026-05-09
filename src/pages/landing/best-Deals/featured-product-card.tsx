@@ -61,14 +61,14 @@ export function FeaturedProductCard({ product }: { product: ProductProps }) {
         <h2 className="line-clamp-2 text-xs font-base">{product.title}</h2>
 
         <div className=" flex items-center gap-2">
-          {product.original_price !== null && (
+          {product.old_price !== null && (
             <span className="md:text-base text-sm text-foreground/60 line-through">
-              {/* ${product.original_price.toFixed(2)} */}
+              ${product.old_price.toFixed(2)}
             </span>
           )}
 
           <span className="md:text-base text-sm font-semibold text-text-primary">
-            {/* ${product.price.toFixed(2)} */}
+            ${product.price.toFixed(2)}
           </span>
         </div>
 
