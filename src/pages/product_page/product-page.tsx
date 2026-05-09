@@ -5,27 +5,27 @@ import {
   MinusSignIcon,
   ShoppingCart02FreeIcons,
   Copy01Icon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { useState } from 'react';
-import ProductCarousel from './carousal/product-carousal';
-import type { EmblaOptionsType } from 'embla-carousel';
-import './carousal/carousal.css';
-import { Badge } from '../../components/ui/badge';
-import Dropdown from '../../components/ui/dropdown';
-import Button from '../../components/ui/button';
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { useState } from "react";
+import ProductCarousel from "./carousal/product-carousal";
+import type { EmblaOptionsType } from "embla-carousel";
+import "./carousal/carousal.css";
+import { Badge } from "../../components/ui/badge";
+import Dropdown from "../../components/ui/dropdown";
+import Button from "../../components/ui/button";
 import {
   ProductShareFacebookIcon,
   ProductSharePinterestIcon,
   TwitterIcon,
-} from '../../components/icons/Icon';
+} from "../../components/icons/Icon";
 
 export default function ProductsDetailsPage() {
   const [selectedSize, setSelectedSize] = useState(
-    '14-inch-liquid-retina-xdr-display',
+    "14-inch-liquid-retina-xdr-display",
   );
-  const [selectedMemory, setSelectedMemory] = useState('16gb-unified-memory');
-  const [selectedStorage, setSelectedStorage] = useState('1tb-ssd-storage');
+  const [selectedMemory, setSelectedMemory] = useState("16gb-unified-memory");
+  const [selectedStorage, setSelectedStorage] = useState("1tb-ssd-storage");
   const [isFirstColorActive, setIsFirstColorActive] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
   const OPTIONS: EmblaOptionsType = { loop: true, dragFree: true };
@@ -46,7 +46,7 @@ export default function ProductsDetailsPage() {
           <div className="flex w-full items-center justify-center">
             <div className="relative flex w-full items-center justify-center">
               <img
-                src={'/assets/images/products/product-page.png'}
+                src={"/assets/images/products/product-page.png"}
                 alt="MacBook Pro"
                 className="h-auto max-w-full rounded-md object-contain"
               />
@@ -78,19 +78,19 @@ export default function ProductsDetailsPage() {
 
           <div className="mt-3.5 grid grid-cols-2 gap-2 text-xxs leading-none">
             <div>
-              <span className="text-foreground/60">Sku:</span>{' '}
+              <span className="text-foreground/60">Sku:</span>{" "}
               <span className="font-semibold text-foreground/80">A264671</span>
             </div>
             <div>
-              <span className="text-foreground/60">Availability:</span>{' '}
+              <span className="text-foreground/60">Availability:</span>{" "}
               <span className="font-semibold text-[#17a24a]">In Stock</span>
             </div>
             <div>
-              <span className="text-foreground/60">Brand:</span>{' '}
+              <span className="text-foreground/60">Brand:</span>{" "}
               <span className="font-semibold text-foreground/80">Apple</span>
             </div>
             <div>
-              <span className="text-foreground/60">Category:</span>{' '}
+              <span className="text-foreground/60">Category:</span>{" "}
               <span className="font-semibold text-foreground/80">
                 Electronics Devices
               </span>
@@ -122,7 +122,7 @@ export default function ProductsDetailsPage() {
                   aria-pressed={isFirstColorActive}
                   onClick={() => setIsFirstColorActive(true)}
                   className={`flex size-7 items-center justify-center rounded-full cursor-pointer ${
-                    isFirstColorActive ? 'ring-2 ring-secondary' : ''
+                    isFirstColorActive ? "ring-2 ring-secondary" : ""
                   }`}
                 >
                   <span className="size-5.5 rounded-full bg-foreground/40" />
@@ -134,7 +134,7 @@ export default function ProductsDetailsPage() {
                   aria-pressed={!isFirstColorActive}
                   onClick={() => setIsFirstColorActive(false)}
                   className={`flex size-7 cursor-pointer items-center justify-center rounded-full ${
-                    !isFirstColorActive ? 'ring-2 ring-secondary' : ''
+                    !isFirstColorActive ? "ring-2 ring-secondary" : ""
                   }`}
                 >
                   <span className="size-5.5 rounded-full bg-foreground/40" />
@@ -152,8 +152,9 @@ export default function ProductsDetailsPage() {
                 options={sizeOptions}
                 value={selectedSize}
                 dropdownWidth="auto"
-                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                className="w-full whitespace-nowrap border border-border text-xxs text-foreground/60"
                 itemClassName="text-xxs"
+                triggerClassName="rounded-xs py-2 "
               />
             </div>
 
@@ -167,8 +168,9 @@ export default function ProductsDetailsPage() {
                 options={memoryOptions}
                 value={selectedMemory}
                 dropdownWidth="auto"
-                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                className="w-full whitespace-nowrap border border-border text-xxs text-foreground/60"
                 itemClassName="text-xxs"
+                triggerClassName="rounded-xs py-2 "
               />
             </div>
 
@@ -182,20 +184,21 @@ export default function ProductsDetailsPage() {
                 options={storageOptions}
                 value={selectedStorage}
                 dropdownWidth="auto"
-                className="w-full whitespace-nowrap rounded-xs border border-border py-2 text-xxs text-foreground/60"
+                className="w-full whitespace-nowrap border border-border text-xxs text-foreground/60"
                 itemClassName="text-xxs"
+                triggerClassName="rounded-xs py-2 "
               />
             </div>
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
-            <div className="flex w-full items-center justify-between gap-7 border-2 border-border px-2.5 py-2.5 sm:w-auto">
+            <div className="flex w-full items-center justify-between gap-7 rounded-xs border-2 border-border px-2.5 py-1.5 sm:w-auto">
               <button
                 type="button"
                 aria-label="Decrease quantity"
                 onClick={decreaseQuantity}
                 disabled={quantity === 1}
-                className="cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex size-6 items-center justify-center rounded-md transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
               >
                 <HugeiconsIcon
                   icon={MinusSignIcon}
@@ -204,15 +207,21 @@ export default function ProductsDetailsPage() {
                 />
               </button>
 
-              <span className="min-w-5 text-center text-xs">
-                {String(quantity).padStart(2, '0')}
-              </span>
+              {/* Animated Quantity */}
+              <div className="relative flex h-5 min-w-5 items-center justify-center overflow-hidden">
+                <span
+                  key={quantity}
+                  className="animate-quantity-change text-center text-xs font-medium tabular-nums"
+                >
+                  {String(quantity).padStart(2, "0")}
+                </span>
+              </div>
 
               <button
                 type="button"
                 aria-label="Increase quantity"
                 onClick={increaseQuantity}
-                className="cursor-pointer"
+                className="flex size-6 items-center justify-center rounded-md transition-colors hover:bg-muted cursor-pointer"
               >
                 <HugeiconsIcon icon={Add01Icon} size={13} strokeWidth={1.9} />
               </button>
@@ -316,77 +325,77 @@ export default function ProductsDetailsPage() {
 const ProductImage: { id: number; title: string; image: string }[] = [
   {
     id: 1,
-    title: 'Electronics',
-    image: '/placeholder.svg',
+    title: "Electronics",
+    image: "/placeholder.svg",
   },
   {
     id: 2,
-    title: 'Fashion',
-    image: '/placeholder.svg',
+    title: "Fashion",
+    image: "/placeholder.svg",
   },
   {
     id: 3,
-    title: 'Home & Living',
-    image: '/placeholder.svg',
+    title: "Home & Living",
+    image: "/placeholder.svg",
   },
   {
     id: 4,
-    title: 'Beauty',
-    image: '/placeholder.svg',
+    title: "Beauty",
+    image: "/placeholder.svg",
   },
   {
     id: 5,
-    title: 'Sports',
-    image: '/placeholder.svg',
+    title: "Sports",
+    image: "/placeholder.svg",
   },
   {
     id: 6,
-    title: 'Toys',
-    image: '/placeholder.svg',
+    title: "Toys",
+    image: "/placeholder.svg",
   },
   {
     id: 7,
-    title: 'Books',
-    image: '/placeholder.svg',
+    title: "Books",
+    image: "/placeholder.svg",
   },
   {
     id: 8,
-    title: 'Groceries',
-    image: '/placeholder.svg',
+    title: "Groceries",
+    image: "/placeholder.svg",
   },
   {
     id: 9,
-    title: 'Furniture',
-    image: '/placeholder.svg',
+    title: "Furniture",
+    image: "/placeholder.svg",
   },
   {
     id: 10,
-    title: 'Shoes',
-    image: '/placeholder.svg',
+    title: "Shoes",
+    image: "/placeholder.svg",
   },
 ];
 
 const sizeOptions: { label: string; value: string }[] = [
-  { label: '13-inch Retina display', value: '13-inch-retina-display' },
+  { label: "13-inch Retina display", value: "13-inch-retina-display" },
   {
-    label: '14-inch Liquid Retina XDR display',
-    value: '14-inch-liquid-retina-xdr-display',
+    label: "14-inch Liquid Retina XDR display",
+    value: "14-inch-liquid-retina-xdr-display",
   },
   {
-    label: '16-inch Liquid Retina XDR display',
-    value: '16-inch-liquid-retina-xdr-display',
+    label: "16-inch Liquid Retina XDR display",
+    value: "16-inch-liquid-retina-xdr-display",
   },
 ];
 
 const memoryOptions: { label: string; value: string }[] = [
-  { label: '8GB unified memory', value: '8gb-unified-memory' },
-  { label: '16GB unified memory', value: '16gb-unified-memory' },
-  { label: '32GB unified memory', value: '32gb-unified-memory' },
+  { label: "8GB unified memory", value: "8gb-unified-memory" },
+  { label: "16GB unified memory", value: "16gb-unified-memory" },
+  { label: "32GB unified memory", value: "32gb-unified-memory" },
 ];
 
 const storageOptions: { label: string; value: string }[] = [
-  { label: '256GB SSD Storage', value: '256gb-ssd-storage' },
-  { label: '512GB SSD Storage', value: '512gb-ssd-storage' },
-  { label: '1TB SSD Storage', value: '1tb-ssd-storage' },
-  { label: '2TB SSD Storage', value: '2tb-ssd-storage' },
+  { label: "256GB SSD Storage", value: "256gb-ssd-storage" },
+  { label: "512GB SSD Storage", value: "512gb-ssd-storage" },
+  { label: "1TB SSD Storage", value: "1tb-ssd-storage" },
+  { label: "2TB SSD Storage", value: "2tb-ssd-storage" },
 ];
