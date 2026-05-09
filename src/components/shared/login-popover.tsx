@@ -1,18 +1,24 @@
-import { useState } from 'react';
-import type { FormEvent } from 'react';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowRight02FreeIcons, ViewIcon } from '@hugeicons/core-free-icons';
+import { useState } from "react";
+import type { FormEvent } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  ArrowExpandIcon,
+  ArrowRight02FreeIcons,
+  ViewIcon,
+} from "@hugeicons/core-free-icons";
 
-import { supabaseClient } from '../../lib/supabase-client';
-import Button from '../ui/button';
+import { supabaseClient } from "../../lib/supabase-client";
+import Button from "../ui/button";
 import type {
   BackendSignupResponse,
   LoginPopoverProps,
-  SignedInView,
-} from '../../lib/types';
-import { Input } from '../ui/input';
+  SignedInViewProps,
+} from "../../lib/types";
+import { Input } from "../ui/input";
+import { Link } from "@tanstack/react-router";
+import { cn } from "../../lib/utils";
 
-type AuthMode = 'login' | 'signup';
+type AuthMode = "login" | "signup";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
@@ -22,25 +28,25 @@ export default function LoginPopover({
   isAuthLoading,
   onClose,
 }: LoginPopoverProps) {
-  const [mode, setMode] = useState<AuthMode>('login');
+  const [mode, setMode] = useState<AuthMode>("login");
 
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const isLoginMode = mode === 'login';
+  const isLoginMode = mode === "login";
 
   const title = user
-    ? 'My Account'
+    ? "My Account"
     : isLoginMode
-      ? 'Sign in to your account'
-      : 'Create your account';
+      ? "Sign in to your account"
+      : "Create your account";
 
   const resetMessages = () => {
     setErrorMessage(null);
@@ -48,9 +54,9 @@ export default function LoginPopover({
   };
 
   const resetForm = () => {
-    setFullName('');
-    setEmail('');
-    setPassword('');
+    setFullName("");
+    setEmail("");
+    setPassword("");
     setShowPassword(false);
     resetMessages();
   };
@@ -59,20 +65,20 @@ export default function LoginPopover({
     const trimmedEmail = email.trim();
     const trimmedName = fullName.trim();
 
-    if (!trimmedEmail) return 'Email is required';
+    if (!trimmedEmail) return "Email is required";
 
     if (!/^\S+@\S+\.\S+$/.test(trimmedEmail)) {
-      return 'Enter a valid email address';
+      return "Enter a valid email address";
     }
 
-    if (!password) return 'Password is required';
+    if (!password) return "Password is required";
 
     if (password.length < 6) {
-      return 'Password must be at least 6 characters';
+      return "Password must be at least 6 characters";
     }
 
     if (!isLoginMode && trimmedName.length < 2) {
-      return 'Full name must be at least 2 characters';
+      return "Full name must be at least 2 characters";
     }
 
     return null;
@@ -89,13 +95,13 @@ export default function LoginPopover({
 
   const createUserWithBackend = async () => {
     if (!API_URL) {
-      throw new Error('Missing VITE_API_URL environment variable');
+      throw new Error("Missing VITE_API_URL environment variable");
     }
 
     const response = await fetch(`${API_URL}/auth/signup`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         fullName: fullName.trim(),
@@ -107,7 +113,7 @@ export default function LoginPopover({
     const json = (await response.json()) as BackendSignupResponse;
 
     if (!response.ok || !json.success) {
-      throw new Error(json.message || 'Failed to create account');
+      throw new Error(json.message || "Failed to create account");
     }
 
     return json.data;
@@ -142,7 +148,7 @@ export default function LoginPopover({
       onClose();
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : 'Authentication failed',
+        error instanceof Error ? error.message : "Authentication failed",
       );
     } finally {
       setIsSubmitting(false);
@@ -162,7 +168,7 @@ export default function LoginPopover({
       resetForm();
       onClose();
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'Logout failed');
+      setErrorMessage(error instanceof Error ? error.message : "Logout failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -170,19 +176,19 @@ export default function LoginPopover({
 
   const switchMode = () => {
     resetMessages();
-    setPassword('');
+    setPassword("");
     setShowPassword(false);
-    setMode((current) => (current === 'login' ? 'signup' : 'login'));
+    setMode((current) => (current === "login" ? "signup" : "login"));
   };
 
   return (
     <div
-      className={[
-        'absolute right-0 top-9 z-50 w-72 origin-top-right border border-border bg-background p-5 shadow-lg transition-all duration-300 ease-out sm:w-80',
+      className={cn(
+        "absolute right-0 top-9 z-50 w-72 origin-top-right border border-border bg-background p-5 shadow-lg transition-all duration-300 ease-out sm:w-80",
         isOpen
-          ? 'visible translate-y-0 scale-100 opacity-100'
-          : 'invisible -translate-y-2 scale-95 opacity-0',
-      ].join(' ')}
+          ? "visible translate-y-0 scale-100 opacity-100"
+          : "invisible -translate-y-2 scale-95 opacity-0",
+      )}
     >
       <h3 className="mb-5 text-center text-base font-semibold text-foreground">
         {title}
@@ -245,10 +251,10 @@ export default function LoginPopover({
               <div className="relative">
                 <Input
                   id="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   autoComplete={
-                    isLoginMode ? 'current-password' : 'new-password'
+                    isLoginMode ? "current-password" : "new-password"
                   }
                   value={password}
                   disabled={isSubmitting}
@@ -259,7 +265,7 @@ export default function LoginPopover({
 
                 <button
                   type="button"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                   onClick={() => setShowPassword((current) => !current)}
                   disabled={isSubmitting}
                   className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-foreground/50 transition-colors hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
@@ -281,11 +287,11 @@ export default function LoginPopover({
             >
               {isSubmitting
                 ? isLoginMode
-                  ? 'Logging in...'
-                  : 'Creating account...'
+                  ? "Logging in..."
+                  : "Creating account..."
                 : isLoginMode
-                  ? 'Login'
-                  : 'Create Account'}
+                  ? "Login"
+                  : "Create Account"}
             </Button>
           </form>
 
@@ -293,7 +299,7 @@ export default function LoginPopover({
             <span className="h-px flex-1 bg-foreground/10" />
 
             <span className="text-xs text-foreground/60">
-              {isLoginMode ? "Don't have account" : 'Already registered'}
+              {isLoginMode ? "Don't have account" : "Already registered"}
             </span>
 
             <span className="h-px flex-1 bg-foreground/10" />
@@ -306,9 +312,23 @@ export default function LoginPopover({
             disabled={isSubmitting}
             className="w-full border-2 border-secondary/60 text-secondary disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isLoginMode ? 'Create Account' : 'Back to Login'}
+            {isLoginMode ? "Create Account" : "Back to Login"}
           </Button>
         </>
+      )}
+
+      {!user && (
+        <Link
+          to="/signin"
+          search={{ redirect: "/", reason: "" }}
+          className="absolute top-6 right-6"
+          title="Expand login page"
+        >
+          <HugeiconsIcon
+            icon={ArrowExpandIcon}
+            className="text-foreground size-4"
+          />
+        </Link>
       )}
     </div>
   );
@@ -329,10 +349,10 @@ function FormField({
     <div>
       <label
         htmlFor={id}
-        className={[
-          'mb-2 block text-xs font-medium transition-colors',
-          error ? 'text-red-600' : 'text-foreground/80',
-        ].join(' ')}
+        className={cn(
+          "mb-2 block text-xs font-medium transition-colors",
+          error ? "text-red-600" : "text-foreground/80",
+        )}
       >
         {label}
       </label>
@@ -358,11 +378,9 @@ function SignedInView({
   errorMessage,
   onClose,
   onLogout,
-}: SignedInView) {
+}: SignedInViewProps) {
   const displayName =
-    typeof user.user_metadata?.full_name === 'string'
-      ? user.user_metadata.full_name
-      : user.email;
+    typeof user.fullName === "string" ? user.fullName : user.email;
 
   return (
     <div>
@@ -397,7 +415,7 @@ function SignedInView({
         disabled={isSubmitting}
         className="mt-3 w-full border-2 border-secondary/60 uppercase text-secondary disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isSubmitting ? 'Logging out...' : 'Logout'}
+        {isSubmitting ? "Logging out..." : "Logout"}
       </Button>
     </div>
   );
@@ -407,15 +425,15 @@ function AuthMessage({
   type,
   message,
 }: {
-  type: 'error' | 'success';
+  type: "error" | "success";
   message: string | null;
 }) {
   if (!message) return null;
 
   const className =
-    type === 'error'
-      ? 'border-red-200 bg-red-50 text-red-600'
-      : 'border-green-200 bg-green-50 text-green-700';
+    type === "error"
+      ? "border-red-200 bg-red-50 text-red-600"
+      : "border-green-200 bg-green-50 text-green-700";
 
   return (
     <p className={`rounded-sm border px-3 py-2 text-xs ${className}`}>
