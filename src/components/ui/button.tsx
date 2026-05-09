@@ -1,9 +1,9 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
-import { cn } from '../../lib/utils';
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
+import { cn } from "../../lib/utils";
 
-type Variant = 'accent' | 'secondary' | 'outline' | 'ghost' | 'dark';
-type Size = 'sm' | 'md' | 'lg';
+type Variant = "accent" | "secondary" | "outline" | "ghost" | "dark" | "link";
+type Size = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -19,8 +19,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   children,
   className,
-  variant = 'accent',
-  size = 'md',
+  variant = "accent",
+  size = "md",
   fullWidth = false,
   loading = false,
   leftIcon,
@@ -30,20 +30,21 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 transition-colors cursor-pointer';
+    "inline-flex items-center justify-center gap-2 rounded-xs transition-all duration-200 ease-out cursor-pointer";
 
   const variants: Record<Variant, string> = {
-    accent: 'bg-accent/95 text-black hover:bg-accent',
-    secondary: 'bg-secondary/95 text-background hover:bg-secondary',
-    outline: 'border border-gray-300 text-gray-800 hover:bg-gray-100',
-    ghost: 'text-gray-800 hover:bg-gray-100',
-    dark: 'bg-black text-background hover:bg-gray-900',
+    accent: "bg-accent/95 text-black hover:bg-accent",
+    secondary: "bg-secondary/95 text-background hover:bg-secondary",
+    outline: "border border-gray-300 text-gray-800 hover:bg-gray-100",
+    ghost: "text-gray-800 hover:bg-gray-100",
+    dark: "bg-black text-background hover:bg-gray-900",
+    link: `relative text-foreground after:absolute after:left-1 after:bottom-1 after:h-[1.5px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-[calc(100%-0.5rem)] hover:bg-foreground/5 `,
   };
 
   const sizes: Record<Size, string> = {
-    sm: 'h-8 px-2 text-sm',
-    md: 'h-10 px-4 text-sm',
-    lg: 'h-12 px-6 text-base',
+    sm: "h-8 px-2 text-sm",
+    md: "h-10 px-4 text-sm",
+    lg: "h-12 px-6 text-base",
   };
 
   return (
@@ -54,8 +55,8 @@ export default function Button({
         base,
         variants[variant],
         sizes[size],
-        fullWidth && 'w-full',
-        'disabled:cursor-not-allowed disabled:opacity-50',
+        fullWidth && "w-full",
+        "disabled:cursor-not-allowed disabled:opacity-50",
       )}
       {...props}
     >
@@ -69,7 +70,7 @@ export default function Button({
           <HugeiconsIcon
             icon={leftIcon}
             size={16}
-            className={cn(iconClass, 'shrink-0')}
+            className={cn(iconClass, "shrink-0")}
             aria-hidden="true"
           />
         )
