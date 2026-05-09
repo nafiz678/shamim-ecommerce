@@ -1,13 +1,13 @@
-import { HugeiconsIcon } from '@hugeicons/react';
-import { Search } from '@hugeicons/core-free-icons';
-import Dropdown from '../../components/ui/dropdown';
-import type { Dispatch, SetStateAction } from 'react';
-import type { SortBy } from './shop-page';
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Search } from "@hugeicons/core-free-icons";
+import Dropdown from "../../components/ui/dropdown";
+import type { Dispatch, SetStateAction } from "react";
+import type { SortBy } from "./shop-page";
 const sortOptions: { value: SortBy; label: string }[] = [
-  { value: 'popular', label: 'Most Popular' },
-  { value: 'price-low-high', label: 'Price: Low to High' },
-  { value: 'price-high-low', label: 'Price: High to Low' },
-  { value: 'rating', label: 'Highest Rated' },
+  { value: "popular", label: "Most Popular" },
+  { value: "price-low-high", label: "Price: Low to High" },
+  { value: "price-high-low", label: "Price: High to Low" },
+  { value: "rating", label: "Highest Rated" },
 ];
 
 export type SearchSortProp = {
@@ -52,8 +52,9 @@ export default function SearchAndSort({
             value={sortBy}
             options={sortOptions}
             onChange={(value) => setSortBy(value as SortBy)}
-            className="w-full sm:text-xs text-xxs border border-[#dfe6ea] bg-background  text-foreground/70 text-nowrap md:py-2.5 py-2"
+            className="w-full sm:text-xs text-xxs bg-background text-foreground/70 text-nowrap "
             itemClassName="sm:text-xs text-xxs"
+            triggerClassName="md:py-2.5 py-2 border border-[#dfe6ea] rounded-xs"
           />
         </div>
       </div>
