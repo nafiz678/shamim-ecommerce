@@ -1,19 +1,19 @@
-import { Link } from '@tanstack/react-router';
-import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
+import { Link } from "@tanstack/react-router";
+import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import {
   AlertCircleIcon,
   Calling02Icon,
   HeadphonesIcon,
   Location04Icon,
   ReloadIcon,
-} from '@hugeicons/core-free-icons';
-import TopHeading from './top-header';
-import Dropdown from '../ui/dropdown';
-import { useState } from 'react';
-import type { Option } from '../../lib/types';
-import { HeaderLogo } from '../icons/Icon';
-import { SearchInput } from '../ui/search-input';
-import HeaderActions from './heading-popover';
+} from "@hugeicons/core-free-icons";
+import TopHeading from "./top-header";
+import Dropdown from "../ui/dropdown";
+import { useState } from "react";
+import type { Option } from "../../lib/types";
+import { HeaderLogo } from "../icons/Icon";
+import { SearchInput } from "../ui/search-input";
+import HeaderActions from "./heading-popover";
 
 export default function Heading() {
   return (
@@ -49,21 +49,21 @@ export default function Heading() {
 }
 
 export const categoryOptions: Option[] = [
-  { value: 'all', label: 'All Category' },
-  { value: 'electronics', label: 'Electronics' },
-  { value: 'fashion', label: 'Fashion' },
-  { value: 'home-garden', label: 'Home & Garden' },
-  { value: 'beauty', label: 'Beauty & Personal Care' },
-  { value: 'sports', label: 'Sports & Outdoors' },
-  { value: 'toys', label: 'Toys & Games' },
-  { value: 'automotive', label: 'Automotive' },
-  { value: 'books', label: 'Books' },
-  { value: 'groceries', label: 'Groceries' },
-  { value: 'health', label: 'Health & Wellness' },
+  { value: "all", label: "All Category" },
+  { value: "electronics", label: "Electronics" },
+  { value: "fashion", label: "Fashion" },
+  { value: "home-garden", label: "Home & Garden" },
+  { value: "beauty", label: "Beauty & Personal Care" },
+  { value: "sports", label: "Sports & Outdoors" },
+  { value: "toys", label: "Toys & Games" },
+  { value: "automotive", label: "Automotive" },
+  { value: "books", label: "Books" },
+  { value: "groceries", label: "Groceries" },
+  { value: "health", label: "Health & Wellness" },
 ];
 
 function BottomHeader() {
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState("all");
   return (
     <div className="flex items-center justify-between border-b border-border py-1">
       <div className="lg:w-[70%] w-[95%] mx-auto">
@@ -75,10 +75,11 @@ function BottomHeader() {
               value={category}
               options={categoryOptions}
               onChange={setCategory}
-              className="flex items-center whitespace-nowrap rounded-xs bg-muted px-2 py-1.5 text-foreground sm:px-3 md:px-3.5 md:py-2.5"
+              className="flex items-center whitespace-nowrap bg-muted text-foreground "
               itemClassName="text-xxs"
               dropdownWidth="content"
               align="left"
+              triggerClassName="px-2 rounded-xs sm:px-3 md:px-3.5  py-1.5 md:py-2.5"
             />
 
             {quickLinks.map(({ label, icon }) => (
@@ -112,19 +113,19 @@ function BottomHeader() {
 
 const quickLinks: { label: string; icon: IconSvgElement }[] = [
   {
-    label: 'Track Order',
+    label: "Track Order",
     icon: Location04Icon,
   },
   {
-    label: 'Compare',
+    label: "Compare",
     icon: ReloadIcon,
   },
   {
-    label: 'Customer support',
+    label: "Customer support",
     icon: HeadphonesIcon,
   },
   {
-    label: 'Need Help',
+    label: "Need Help",
     icon: AlertCircleIcon,
   },
 ];
