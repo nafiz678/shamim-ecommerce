@@ -9,86 +9,235 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ShopIndexRouteImport } from './routes/shop/index'
-import { Route as ShopProductIdRouteImport } from './routes/shop/$productId'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as publicRouteRouteImport } from './routes/(public)/route'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as publicIndexRouteImport } from './routes/(public)/index'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as publicSigninRouteImport } from './routes/(public)/signin'
+import { Route as publicShopIndexRouteImport } from './routes/(public)/shop/index'
+import { Route as publicShopSlugRouteImport } from './routes/(public)/shop/$slug'
 
-const IndexRoute = IndexRouteImport.update({
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicRouteRoute = publicRouteRouteImport.update({
+  id: '/(public)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminRouteRoute,
 } as any)
-const ShopIndexRoute = ShopIndexRouteImport.update({
+const publicIndexRoute = publicIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => publicRouteRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const publicSigninRoute = publicSigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => publicRouteRoute,
+} as any)
+const publicShopIndexRoute = publicShopIndexRouteImport.update({
   id: '/shop/',
   path: '/shop/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => publicRouteRoute,
 } as any)
-const ShopProductIdRoute = ShopProductIdRouteImport.update({
-  id: '/shop/$productId',
-  path: '/shop/$productId',
-  getParentRoute: () => rootRouteImport,
+const publicShopSlugRoute = publicShopSlugRouteImport.update({
+  id: '/shop/$slug',
+  path: '/shop/$slug',
+  getParentRoute: () => publicRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/shop/$productId': typeof ShopProductIdRoute
-  '/shop/': typeof ShopIndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/signin': typeof publicSigninRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/': typeof publicIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/shop/$slug': typeof publicShopSlugRoute
+  '/shop/': typeof publicShopIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/shop/$productId': typeof ShopProductIdRoute
-  '/shop': typeof ShopIndexRoute
+  '/signin': typeof publicSigninRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/': typeof publicIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/shop/$slug': typeof publicShopSlugRoute
+  '/shop': typeof publicShopIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/shop/$productId': typeof ShopProductIdRoute
-  '/shop/': typeof ShopIndexRoute
+  '/(public)': typeof publicRouteRouteWithChildren
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/(public)/signin': typeof publicSigninRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/(public)/': typeof publicIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/(public)/shop/$slug': typeof publicShopSlugRoute
+  '/(public)/shop/': typeof publicShopIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shop/$productId' | '/shop/'
+  fullPaths:
+    | '/admin'
+    | '/signin'
+    | '/admin/dashboard'
+    | '/admin/users'
+    | '/'
+    | '/admin/'
+    | '/shop/$slug'
+    | '/shop/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop/$productId' | '/shop'
-  id: '__root__' | '/' | '/shop/$productId' | '/shop/'
+  to:
+    | '/signin'
+    | '/admin/dashboard'
+    | '/admin/users'
+    | '/'
+    | '/admin'
+    | '/shop/$slug'
+    | '/shop'
+  id:
+    | '__root__'
+    | '/(public)'
+    | '/admin'
+    | '/(public)/signin'
+    | '/admin/dashboard'
+    | '/admin/users'
+    | '/(public)/'
+    | '/admin/'
+    | '/(public)/shop/$slug'
+    | '/(public)/shop/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ShopProductIdRoute: typeof ShopProductIdRoute
-  ShopIndexRoute: typeof ShopIndexRoute
+  publicRouteRoute: typeof publicRouteRouteWithChildren
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)': {
+      id: '/(public)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof publicRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/(public)/': {
+      id: '/(public)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof publicIndexRouteImport
+      parentRoute: typeof publicRouteRoute
     }
-    '/shop/': {
-      id: '/shop/'
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/(public)/signin': {
+      id: '/(public)/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof publicSigninRouteImport
+      parentRoute: typeof publicRouteRoute
+    }
+    '/(public)/shop/': {
+      id: '/(public)/shop/'
       path: '/shop'
       fullPath: '/shop/'
-      preLoaderRoute: typeof ShopIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof publicShopIndexRouteImport
+      parentRoute: typeof publicRouteRoute
     }
-    '/shop/$productId': {
-      id: '/shop/$productId'
-      path: '/shop/$productId'
-      fullPath: '/shop/$productId'
-      preLoaderRoute: typeof ShopProductIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/(public)/shop/$slug': {
+      id: '/(public)/shop/$slug'
+      path: '/shop/$slug'
+      fullPath: '/shop/$slug'
+      preLoaderRoute: typeof publicShopSlugRouteImport
+      parentRoute: typeof publicRouteRoute
     }
   }
 }
 
+interface publicRouteRouteChildren {
+  publicSigninRoute: typeof publicSigninRoute
+  publicIndexRoute: typeof publicIndexRoute
+  publicShopSlugRoute: typeof publicShopSlugRoute
+  publicShopIndexRoute: typeof publicShopIndexRoute
+}
+
+const publicRouteRouteChildren: publicRouteRouteChildren = {
+  publicSigninRoute: publicSigninRoute,
+  publicIndexRoute: publicIndexRoute,
+  publicShopSlugRoute: publicShopSlugRoute,
+  publicShopIndexRoute: publicShopIndexRoute,
+}
+
+const publicRouteRouteWithChildren = publicRouteRoute._addFileChildren(
+  publicRouteRouteChildren,
+)
+
+interface AdminRouteRouteChildren {
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ShopProductIdRoute: ShopProductIdRoute,
-  ShopIndexRoute: ShopIndexRoute,
+  publicRouteRoute: publicRouteRouteWithChildren,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
