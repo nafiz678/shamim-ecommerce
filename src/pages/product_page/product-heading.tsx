@@ -2,20 +2,7 @@ import { ArrowRight01Icon, Home01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { cn } from '../../lib/utils';
 
-const breadcrumbs: { label: string; href: string; active?: boolean }[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Shop', href: '/shop' },
-  { label: 'Shop Grid', href: '/shop' },
-  {
-    label: 'Electronics Devices',
-    href: '/shop',
-  },
-  {
-    label: 'Macbook Pro',
-    href: '/shop',
-    active: true,
-  },
-];
+
 
 export default function ProductHeading() {
   return (
