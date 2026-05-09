@@ -1,21 +1,21 @@
-import type { ProductProps } from '../../lib/types';
-import BestDeals from './best-Deals/best-deals';
-import Categories from './categories/categories';
-import ComputerAccessories from './computer-accessories/computer-accessories';
-import FeaturedSection from './featured-section/featured-section';
-import Hero from './hero/hero';
-import ProductBannerFirst from './product-banner/product-banner-first';
-import ProductBannerSecond from './product-banner/product-banner-second';
-import ProductBanner from './product-banner/product-banner';
-import BLogs from './blog/blogs';
-import NewsLatter from './news-latter';
-import { useQuery } from '@tanstack/react-query';
+import type { ProductProps } from "../../lib/types";
+import BestDeals from "./best-Deals/best-deals";
+import Categories from "./categories/categories";
+import ComputerAccessories from "./computer-accessories/computer-accessories";
+import FeaturedSection from "./featured-section/featured-section";
+import Hero from "./hero/hero";
+import ProductBannerFirst from "./product-banner/product-banner-first";
+import ProductBannerSecond from "./product-banner/product-banner-second";
+import ProductBanner from "./product-banner/product-banner";
+import BLogs from "./blog/blogs";
+import NewsLatter from "./news-latter";
+import { useQuery } from "@tanstack/react-query";
 import {
   BestDealsSkeleton,
   ComputerAccessoriesSkeleton,
   FeaturedSectionSkeleton,
-} from '../../components/shared/loader/loader';
-import { apiFetch } from '../../lib/api-fetch';
+} from "../../components/shared/loader/loader";
+import { apiFetch } from "../../lib/api-fetch";
 
 type ProductsResponse = {
   success: boolean;
@@ -25,8 +25,8 @@ type ProductsResponse = {
 
 export default function Landing() {
   const { data, isPending, isError, error, refetch } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => apiFetch<ProductsResponse>('/products'),
+    queryKey: ["products"],
+    queryFn: () => apiFetch<ProductsResponse>("/products"),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 30,
     select: (response) => ({
@@ -38,7 +38,6 @@ export default function Landing() {
   const products = data?.products ?? [];
   const productList = data?.productList ?? [];
 
-  console.log(data);
   return (
     <main className="pt-6">
       <div className="lg:w-[70%] w-[95%] mx-auto">
@@ -47,7 +46,7 @@ export default function Landing() {
         {isError ? (
           <LandingError
             message={
-              error instanceof Error ? error.message : 'Something went wrong'
+              error instanceof Error ? error.message : "Something went wrong"
             }
             onRetry={() => void refetch()}
           />
