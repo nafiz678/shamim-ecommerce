@@ -1,41 +1,45 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import type { User } from '@supabase/supabase-js';
-import { HugeiconsIcon } from '@hugeicons/react';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ShoppingCart02Icon,
   FavouriteIcon,
   UserIcon,
   Cancel01Icon,
   ArrowRight02FreeIcons,
-} from '@hugeicons/core-free-icons';
+} from "@hugeicons/core-free-icons";
 
-import Button from '../ui/button';
-import { supabaseClient } from '../../lib/supabase-client';
-import LoginPopover from './login-popover';
+import Button from "../ui/button";
+import LoginPopover from "./login-popover";
+import { useAppSelector } from "../../store/hooks";
+import { cn } from "../../lib/utils";
 
-type PopoverType = 'cart' | 'user' | null;
+type PopoverType = "cart" | "user" | null;
 
 const cartItems = [
   {
     id: 1,
-    title: 'Canon EOS 1500D DSLR Camera Body+ 18-55 mm',
+    title: "Canon EOS 1500D DSLR Camera Body+ 18-55 mm",
     quantity: 1,
     price: 1500,
-    image: '/placeholder.svg',
+    image: "/placeholder.svg",
   },
   {
     id: 2,
-    title: 'Simple Mobile 5G LTE Galaxy 12 Mini 512GB Gaming Phone',
+    title: "Simple Mobile 5G LTE Galaxy 12 Mini 512GB Gaming Phone",
     quantity: 2,
     price: 269,
-    image: '/placeholder.svg',
+    image: "/placeholder.svg",
   },
 ];
 
 export default function HeaderActions() {
   const [activePopover, setActivePopover] = useState<PopoverType>(null);
-  const [user, setUser] = useState<User | null>(null);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
+
+  const {
+    user,
+    isAuthenticated,
+    isLoading: isAuthLoading,
+  } = useAppSelector((state) => state.auth);
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -51,31 +55,27 @@ export default function HeaderActions() {
   };
 
   useEffect(() => {
-    let mounted = true;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setActivePopover(null);
+      }
+    };
 
-    async function loadSession() {
-      const {
-        data: { session },
-      } = await supabaseClient.auth.getSession();
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActivePopover(null);
+      }
+    };
 
-      if (!mounted) return;
-
-      setUser(session?.user ?? null);
-      setIsAuthLoading(false);
-    }
-
-    loadSession();
-
-    const {
-      data: { subscription },
-    } = supabaseClient.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      setIsAuthLoading(false);
-    });
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
-      mounted = false;
-      subscription.unsubscribe();
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
@@ -90,17 +90,17 @@ export default function HeaderActions() {
     };
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setActivePopover(null);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
 
@@ -111,10 +111,9 @@ export default function HeaderActions() {
     >
       <div className="relative">
         <button
-          type="button"
           aria-label="Open shopping cart"
-          aria-expanded={activePopover === 'cart'}
-          onClick={() => togglePopover('cart')}
+          aria-expanded={activePopover === "cart"}
+          onClick={() => togglePopover("cart")}
           className="relative flex items-center justify-center outline-none transition-opacity hover:opacity-80"
         >
           <HugeiconsIcon
@@ -128,7 +127,7 @@ export default function HeaderActions() {
         </button>
 
         <CartPopover
-          isOpen={activePopover === 'cart'}
+          isOpen={activePopover === "cart"}
           subtotal={subtotal}
           onClose={() => setActivePopover(null)}
         />
@@ -149,8 +148,8 @@ export default function HeaderActions() {
         <button
           type="button"
           aria-label="Open account menu"
-          aria-expanded={activePopover === 'user'}
-          onClick={() => togglePopover('user')}
+          aria-expanded={activePopover === "user"}
+          onClick={() => togglePopover("user")}
           className="relative flex items-center justify-center outline-none transition-opacity hover:opacity-80"
         >
           <HugeiconsIcon
@@ -158,13 +157,13 @@ export default function HeaderActions() {
             icon={UserIcon}
           />
 
-          {user && (
+          {isAuthenticated && (
             <span className="absolute -right-1 -top-1 size-2 rounded-full bg-green-500" />
           )}
         </button>
 
         <LoginPopover
-          isOpen={activePopover === 'user'}
+          isOpen={activePopover === "user"}
           user={user}
           isAuthLoading={isAuthLoading}
           onClose={() => setActivePopover(null)}
@@ -185,17 +184,17 @@ function CartPopover({
 }) {
   return (
     <div
-      className={[
-        'absolute right-0 top-9 z-50 w-65 origin-top-right rounded-sm border border-border bg-background p-4 shadow-lg transition-all duration-300 ease-out sm:w-80',
+      className={cn(
+        "absolute right-0 top-9 z-50 w-65 origin-top-right rounded-sm border border-border bg-background p-4 shadow-lg transition-all duration-300 ease-out sm:w-80",
         isOpen
-          ? 'visible translate-y-0 scale-100 opacity-100'
-          : 'invisible -translate-y-2 scale-95 opacity-0',
-      ].join(' ')}
+          ? "visible translate-y-0 scale-100 opacity-100"
+          : "invisible -translate-y-2 scale-95 opacity-0",
+      )}
     >
       <h3 className="mb-4 text-sm font-medium text-foreground">
-        Shopping Cart{' '}
+        Shopping Cart{" "}
         <span className="text-foreground/60">
-          ({String(cartItems.length).padStart(2, '0')})
+          ({String(cartItems.length).padStart(2, "0")})
         </span>
       </h3>
 
@@ -216,7 +215,7 @@ function CartPopover({
               </h4>
 
               <p className="mt-1 text-xs text-foreground/60">
-                {item.quantity} x{' '}
+                {item.quantity} x{" "}
                 <span className="font-semibold text-text-primary">
                   ${item.price.toLocaleString()}
                 </span>
