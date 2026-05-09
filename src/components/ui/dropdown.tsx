@@ -255,7 +255,7 @@ export default function Dropdown({
 
       <div
         className={cn(
-          'absolute top-full z-20 mt-2 origin-top rounded-xl border border-border bg-primary p-1.5 shadow-2xl ring-1 ring-border transition-all duration-200 ease-out will-change-transform',
+          'absolute top-full z-20 mt-2 origin-top rounded-xl border border-border bg-primary p-1.5 shadow-2xl transition-all duration-200 ease-out will-change-transform',
           menuAlignmentClassName,
           menuWidthClassName,
           open
