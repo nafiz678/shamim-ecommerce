@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import { cn } from "../../lib/utils";
+import { Link, type LinkProps } from "@tanstack/react-router";
 
 type Variant = "accent" | "secondary" | "outline" | "ghost" | "dark" | "link";
 type Size = "sm" | "md" | "lg";
@@ -14,6 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: IconSvgElement;
   rightIcon?: IconSvgElement;
   iconClass?: string;
+  href?: LinkProps["to"];
 }
 
 export default function Button({
@@ -27,6 +29,7 @@ export default function Button({
   rightIcon,
   disabled,
   iconClass,
+  href,
   ...props
 }: ButtonProps) {
   const base =
@@ -47,31 +50,16 @@ export default function Button({
     lg: "h-12 px-6 text-base",
   };
 
-  return (
-    <button
-      disabled={disabled || loading}
-      className={cn(
-        className,
-        base,
-        variants[variant],
-        sizes[size],
-        fullWidth && "w-full",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-      )}
-      {...props}
-    >
+  const content = (
+    <>
       {loading ? (
-        <span
-          className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-          aria-hidden="true"
-        />
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
       ) : (
         leftIcon && (
           <HugeiconsIcon
             icon={leftIcon}
             size={16}
             className={cn(iconClass, "shrink-0")}
-            aria-hidden="true"
           />
         )
       )}
@@ -79,13 +67,32 @@ export default function Button({
       <span>{children}</span>
 
       {!loading && rightIcon && (
-        <HugeiconsIcon
-          icon={rightIcon}
-          size={16}
-          className={iconClass}
-          aria-hidden="true"
-        />
+        <HugeiconsIcon icon={rightIcon} size={16} className={iconClass} />
       )}
+    </>
+  );
+
+  const classes = cn(
+    className,
+    base,
+    variants[variant],
+    sizes[size],
+    fullWidth && "w-full",
+    "disabled:cursor-not-allowed disabled:opacity-50",
+  );
+
+  // 👉 If href exists → render Link
+  if (href) {
+    return (
+      <Link to={href} className={classes}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button disabled={disabled || loading} className={classes} {...props}>
+      {content}
     </button>
   );
 }
