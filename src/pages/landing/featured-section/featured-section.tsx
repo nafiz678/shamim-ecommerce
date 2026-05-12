@@ -1,7 +1,7 @@
-import type { ProductProps } from '../../../lib/types';
-import Button from '../../../components/ui/button';
-import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import ProductsCard from '../../../components/ui/products-card';
+import type { ProductProps } from "../../../lib/types";
+import Button from "../../../components/ui/button";
+import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
+import ProductsCard from "../../../components/ui/products-card";
 
 export default function FeaturedSection({
   productList,
@@ -36,6 +36,7 @@ export default function FeaturedSection({
               </div>
 
               <Button
+                href="/shop"
                 variant="secondary"
                 rightIcon={ArrowRight02FreeIcons}
                 className="rounded-sm px-7 py-5 uppercase"
@@ -67,8 +68,8 @@ export default function FeaturedSection({
                     key={label}
                     className={
                       active
-                        ? 'cursor-pointer whitespace-nowrap border-b-2 border-secondary px-1 pb-1 text-sxs font-semibold text-foreground sm:text-xxs md:text-xs'
-                        : 'cursor-pointer whitespace-nowrap border-secondary pb-1 text-sxs text-muted-foreground hover:border-b-2 hover:text-foreground sm:text-xxs md:text-xs'
+                        ? "cursor-pointer whitespace-nowrap border-b-2 border-secondary px-1 pb-1 text-sxs font-semibold text-foreground sm:text-xxs md:text-xs"
+                        : "cursor-pointer whitespace-nowrap border-secondary pb-1 text-sxs text-muted-foreground hover:border-b-2 hover:text-foreground sm:text-xxs md:text-xs"
                     }
                   >
                     {label}
@@ -96,23 +97,23 @@ export default function FeaturedSection({
 
 const productTabs: { label: string; active: boolean }[] = [
   {
-    label: 'All Product',
+    label: "All Product",
     active: true,
   },
   {
-    label: 'Smart Phone',
+    label: "Smart Phone",
     active: false,
   },
   {
-    label: 'Laptop',
+    label: "Laptop",
     active: false,
   },
   {
-    label: 'Headphone',
+    label: "Headphone",
     active: false,
   },
   {
-    label: 'TV',
+    label: "TV",
     active: false,
   },
 ];
