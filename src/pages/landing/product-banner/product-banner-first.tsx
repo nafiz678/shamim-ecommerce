@@ -1,11 +1,11 @@
-import React from 'react';
-import Button from '../../../components/ui/button';
-import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import { Badge } from '../../../components/ui/badge';
-import { cn } from '../../../lib/utils';
+import React from "react";
+import Button from "../../../components/ui/button";
+import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
+import { Badge } from "../../../components/ui/badge";
+import { cn } from "../../../lib/utils";
 
 type BannerCardProps = {
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   label: string;
   title: React.ReactNode;
   description: React.ReactNode;
@@ -25,13 +25,13 @@ const BannerCard = React.memo(function BannerCard({
   badge,
   image,
 }: BannerCardProps) {
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
 
   return (
     <article
       className={cn(
-        'relative flex flex-col gap-6 overflow-hidden rounded p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 md:p-10',
-        isDark ? 'bg-foreground text-background' : 'bg-muted text-foreground',
+        "relative flex flex-col gap-6 overflow-hidden rounded p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8 md:p-10",
+        isDark ? "bg-foreground text-background" : "bg-muted text-foreground",
       )}
     >
       <div className="relative z-20 flex-1">
@@ -45,14 +45,15 @@ const BannerCard = React.memo(function BannerCard({
 
         <p
           className={cn(
-            'mt-2 text-xs',
-            isDark ? 'text-background' : 'text-muted-foreground',
+            "mt-2 text-xs",
+            isDark ? "text-background" : "text-muted-foreground",
           )}
         >
           {description}
         </p>
 
         <Button
+          href="/shop"
           rightIcon={ArrowRight02FreeIcons}
           variant="secondary"
           className="mt-2 rounded-xs"
@@ -67,7 +68,7 @@ const BannerCard = React.memo(function BannerCard({
         loading="lazy"
         decoding="async"
         className={cn(
-          'pointer-events-none z-10 mx-auto size-40 select-none object-contain sm:mx-0 sm:size-44',
+          "pointer-events-none z-10 mx-auto size-40 select-none object-contain sm:mx-0 sm:size-44",
           imageClassName,
         )}
       />
