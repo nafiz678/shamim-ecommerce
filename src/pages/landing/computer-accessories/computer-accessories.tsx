@@ -1,7 +1,7 @@
-import Button from '../../../components/ui/button';
-import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import type { ProductProps } from '../../../lib/types';
-import ProductsCard from '../../../components/ui/products-card';
+import Button from "../../../components/ui/button";
+import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
+import type { ProductProps } from "../../../lib/types";
+import ProductsCard from "../../../components/ui/products-card";
 
 export default function ComputerAccessories({
   productList,
@@ -26,9 +26,9 @@ export default function ComputerAccessories({
                     <button
                       key={tab}
                       className={
-                        tab === 'All Product'
-                          ? 'border-b-2 cursor-pointer border-secondary pb-1 px-1 font-semibold text-foreground md:text-xs text-xxs pt-2 md:pt-0 text-nowrap'
-                          : 'text-foreground/40 md:text-xs text-xxs pt-2 md:pt-0 pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary text-nowrap'
+                        tab === "All Product"
+                          ? "border-b-2 cursor-pointer border-secondary pb-1 px-1 font-semibold text-foreground md:text-xs text-xxs pt-2 md:pt-0 text-nowrap"
+                          : "text-foreground/40 md:text-xs text-xxs pt-2 md:pt-0 pb-1 hover:text-foreground hover:border-b-2 cursor-pointer border-secondary text-nowrap"
                       }
                     >
                       {tab}
@@ -77,6 +77,7 @@ export default function ComputerAccessories({
                 </div>
 
                 <Button
+                  href="/shop"
                   variant="secondary"
                   rightIcon={ArrowRight02FreeIcons}
                   className="mt-3 w-full rounded-sm bg-secondary/90 px-7 py-5 text-xs font-semibold uppercase tracking-wide text-background hover:bg-secondary"
@@ -96,12 +97,13 @@ export default function ComputerAccessories({
                 </h3>
 
                 <p className="mt-2 text-sm leading-6 text-background">
-                  only for{' '}
-                  <span className="font-semibold text-badge">SmartPhone</span>{' '}
+                  only for{" "}
+                  <span className="font-semibold text-badge">SmartPhone</span>{" "}
                   product.
                 </p>
 
                 <Button
+                  href="/shop"
                   variant="secondary"
                   rightIcon={ArrowRight02FreeIcons}
                   className="mt-5 w-full rounded-sm bg-text-primary px-7 py-5 text-xs font-semibold uppercase tracking-wide text-background hover:bg-text-primary/90"
@@ -118,9 +120,9 @@ export default function ComputerAccessories({
 }
 
 const productTabs: string[] = [
-  'All Product',
-  'Keyboard & Mouse',
-  'Headphone',
-  'Webcam',
-  'Printer',
+  "All Product",
+  "Keyboard & Mouse",
+  "Headphone",
+  "Webcam",
+  "Printer",
 ];
