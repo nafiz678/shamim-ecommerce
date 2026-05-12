@@ -1,6 +1,6 @@
-import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import { Badge } from '../../../components/ui/badge';
-import Button from '../../../components/ui/button';
+import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
+import { Badge } from "../../../components/ui/badge";
+import Button from "../../../components/ui/button";
 
 export default function ProductBannerSecond() {
   return (
@@ -23,6 +23,7 @@ export default function ProductBannerSecond() {
           </p>
 
           <Button
+            href="/shop"
             variant="secondary"
             rightIcon={ArrowRight02FreeIcons}
             size="lg"
