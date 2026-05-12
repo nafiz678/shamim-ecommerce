@@ -1,6 +1,6 @@
-import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
-import Button from '../../../components/ui/button';
-import FeatureBar from './feature-bar';
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import Button from "../../../components/ui/button";
+import FeatureBar from "./feature-bar";
 
 export default function Hero() {
   return (
@@ -24,6 +24,7 @@ export default function Hero() {
               </p>
 
               <Button
+                href="/shop"
                 rightIcon={ArrowRight02Icon}
                 variant="secondary"
                 className="px-5 text-nowrap"
@@ -61,6 +62,7 @@ export default function Hero() {
               </span>
               <h3 className="text-xl">New Google Pixel 6 Pro</h3>
               <Button
+                href="/shop"
                 rightIcon={ArrowRight02Icon}
                 className="rounded-xs text-xs"
                 variant="secondary"
@@ -108,6 +110,7 @@ export default function Hero() {
               <h3 className="text-xl font-medium">Xiaomi FlipBuds Pro</h3>
               <p className="text-text-primary">$299 USD</p>
               <Button
+                href="/shop"
                 rightIcon={ArrowRight02Icon}
                 className="rounded-xs text-xs font-semibold"
                 variant="secondary"
