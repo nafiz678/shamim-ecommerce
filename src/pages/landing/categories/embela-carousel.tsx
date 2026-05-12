@@ -29,7 +29,7 @@ const EmblaCarousel = (props: PropType) => {
         <div className="embla__container">
           {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-              <div className="md:p-3 p-1">
+              <div className="md:p-3 p-1 cursor-grab">
                 <div className="w-full flex flex-col items-center justify-center border border-border rounded pb-4">
                   <img
                     src={slide.image}
