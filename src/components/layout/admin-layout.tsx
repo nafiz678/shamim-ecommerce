@@ -1,4 +1,5 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 import {
   Bell,
   ChartRoseIcon,
@@ -313,6 +314,7 @@ export default function AdminLayout() {
           </main>
         </div>
       </div>
+      <Toaster richColors position="top-right" />
     </div>
   );
 }
