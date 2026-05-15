@@ -1,11 +1,17 @@
 import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { useEffect, useMemo, useState } from "react";
 import type { ProductProps } from "../../lib/types";
+
 import SearchAndSort from "./search-sort";
 import ShopSidebar from "./shop-sidebar";
 import ProductsCard from "../../components/ui/products-card";
+
 import { HugeiconsIcon } from "@hugeicons/react";
-import BreadcrumbHeading, { type BreadcrumbItemProps } from "./breadcumb-heading";
+
+import BreadcrumbHeading, {
+  type BreadcrumbItemProps,
+} from "./breadcumb-heading";
+import { apiFetch } from "../../lib/api-fetch";
 
 export type SortBy = "popular" | "price-low-high" | "price-high-low" | "rating";
 
@@ -24,13 +30,17 @@ export default function ShopPage() {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortBy>("popular");
+
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
     useState<boolean>(false);
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     "Electronics Devices",
   );
+
   const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(
     "All Price",
   );
@@ -41,23 +51,21 @@ export default function ShopPage() {
         setIsLoading(true);
         setError(null);
 
-        const res = await fetch("/dummy_data/shop-products.json", {
-          headers: {
-            Accept: "application/json",
-          },
-        });
+        const data = await apiFetch<{
+          success: boolean;
+          message: string;
+          data: ProductProps[];
+        }>("/products");
 
-        if (!res.ok) {
-          throw new Error(`Failed to load products: ${res.status}`);
+        if (!data.success) {
+          throw new Error(data.message || "Failed to load products");
         }
 
-        const data: unknown = await res.json();
-
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(data.data)) {
           throw new Error("Invalid products JSON format");
         }
 
-        setProducts(data as ProductProps[]);
+        setProducts(data.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
@@ -87,18 +95,61 @@ export default function ShopPage() {
   }, [isMobileSidebarOpen]);
 
   const finalProducts = useMemo(() => {
-    const normalQuery = query.trim().toLowerCase();
+    const normalizedQuery = query.trim().toLowerCase();
 
-    const filteredProducts = products.filter((product) => {
-      if (!normalQuery) return true;
-      return (
-        product.title.toLowerCase().includes(normalQuery) ||
-        product.category_id?.toLowerCase().includes(normalQuery) ||
-        product.description?.toLowerCase().includes(normalQuery)
+    let filteredProducts = [...products];
+
+    // Search filter
+    if (normalizedQuery) {
+      filteredProducts = filteredProducts.filter((product) => {
+        return (
+          product.title.toLowerCase().includes(normalizedQuery) ||
+          product.brand?.toLowerCase().includes(normalizedQuery) ||
+          product.category_id?.toLowerCase().includes(normalizedQuery) ||
+          product.description?.toLowerCase().includes(normalizedQuery)
+        );
+      });
+    }
+
+    // Category filter
+    if (
+      selectedCategory &&
+      selectedCategory !== "All Categories" &&
+      selectedCategory !== "Electronics Devices"
+    ) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.category_id
+          ?.toLowerCase()
+          .includes(selectedCategory.toLowerCase()),
       );
-    });
+    }
 
-    return [...filteredProducts].sort((a, b) => {
+    // Price filter
+    if (selectedPriceRange && selectedPriceRange !== "All Price") {
+      filteredProducts = filteredProducts.filter((product) => {
+        const price = product.price;
+
+        switch (selectedPriceRange) {
+          case "Under $50":
+            return price < 50;
+
+          case "$50 - $100":
+            return price >= 50 && price <= 100;
+
+          case "$100 - $500":
+            return price >= 100 && price <= 500;
+
+          case "Above $500":
+            return price > 500;
+
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Sorting
+    return filteredProducts.sort((a, b) => {
       switch (sortBy) {
         case "price-low-high":
           return a.price - b.price;
@@ -111,12 +162,20 @@ export default function ShopPage() {
 
         case "popular":
         default:
-          return (b.reviews_count ?? 0) - (a.reviews_count ?? 0);
+          return b.rating - a.rating;
       }
     });
-  }, [products, query, sortBy]);
+  }, [products, query, sortBy, selectedCategory, selectedPriceRange]);
 
-  const activeFilterText = query ? `Search: ${query}` : "No active filters";
+  const activeFilters = [
+    query && `Search: "${query}"`,
+    selectedCategory &&
+      selectedCategory !== "Electronics Devices" &&
+      `Category: ${selectedCategory}`,
+    selectedPriceRange &&
+      selectedPriceRange !== "All Price" &&
+      `Price: ${selectedPriceRange}`,
+  ].filter(Boolean);
 
   return (
     <section>
@@ -126,9 +185,10 @@ export default function ShopPage() {
         containerClassName="bg-background"
       />
 
-      <div className="md:w-[70%] w-[95%] mx-auto pt-10 min-h-screen">
-        <div className="grid grid-cols-12 items-start justify-center gap-5">
-          <aside className="hidden md:block md:col-span-3">
+      <div className="mx-auto min-h-screen w-[95%] pt-10 md:w-[70%]">
+        <div className="grid grid-cols-12 items-start gap-5">
+          {/* Desktop Sidebar */}
+          <aside className="hidden md:col-span-3 md:block">
             <ShopSidebar
               onCategoryChange={setSelectedCategory}
               selectedCategory={selectedCategory}
@@ -137,6 +197,7 @@ export default function ShopPage() {
             />
           </aside>
 
+          {/* Main Content */}
           <main className="col-span-12 md:col-span-9">
             <div className="mb-6">
               <div className="flex items-center gap-3 md:block">
@@ -146,7 +207,7 @@ export default function ShopPage() {
                   aria-expanded={isMobileSidebarOpen}
                   aria-controls="mobile-shop-filters"
                   onClick={() => setIsMobileSidebarOpen(true)}
-                  className="inline-flex sm:size-10 size-8 shrink-0 items-center justify-center rounded-sm border border-border bg-background text-foreground transition-colors hover:bg-muted md:hidden"
+                  className="inline-flex size-8 shrink-0 items-center justify-center rounded-sm border border-border bg-background text-foreground transition-colors hover:bg-muted sm:size-10 md:hidden"
                 >
                   <HugeiconsIcon
                     icon={Menu01Icon}
@@ -165,32 +226,51 @@ export default function ShopPage() {
                 </div>
               </div>
 
-              <div className="bg-muted w-full px-4 text-xs py-2 mt-2.5 rounded-sm flex items-center justify-start gap-3">
+              {/* Active Filters */}
+              <div className="mt-2.5 flex flex-wrap items-center gap-2 rounded-sm bg-muted px-4 py-2 text-xs">
                 <p className="text-foreground/70">Active filters:</p>
-                <div>{activeFilterText}</div>
+
+                {activeFilters.length > 0 ? (
+                  activeFilters.map((filter, idx) => (
+                    <span
+                      key={idx}
+                      className="rounded-sm bg-background px-2 py-1 text-foreground/80"
+                    >
+                      {filter}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-foreground/50">No active filters</span>
+                )}
               </div>
             </div>
 
+            {/* Loading */}
             {isLoading && (
-              <div className="flex items-center justify-center h-1/2">
-                Loading...
+              <div className="flex h-[50vh] items-center justify-center">
+                <p className="text-sm text-foreground/60">
+                  Loading products...
+                </p>
               </div>
             )}
 
+            {/* Error */}
             {!isLoading && error && (
               <div className="rounded-sm border border-red-200 bg-red-50 p-4 text-sm text-red-600">
                 {error}
               </div>
             )}
 
+            {/* Empty */}
             {!isLoading && !error && finalProducts.length === 0 && (
               <div className="rounded-sm border border-border p-6 text-center text-sm text-foreground/60">
                 No products found.
               </div>
             )}
 
+            {/* Products */}
             {!isLoading && !error && finalProducts.length > 0 && (
-              <div className="grid lg:grid-cols-4 grid-cols-2 items-center justify-center gap-3 py-4">
+              <div className="grid grid-cols-2 gap-3 py-4 lg:grid-cols-4">
                 {finalProducts.slice(0, 24).map((product) => (
                   <ProductsCard key={product.id} product={product} featured />
                 ))}
@@ -200,8 +280,9 @@ export default function ShopPage() {
         </div>
       </div>
 
+      {/* Mobile Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-foreground/40 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 md:hidden ${
           isMobileSidebarOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -210,6 +291,7 @@ export default function ShopPage() {
         onClick={() => setIsMobileSidebarOpen(false)}
       />
 
+      {/* Mobile Sidebar */}
       <aside
         id="mobile-shop-filters"
         role="dialog"
