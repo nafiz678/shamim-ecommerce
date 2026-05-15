@@ -1,11 +1,14 @@
 import type { ReactElement } from "react";
 import type { AuthUser } from "../features/auth/auth-slice";
 import type { IconSvgElement } from "@hugeicons/react";
+import type { Tables } from "./supabase";
 
 export type Option = {
   value: string;
   label: string;
 };
+
+export type ProductProps = Tables<"products">
 
 export type FeatureItemProps = {
   title: string;
