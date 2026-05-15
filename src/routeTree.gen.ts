@@ -14,7 +14,9 @@ import { Route as publicRouteRouteImport } from './routes/(public)/route'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AdminProductsRouteImport } from './routes/admin/products'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as publicUnauthorizedRouteImport } from './routes/(public)/unauthorized'
 import { Route as publicSigninRouteImport } from './routes/(public)/signin'
 import { Route as publicShopIndexRouteImport } from './routes/(public)/shop/index'
 import { Route as publicShopSlugRouteImport } from './routes/(public)/shop/$slug'
@@ -43,10 +45,20 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AdminRouteRoute,
+} as any)
+const publicUnauthorizedRoute = publicUnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
+  getParentRoute: () => publicRouteRoute,
 } as any)
 const publicSigninRoute = publicSigninRouteImport.update({
   id: '/signin',
@@ -67,7 +79,9 @@ const publicShopSlugRoute = publicShopSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteRouteWithChildren
   '/signin': typeof publicSigninRoute
+  '/unauthorized': typeof publicUnauthorizedRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/users': typeof AdminUsersRoute
   '/': typeof publicIndexRoute
   '/admin/': typeof AdminIndexRoute
@@ -76,7 +90,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/signin': typeof publicSigninRoute
+  '/unauthorized': typeof publicUnauthorizedRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/users': typeof AdminUsersRoute
   '/': typeof publicIndexRoute
   '/admin': typeof AdminIndexRoute
@@ -88,7 +104,9 @@ export interface FileRoutesById {
   '/(public)': typeof publicRouteRouteWithChildren
   '/admin': typeof AdminRouteRouteWithChildren
   '/(public)/signin': typeof publicSigninRoute
+  '/(public)/unauthorized': typeof publicUnauthorizedRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/products': typeof AdminProductsRoute
   '/admin/users': typeof AdminUsersRoute
   '/(public)/': typeof publicIndexRoute
   '/admin/': typeof AdminIndexRoute
@@ -100,7 +118,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/admin'
     | '/signin'
+    | '/unauthorized'
     | '/admin/dashboard'
+    | '/admin/products'
     | '/admin/users'
     | '/'
     | '/admin/'
@@ -109,7 +129,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/signin'
+    | '/unauthorized'
     | '/admin/dashboard'
+    | '/admin/products'
     | '/admin/users'
     | '/'
     | '/admin'
@@ -120,7 +142,9 @@ export interface FileRouteTypes {
     | '/(public)'
     | '/admin'
     | '/(public)/signin'
+    | '/(public)/unauthorized'
     | '/admin/dashboard'
+    | '/admin/products'
     | '/admin/users'
     | '/(public)/'
     | '/admin/'
@@ -170,12 +194,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRouteRoute
+    }
+    '/(public)/unauthorized': {
+      id: '/(public)/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof publicUnauthorizedRouteImport
+      parentRoute: typeof publicRouteRoute
     }
     '/(public)/signin': {
       id: '/(public)/signin'
@@ -203,6 +241,7 @@ declare module '@tanstack/react-router' {
 
 interface publicRouteRouteChildren {
   publicSigninRoute: typeof publicSigninRoute
+  publicUnauthorizedRoute: typeof publicUnauthorizedRoute
   publicIndexRoute: typeof publicIndexRoute
   publicShopSlugRoute: typeof publicShopSlugRoute
   publicShopIndexRoute: typeof publicShopIndexRoute
@@ -210,6 +249,7 @@ interface publicRouteRouteChildren {
 
 const publicRouteRouteChildren: publicRouteRouteChildren = {
   publicSigninRoute: publicSigninRoute,
+  publicUnauthorizedRoute: publicUnauthorizedRoute,
   publicIndexRoute: publicIndexRoute,
   publicShopSlugRoute: publicShopSlugRoute,
   publicShopIndexRoute: publicShopIndexRoute,
@@ -221,12 +261,14 @@ const publicRouteRouteWithChildren = publicRouteRoute._addFileChildren(
 
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminProductsRoute: typeof AdminProductsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminProductsRoute: AdminProductsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
