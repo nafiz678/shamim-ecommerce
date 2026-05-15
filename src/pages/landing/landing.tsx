@@ -1,4 +1,3 @@
-import type { ProductProps } from "../../lib/types";
 import BestDeals from "./best-Deals/best-deals";
 import Categories from "./categories/categories";
 import ComputerAccessories from "./computer-accessories/computer-accessories";
@@ -16,6 +15,9 @@ import {
   FeaturedSectionSkeleton,
 } from "../../components/shared/loader/loader";
 import { apiFetch } from "../../lib/api-fetch";
+import type { Tables } from "../../lib/supabase";
+
+type ProductProps = Tables<"products">;
 
 type ProductsResponse = {
   success: boolean;
@@ -26,7 +28,7 @@ type ProductsResponse = {
 export default function Landing() {
   const { data, isPending, isError, error, refetch } = useQuery({
     queryKey: ["products"],
-    queryFn: () => apiFetch<ProductsResponse>("/products"),
+    queryFn: () => apiFetch<ProductsResponse>("/products/landing"),
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 30,
     select: (response) => ({
