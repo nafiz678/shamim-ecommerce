@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -17,6 +17,7 @@ import type {
 import { Input } from "../ui/input";
 import { Link } from "@tanstack/react-router";
 import { cn } from "../../lib/utils";
+import { getUserRole } from "../../features/auth/get-roles";
 
 type AuthMode = "login" | "signup";
 
@@ -379,35 +380,94 @@ function SignedInView({
   onClose,
   onLogout,
 }: SignedInViewProps) {
+  const [role, setRole] = useState<string | null>(null);
+  const [loadingRole, setLoadingRole] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadRole() {
+      if (!user?.id) {
+        setLoadingRole(false);
+        return;
+      }
+
+      const fetchedRole = await getUserRole(user.id);
+
+      if (!mounted) return;
+
+      setRole(fetchedRole);
+      setLoadingRole(false);
+    }
+
+    loadRole();
+
+    return () => {
+      mounted = false;
+    };
+  }, [user?.id]);
+
   const displayName =
     typeof user.fullName === "string" ? user.fullName : user.email;
 
+  const isAdmin = role === "admin";
+
   return (
     <div>
-      <div className="rounded-sm border border-border bg-foreground/3 p-4">
-        <p className="text-xs text-foreground/60">Signed in as</p>
+      <div className="border border-border bg-foreground/5 p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-xs uppercase tracking-wide text-foreground/50">
+              Signed in as
+            </p>
 
-        <p className="mt-1 truncate text-sm font-semibold text-foreground">
-          {displayName}
-        </p>
+            <p className="mt-1 truncate text-sm font-semibold text-foreground">
+              {displayName}
+            </p>
 
-        {user.email && (
-          <p className="mt-1 truncate text-xs text-foreground/60">
-            {user.email}
-          </p>
-        )}
+            {user.email && (
+              <p className="mt-1 truncate text-xs text-foreground/60">
+                {user.email}
+              </p>
+            )}
+          </div>
+
+          {!loadingRole && role && (
+            <div
+              className={cn(
+                "border px-2 py-1 text-xxs font-bold uppercase tracking-wider",
+                isAdmin
+                  ? "border-secondary bg-secondary/10 text-secondary"
+                  : "border-border bg-muted text-foreground/70",
+              )}
+            >
+              {role}
+            </div>
+          )}
+        </div>
       </div>
 
       <AuthMessage type="error" message={errorMessage} />
 
-      <Button
-        variant="secondary"
-        onClick={onClose}
-        rightIcon={ArrowRight02FreeIcons}
-        className="mt-4 w-full font-semibold uppercase"
-      >
-        My Account
-      </Button>
+      {isAdmin ? (
+        <Button
+          href="/admin/dashboard"
+          variant="secondary"
+          rightIcon={ArrowRight02FreeIcons}
+          className="mt-4 w-full font-semibold uppercase"
+        >
+          Admin Panel
+        </Button>
+      ) : (
+        <Button
+          variant="secondary"
+          onClick={onClose}
+          rightIcon={ArrowRight02FreeIcons}
+          className="mt-4 w-full font-semibold uppercase"
+        >
+          My Account
+        </Button>
+      )}
 
       <Button
         variant="outline"
