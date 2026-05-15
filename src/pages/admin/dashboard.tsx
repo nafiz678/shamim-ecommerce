@@ -11,6 +11,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { cn } from "../../lib/utils";
 import type { ReactNode } from "react";
 import type { Order, Product, Stat } from "../../lib/types";
+import { Card, CardContent, CardHeader } from "../../components/ui/card";
 
 const stats: Stat[] = [
   { title: "Total Revenue", value: "$24,500", icon: DollarSign, trend: "+12%" },
@@ -30,26 +31,6 @@ const products: Product[] = [
   { title: "MacBook Air M2", price: 999, stock: 8, rating: 4.9 },
   { title: "Sony Headphones", price: 199, stock: 34, rating: 4.6 },
 ];
-
-function Card({ children }: { children: ReactNode }) {
-  return (
-    <div className="border border-border rounded-2xl shadow-sm hover:shadow-md transition">
-      {children}
-    </div>
-  );
-}
-
-function CardHeader({ title }: { title: string }) {
-  return (
-    <div className="p-5 border-b border-border">
-      <h3 className="font-semibold text-lg">{title}</h3>
-    </div>
-  );
-}
-
-function CardContent({ children }: { children: ReactNode }) {
-  return <div className="p-5 space-y-3">{children}</div>;
-}
 
 function StatCard({ stat }: { stat: Stat }) {
   return (
@@ -80,9 +61,9 @@ function TabButton({
     <button
       onClick={onClick}
       className={cn(
-        "px-4 py-2 rounded-xl text-sm font-medium transition border",
+        "px-4 py-2 rounded-xl text-sm font-medium transition border cursor-pointer",
         active
-          ? "bg-black text-white border-black"
+          ? "bg-foreground text-background border-black"
           : "text-gray-600 hover:text-black border-border",
       )}
     >
