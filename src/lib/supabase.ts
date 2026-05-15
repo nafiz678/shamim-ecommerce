@@ -207,41 +207,6 @@ export type Database = {
         }
         Relationships: []
       }
-      product_images: {
-        Row: {
-          alt_text: string | null
-          created_at: string
-          id: string
-          image_url: string
-          product_id: string
-          sort_order: number
-        }
-        Insert: {
-          alt_text?: string | null
-          created_at?: string
-          id?: string
-          image_url: string
-          product_id: string
-          sort_order?: number
-        }
-        Update: {
-          alt_text?: string | null
-          created_at?: string
-          id?: string
-          image_url?: string
-          product_id?: string
-          sort_order?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "product_images_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       products: {
         Row: {
           brand: string | null
@@ -249,6 +214,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          images: string[] | null
           is_active: boolean
           is_featured: boolean
           old_price: number | null
@@ -265,6 +231,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          images?: string[] | null
           is_active?: boolean
           is_featured?: boolean
           old_price?: number | null
@@ -281,6 +248,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          images?: string[] | null
           is_active?: boolean
           is_featured?: boolean
           old_price?: number | null
@@ -300,6 +268,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          last_seen_at: string | null
+          phone: string | null
+          role: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          last_seen_at?: string | null
+          phone?: string | null
+          role?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          last_seen_at?: string | null
+          phone?: string | null
+          role?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {
