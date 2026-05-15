@@ -1,5 +1,4 @@
 import type { ReactElement } from "react";
-import type { Tables } from "./supabase";
 import type { AuthUser } from "../features/auth/auth-slice";
 import type { IconSvgElement } from "@hugeicons/react";
 
@@ -14,16 +13,18 @@ export type FeatureItemProps = {
   icon: ReactElement;
 };
 
-export type ProductRow = Tables<"products">;
-export type ProductImageRow = Tables<"product_images">;
-
-export type ProductProps = ProductRow & {
-  images?: ProductImageRow[];
-  image?: string | null;
-  image_alt?: string | null;
-  tags?: string[];
-  reviews_count?: number;
-  discount_percent?: number | null;
+export type ProductFormData = {
+  title: string;
+  slug: string;
+  description: string;
+  brand: string;
+  category_id: string;
+  price: string;
+  old_price: string;
+  stock: string;
+  rating: string;
+  is_active: boolean;
+  is_featured: boolean;
 };
 
 export type CategoryProp = { id: number; title: string; image: string };
