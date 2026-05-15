@@ -19,7 +19,6 @@ import {
 } from "./image-upload";
 
 import { toast } from "sonner";
-import { Input } from "../../../components/ui/input";
 import type { ProductFormData } from "../../../lib/types";
 import {
   createProduct,
@@ -31,6 +30,7 @@ import {
   useProducts,
 } from "./products";
 import { slugify } from "../../../lib/utils";
+import { CheckboxField, InputField, StatusBadge, TableData, TableHead } from "./utils-components";
 
 type ProductsType = Tables<"products">;
 
@@ -240,10 +240,6 @@ export default function AdminProducts() {
     }
   }
 
-  // =======================================================
-  // DELETE PRODUCT
-  // =======================================================
-
   async function handleDelete(productId: string) {
     const confirmDelete = confirm(
       "Are you sure you want to delete this product?",
@@ -267,15 +263,10 @@ export default function AdminProducts() {
     }
   }
 
-  // =======================================================
-  // RENDER
-  // =======================================================
-
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
         {/* HEADER */}
-
         <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Products</h1>
@@ -296,7 +287,6 @@ export default function AdminProducts() {
         </div>
 
         {/* SEARCH */}
-
         <div className="mb-6 flex items-center gap-3 rounded-2xl border border-border px-4 py-3 shadow-sm">
           <HugeiconsIcon icon={Search} size={18} className="text-neutral-400" />
 
@@ -722,93 +712,6 @@ export default function AdminProducts() {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function TableHead({
-  children,
-  align = "left",
-}: {
-  children: React.ReactNode;
-  align?: "left" | "right";
-}) {
-  return (
-    <th
-      className={`px-6 py-4 text-xs font-semibold uppercase tracking-wider text-neutral-500 ${
-        align === "right" ? "text-right" : "text-left"
-      }`}
-    >
-      {children}
-    </th>
-  );
-}
-
-function TableData({
-  children,
-  align = "left",
-}: {
-  children: React.ReactNode;
-  align?: "left" | "right";
-}) {
-  return (
-    <td
-      className={`px-6 py-5 text-sm text-neutral-700 ${
-        align === "right" ? "text-right" : "text-left"
-      }`}
-    >
-      {children}
-    </td>
-  );
-}
-
-function InputField({
-  label,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
-}) {
-  return (
-    <div>
-      <label className="mb-2 block text-sm font-medium text-foreground/75">
-        {label}
-      </label>
-
-      <Input
-        {...props}
-        className="h-10 w-full rounded-xl! border border-border px-4 text-sm transition-all duration-300 ease-in-out"
-      />
-    </div>
-  );
-}
-
-function CheckboxField({
-  label,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
-}) {
-  return (
-    <label className="flex items-center gap-3 text-sm text-neutral-600">
-      <input
-        {...props}
-        type="checkbox"
-        className="size-4 rounded border-neutral-300"
-      />
-
-      {label}
-    </label>
-  );
-}
-
-function StatusBadge({ active }: { active: boolean }) {
-  return (
-    <div
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
-        active ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-      }`}
-    >
-      {active ? "Active" : "Inactive"}
     </div>
   );
 }
