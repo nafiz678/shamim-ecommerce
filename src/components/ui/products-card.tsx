@@ -1,13 +1,13 @@
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   FavouriteIcon,
   ShoppingCart02Icon,
   StarIcon,
   ViewIcon,
-} from '@hugeicons/core-free-icons';
-import { Link } from '@tanstack/react-router';
-import type { ProductProps } from '../../lib/types';
-import { Badge, type BadgeVariant } from './badge';
+} from "@hugeicons/core-free-icons";
+import { Link } from "@tanstack/react-router";
+import type { ProductProps } from "../../lib/types";
+import { Badge } from "./badge";
 
 type ProductCardProps = {
   product: ProductProps;
@@ -30,25 +30,22 @@ function formatPrice(price: number): string {
 
 export default function ProductsCard({
   product,
-  className = '',
+  className = "",
   featured = false,
 }: ProductCardProps) {
   const imageUrl =
-    product.image ?? product.images?.[0]?.image_url ?? '/placeholder.svg';
+    product.images && product.images.length > 0
+      ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${product.images?.[0]}`
+      : "/placeholder.svg";
 
-  const imageAlt =
-    product.image_alt ?? product.images?.[0]?.alt_text ?? product.title;
-
-  const discountPercent =
-    product.discount_percent ??
-    getDiscountPercent(product.price, product.old_price);
+  const discountPercent = getDiscountPercent(product.price, product.old_price);
 
   return (
     <article
       className={`group relative space-y-2 border border-border p-3 font-sans ${className} ${
         featured
-          ? 'transition-shadow duration-200 ease-linear hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)]'
-          : ''
+          ? "transition-shadow duration-200 ease-linear hover:shadow-[0px_8px_24px_0px_rgba(25,28,31,0.12)]"
+          : ""
       }`}
     >
       <div className="absolute left-2.5 top-3 z-10 flex flex-col gap-1">
@@ -57,22 +54,12 @@ export default function ProductsCard({
             {discountPercent}% OFF
           </Badge>
         )}
-
-        {product.tags?.map((tag) => (
-          <Badge
-            key={tag}
-            className="text-xxs font-semibold"
-            variant={tag.toLowerCase().replaceAll(' ', '_') as BadgeVariant}
-          >
-            {tag}
-          </Badge>
-        ))}
       </div>
 
       <div className="relative flex items-start justify-center">
         <img
           src={imageUrl}
-          alt={imageAlt}
+          alt={product.title}
           loading="lazy"
           decoding="async"
           className="max-w-full rounded-xs object-contain transition-[filter] duration-200 ease-linear group-hover:brightness-80"
@@ -111,15 +98,11 @@ export default function ProductsCard({
                 icon={StarIcon}
                 className={`size-3 text-secondary ${
                   index < Math.round(product.rating)
-                    ? 'fill-secondary'
-                    : 'fill-transparent'
+                    ? "fill-secondary"
+                    : "fill-transparent"
                 }`}
               />
             ))}
-
-            <span className="ml-0.5 text-xs leading-[100%] text-text/50">
-              ({product.reviews_count?.toLocaleString() ?? 0})
-            </span>
           </div>
         )}
 
