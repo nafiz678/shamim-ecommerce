@@ -1,35 +1,46 @@
-import { useState } from 'react';
-import './shop.css';
-import { brands, categories, priceRanges, tags } from './shop-data';
-import { HugeiconsIcon } from '@hugeicons/react';
+import "./shop.css";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Apple,
   ArrowRight02FreeIcons,
-  CheckSquare,
   ShoppingCart02Icon,
-} from '@hugeicons/core-free-icons';
-import Button from '../../components/ui/button';
+  Tick02Icon,
+} from "@hugeicons/core-free-icons";
+import Button from "../../components/ui/button";
+import type { CategoryProp } from "../../lib/types";
+import { useMemo } from "react";
+import { cn } from "../../lib/utils";
+import { pricePresets } from "./shop-data";
+
+type PriceRange = {
+  min: number;
+  max: number;
+};
 
 export type ShopSidebarProps = {
+  categories: CategoryProp[];
+  brands: string[];
   selectedCategory: string | null;
-  selectedPriceRange: string | null;
+  selectedBrands: string[];
+  priceRange: PriceRange;
   onCategoryChange: (category: string | null) => void;
-  onPriceRangeChange: (range: string | null) => void;
+  onBrandChange: React.Dispatch<React.SetStateAction<string[]>>;
+  onPriceRangeChange: React.Dispatch<React.SetStateAction<PriceRange>>;
 };
 
 export default function ShopSidebar({
-  selectedCategory = 'Electronics Devices',
-  selectedPriceRange = 'All Price',
+  categories,
+  brands,
+  selectedCategory,
+  selectedBrands,
+  priceRange,
   onCategoryChange,
+  onBrandChange,
   onPriceRangeChange,
 }: ShopSidebarProps) {
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([
-    'Apple',
-    'Microsoft',
-    'Sony',
-    'Symphony',
-  ]);
-  const [selectedTags, setSelectedTags] = useState<string[]>(['Graphics Card']);
+  const activePreset = pricePresets.find(
+    (preset) => preset.min === priceRange.min && preset.max === priceRange.max,
+  );
   return (
     <div>
       {/* category */}
@@ -39,22 +50,39 @@ export default function ShopSidebar({
         </h3>
 
         <div className="space-y-2">
+          <button
+            type="button"
+            onClick={() => onCategoryChange(null)}
+            className="flex w-full items-center gap-3 text-left text-xs font-medium text-foreground/60 hover:text-foreground"
+          >
+            <span
+              className={`flex size-4 shrink-0 items-center justify-center rounded-full border ${
+                !selectedCategory
+                  ? "border-secondary bg-secondary"
+                  : "border-border"
+              }`}
+            >
+              {!selectedCategory && (
+                <span className="size-2 rounded-full bg-background" />
+              )}
+            </span>
+
+            <span>All Categories</span>
+          </button>
+
           {categories.map((category) => {
-            const isActive = selectedCategory === category;
+            const isActive = selectedCategory === category.id;
 
             return (
               <button
-                key={category}
+                key={category.id}
                 type="button"
-                onClick={() => onCategoryChange(isActive ? null : category)}
-                className="flex w-full items-center gap-3 text-left md:text-xs text-xxs font-medium text-foreground/60 transition-colors duration-300
-               hover:text-foreground"
+                onClick={() => onCategoryChange(isActive ? null : category.id)}
+                className="flex w-full items-center gap-3 text-left text-xs font-medium text-foreground/60 hover:text-foreground"
               >
                 <span
-                  className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                    isActive
-                      ? 'border-secondary bg-secondary'
-                      : 'border-[#c7d0d6] bg-background'
+                  className={`flex size-4 shrink-0 items-center justify-center rounded-full border ${
+                    isActive ? "border-secondary bg-secondary" : "border-border"
                   }`}
                 >
                   {isActive && (
@@ -62,8 +90,8 @@ export default function ShopSidebar({
                   )}
                 </span>
 
-                <span className={isActive ? 'text-foreground' : ''}>
-                  {category}
+                <span className={isActive ? "text-foreground" : ""}>
+                  {category.name}
                 </span>
               </button>
             );
@@ -78,19 +106,28 @@ export default function ShopSidebar({
         <h3 className="mb-4 text-sm font-medium uppercase tracking-wide">
           Price Range
         </h3>
-        <PriceRangeFilter />
-        <div className="space-y-2">
-          {priceRanges.map((range) => {
-            const isActive = selectedPriceRange === range;
+        <PriceRangeFilter
+          priceRange={priceRange}
+          onPriceRangeChange={onPriceRangeChange}
+        />
+        <div className="mt-1">
+          {pricePresets.map((preset) => {
+            const isActive = activePreset?.label === preset.label;
 
             return (
               <button
-                key={range}
+                key={preset.label}
                 type="button"
-                onClick={() => onPriceRangeChange(isActive ? null : range)}
-                className="flex w-full items-center gap-3 text-left md:text-xs text-xxs font-medium text-foreground/60 transition-colors duration-300
-               hover:text-foreground"
+                onClick={() =>
+                  onPriceRangeChange({
+                    min: preset.min,
+                    max: preset.max,
+                  })
+                }
+                className={`group flex w-full items-center gap-3 rounded-sm px-1 py-1.5 text-left md:text-xs text-xxs font-medium text-foreground/60 transition-colors duration-300
+               hover:text-foreground cursor-pointer`}
               >
+                {/* Radio */}
                 <span
                   className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isActive
@@ -99,8 +136,13 @@ export default function ShopSidebar({
                   }`}
                 ></span>
 
-                <span className={isActive ? 'text-foreground' : ''}>
-                  {range}
+                {/* Label */}
+                <span
+                  className={`transition-colors ${
+                    isActive ? "text-foreground" : "text-foreground/60"
+                  }`}
+                >
+                  {preset.label}
                 </span>
               </button>
             );
@@ -123,29 +165,33 @@ export default function ShopSidebar({
                 key={brand}
                 type="button"
                 onClick={() =>
-                  setSelectedBrands((prev) =>
+                  onBrandChange((prev) =>
                     isActive
                       ? prev.filter((b) => b !== brand)
                       : [...prev, brand],
                   )
                 }
-                className="flex items-center gap-2 md:text-xs text-xxs text-foreground/70 hover:text-foreground"
+                className="flex items-center gap-2 text-xs text-foreground/70 hover:text-foreground"
               >
                 <span
-                  className={`flex size-4 items-center justify-center rounded border transition-colors ${
-                    isActive
-                      ? 'bg-secondary border-secondary'
-                      : 'border-border bg-background'
+                  className={`flex size-4 items-center justify-center rounded border ${
+                    isActive ? "border-secondary bg-secondary" : "border-border"
                   }`}
                 >
                   {isActive && (
-                    <span className="text-background text-xxs">
-                      <HugeiconsIcon icon={CheckSquare} />
-                    </span>
+                    <HugeiconsIcon
+                      icon={Tick02Icon}
+                      className="size-3 text-background"
+                    />
                   )}
                 </span>
 
-                <span className={isActive ? 'text-foreground' : ''}>
+                <span
+                  className={cn(
+                    "text-nowrap truncate capitalize cursor-pointer",
+                    isActive ? "text-foreground" : "text-foreground/70",
+                  )}
+                >
                   {brand}
                 </span>
               </button>
@@ -154,13 +200,31 @@ export default function ShopSidebar({
         </div>
       </div>
 
+      <Button
+        type="button"
+        variant="outline"
+        className="mt-6 w-full"
+        onClick={() => {
+          onCategoryChange(null);
+
+          onBrandChange([]);
+
+          onPriceRangeChange({
+            min: 0,
+            max: 5000,
+          });
+        }}
+      >
+        Clear Filters
+      </Button>
+
       {/* popular tag */}
       <div className="w-full mt-5">
         <h3 className="mb-4 text-sm font-medium uppercase tracking-wide">
           Popular Tag
         </h3>
 
-        <div className="flex flex-wrap gap-3">
+        {/* <div className="flex flex-wrap gap-3">
           {tags.map((tag) => {
             const isActive = selectedTags.includes(tag);
 
@@ -176,15 +240,15 @@ export default function ShopSidebar({
                 className={`px-2.5 py-1 text-xxs rounded-xs border transition-all duration-200
             ${
               isActive
-                ? 'border-secondary text-secondary bg-orange-50'
-                : 'border-border text-foreground/70 hover:border-gray-400'
+                ? "border-secondary text-secondary bg-orange-50"
+                : "border-border text-foreground/70 hover:border-gray-400"
             }`}
               >
                 {tag}
               </button>
             );
           })}
-        </div>
+        </div> */}
       </div>
 
       {/* apple banner */}
@@ -206,7 +270,7 @@ export default function ShopSidebar({
                 className="size-5 sm:size-6 mb-1"
                 fill="var(--color-foreground)"
                 icon={Apple}
-              />{' '}
+              />{" "}
               <span>Watch</span>
             </h3>
 
@@ -253,45 +317,116 @@ export default function ShopSidebar({
   );
 }
 
-function PriceRangeFilter() {
-  const [min, setMin] = useState(18);
-  const [max, setMax] = useState(67);
+type PriceRangeFilterProps = {
+  minPrice?: number;
+  maxPrice?: number;
+  priceRange: {
+    min: number;
+    max: number;
+  };
+  onPriceRangeChange: React.Dispatch<
+    React.SetStateAction<{
+      min: number;
+      max: number;
+    }>
+  >;
+};
+
+function PriceRangeFilter({
+  minPrice = 0,
+  maxPrice = 5000,
+
+  priceRange,
+  onPriceRangeChange,
+}: PriceRangeFilterProps) {
+  const minPercent = useMemo(() => {
+    return ((priceRange.min - minPrice) / (maxPrice - minPrice)) * 100;
+  }, [priceRange.min, minPrice, maxPrice]);
+
+  const maxPercent = useMemo(() => {
+    return ((priceRange.max - minPrice) / (maxPrice - minPrice)) * 100;
+  }, [priceRange.max, minPrice, maxPrice]);
 
   return (
-    <div className="flex flex-col items-center justify-start pt-2">
-      <div className="relative w-full h-6">
-        <div className="absolute left-0 right-0 top-2 h-0.5 bg-foreground/20 rounded-full" />
+    <div className="space-y-5">
+      <div className="relative h-6">
+        <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-border" />
+
         <div
-          className="absolute top-2 h-0.5 bg-secondary rounded-full"
-          style={{ left: `${min}%`, right: `${100 - max}%` }}
+          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-secondary"
+          style={{
+            left: `${minPercent}%`,
+            right: `${100 - maxPercent}%`,
+          }}
         />
 
+        {/* Min Slider */}
         <input
           type="range"
-          min="0"
-          max="100"
-          value={min}
-          onChange={(e) => setMin(Math.min(Number(e.target.value), max - 1))}
-          className="range-thumb pointer-events-none absolute left-0 top-0 h-5 w-full appearance-none bg-transparent"
+          min={minPrice}
+          max={maxPrice}
+          value={priceRange.min}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+
+            onPriceRangeChange((prev) => ({
+              ...prev,
+              min: Math.min(value, prev.max - 1),
+            }));
+          }}
+          className="range-slider"
         />
+
+        {/* Max Slider */}
         <input
           type="range"
-          min="0"
-          max="100"
-          value={max}
-          onChange={(e) => setMax(Math.max(Number(e.target.value), min + 1))}
-          className="range-thumb pointer-events-none absolute left-0 top-0 h-5 w-full appearance-none bg-transparent"
+          min={minPrice}
+          max={maxPrice}
+          value={priceRange.max}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+
+            onPriceRangeChange((prev) => ({
+              ...prev,
+              max: Math.max(value, prev.min + 1),
+            }));
+          }}
+          className="range-slider"
         />
       </div>
 
-      <div className="my-2 flex items-center justify-center gap-3">
+      {/* Inputs */}
+      <div className="flex items-center gap-3">
         <input
-          placeholder="Min price"
-          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-background px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
+          type="number"
+          min={minPrice}
+          max={maxPrice}
+          value={priceRange.min}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+
+            onPriceRangeChange((prev) => ({
+              ...prev,
+              min: Math.min(value, prev.max - 1),
+            }));
+          }}
+          className="w-full rounded-sm border border-border bg-background px-3 py-2 text-xs outline-none"
         />
+
         <input
-          placeholder="Max price"
-          className="w-1/2 py-2 rounded-sm border border-[#dfe5e8] bg-background px-3.75 text-xs font-normal text-[#6f858f] outline-none placeholder:text-[#6f858f]"
+          type="number"
+          min={minPrice}
+          max={maxPrice}
+          value={priceRange.max}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+
+            onPriceRangeChange((prev) => ({
+              ...prev,
+              max: Math.max(value, prev.min + 1),
+            }));
+          }}
+          className="w-full rounded-sm border border-border bg-background px-3 py-2 text-xs outline-none"
         />
       </div>
     </div>
