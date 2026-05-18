@@ -19,8 +19,14 @@ import {
   ProductSharePinterestIcon,
   TwitterIcon,
 } from "../../components/icons/Icon";
+import type { ProductDetailsProps } from "../../routes/(public)/shop/$slug";
+import { getProductImageUrl } from "../admin/admin-product/image-upload";
 
-export default function ProductsDetailsPage() {
+export default function ProductsDetailsPage({
+  product,
+}: {
+  product: ProductDetailsProps;
+}) {
   const [selectedSize, setSelectedSize] = useState(
     "14-inch-liquid-retina-xdr-display",
   );
@@ -28,15 +34,26 @@ export default function ProductsDetailsPage() {
   const [selectedStorage, setSelectedStorage] = useState("1tb-ssd-storage");
   const [isFirstColorActive, setIsFirstColorActive] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
-  const OPTIONS: EmblaOptionsType = { loop: true, dragFree: true };
 
   const decreaseQuantity = () => {
     setQuantity((prev) => Math.max(1, prev - 1));
   };
-
   const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
+    if (quantity < product.stock) {
+      setQuantity((prev) => prev + 1);
+    }
   };
+
+  const OPTIONS: EmblaOptionsType = { loop: true, dragFree: true };
+
+  const isInStock = product.stock > 0;
+
+  const discount =
+    product.old_price && product.old_price > product.price
+      ? Math.round(
+          ((product.old_price - product.price) / product.old_price) * 100,
+        )
+      : 0;
 
   return (
     <div className="w-full md:w-[90%] lg:w-[85%] xl:w-[70%] mx-auto flex lg:p-0 px-2">
@@ -46,7 +63,11 @@ export default function ProductsDetailsPage() {
           <div className="flex w-full items-center justify-center">
             <div className="relative flex w-full items-center justify-center">
               <img
-                src={"/assets/images/products/product-page.png"}
+                src={
+                  product.images
+                    ? getProductImageUrl(product.images[0])
+                    : "/assets/images/products/product-page.png"
+                }
                 alt="MacBook Pro"
                 className="h-auto max-w-full rounded-md object-contain"
               />
@@ -60,10 +81,10 @@ export default function ProductsDetailsPage() {
         <div className="col-span-6 ">
           <div className="flex items-center gap-1">
             <div className="flex text-secondary text-lg leading-none tracking-[1px]">
-              ★★★★★
+              {"★".repeat(Math.round(product.rating))}
             </div>
             <div className="text-xs text-foreground/80 font-semibold ml-0.5">
-              4.7 Star Rating
+              {product.rating} Star Rating
             </div>
             <div className="text-xxs text-foreground/60">
               (21,671 User feedback)
@@ -71,41 +92,47 @@ export default function ProductsDetailsPage() {
           </div>
 
           <h1 className="mt-1.5 text-base font-normal text-foreground">
-            2020 Apple MacBook Pro with Apple M1 Chip (13-inch, 8GB RAM,
-            <br />
-            256GB SSD Storage) -Space Gray
+            {product.title}
           </h1>
 
           <div className="mt-3.5 grid grid-cols-2 gap-2 text-xxs leading-none">
             <div>
               <span className="text-foreground/60">Sku:</span>{" "}
-              <span className="font-semibold text-foreground/80">A264671</span>
+              <span className="font-semibold text-foreground/80">
+                {product.id.slice(0, 8)}
+              </span>
             </div>
             <div>
               <span className="text-foreground/60">Availability:</span>{" "}
-              <span className="font-semibold text-[#17a24a]">In Stock</span>
+              {isInStock ? (
+                <span className="font-semibold text-green-600">In Stock</span>
+              ) : (
+                <span className="font-semibold text-red-600">Out of Stock</span>
+              )}
             </div>
             <div>
               <span className="text-foreground/60">Brand:</span>{" "}
-              <span className="font-semibold text-foreground/80">Apple</span>
+              <span className="font-semibold text-foreground/80">
+                {product.brand || "N/A"}
+              </span>
             </div>
             <div>
               <span className="text-foreground/60">Category:</span>{" "}
               <span className="font-semibold text-foreground/80">
-                Electronics Devices
+                {product.category?.name || "Uncategorized"}
               </span>
             </div>
           </div>
 
           <div className="mt-4 flex items-center gap-2">
             <span className="text-lg leading-none font-semibold text-text-primary">
-              $1699
+              ${product.price.toFixed(2)}
             </span>
             <span className="text-xs line-through text-foreground/60">
-              $1999.00
+              {product.old_price ? `$${product.old_price}` : ""}
             </span>
             <Badge variant="discount" className="bg-accent text-xxs font-bold">
-              21% OFF
+              {discount}% OFF
             </Badge>
           </div>
 
@@ -119,7 +146,6 @@ export default function ProductsDetailsPage() {
                 <button
                   type="button"
                   aria-label="Select first color"
-                  aria-pressed={isFirstColorActive}
                   onClick={() => setIsFirstColorActive(true)}
                   className={`flex size-7 items-center justify-center rounded-full cursor-pointer ${
                     isFirstColorActive ? "ring-2 ring-secondary" : ""
