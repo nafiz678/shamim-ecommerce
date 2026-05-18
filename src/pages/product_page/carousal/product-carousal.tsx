@@ -1,6 +1,5 @@
 import type { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import type { CategoryProp } from "../../../lib/types";
 import {
   NextButton,
   PrevButton,
@@ -8,7 +7,7 @@ import {
 } from "./product-arrow-buttons";
 
 type PropType = {
-  slides: CategoryProp[];
+  slides: { id: number; title: string; image: string }[];
   options?: EmblaOptionsType;
 };
 
