@@ -41,7 +41,7 @@ export default function ShopPage() {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<(string | null)[]>([]);
 
   const [priceRange, setPriceRange] = useState({
     min: 0,
@@ -53,33 +53,39 @@ export default function ShopPage() {
     isLoading: isProductsLoading,
     error: productsError,
   } = useQuery<ProductProps[]>({
-    queryKey: ["products"],
+    queryKey: ["shop-products"],
     queryFn: async () => {
-      const data = await apiFetch<{
+      const res = await apiFetch<{
         success: boolean;
         data: ProductProps[];
       }>("/products");
 
-      return data.data;
+      return Array.isArray(res.data) ? res.data : [];
     },
   });
 
   const { data: categoriesData = [] } = useQuery<CategoryProp[]>({
     queryKey: ["categories"],
     queryFn: async () => {
-      const data = await apiFetch<{
+      const res = await apiFetch<{
         success: boolean;
         data: CategoryProp[];
       }>("/categories");
 
-      return data.data;
+      return Array.isArray(res.data) ? res.data : [];
     },
   });
 
   const availableBrands = useMemo(() => {
+    const safeProducts = Array.isArray(productsData) ? productsData : [];
+
     return Array.from(
-      new Set(productsData.map((product) => product.brand).filter(Boolean)),
-    ) as string[];
+      new Set(
+        safeProducts
+          .map((p) => p?.brand)
+          .filter((brand): brand is string => Boolean(brand)),
+      ),
+    );
   }, [productsData]);
 
   useEffect(() => {
@@ -103,11 +109,7 @@ export default function ShopPage() {
   const finalProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    let filtered = [...(productsData ?? [])];
-
-    /*
-     * Search
-     */
+    let filtered = Array.isArray(productsData) ? [...productsData] : [];
     if (normalizedQuery) {
       filtered = filtered.filter((product) => {
         return (
@@ -118,34 +120,22 @@ export default function ShopPage() {
       });
     }
 
-    /*
-     * Category Filter
-     */
     if (selectedCategory) {
       filtered = filtered.filter(
         (product) => product.category_id === selectedCategory,
       );
     }
 
-    /*
-     * Brand Filter
-     */
     if (selectedBrands.length > 0) {
       filtered = filtered.filter((product) =>
         selectedBrands.includes(product.brand || ""),
       );
     }
 
-    /*
-     * Price Range Filter
-     */
     filtered = filtered.filter((product) => {
       return product.price >= priceRange.min && product.price <= priceRange.max;
     });
 
-    /*
-     * Sorting
-     */
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "price-low-high":
@@ -181,7 +171,8 @@ export default function ShopPage() {
         categoriesData.find((c) => c.id === selectedCategory)?.name
       }`,
 
-    selectedBrands.length > 0 && `Brands: ${selectedBrands.join(", ")}`,
+    selectedBrands.length > 0 &&
+      `Brands: ${selectedBrands.filter((v): v is string => !!v).join(", ")}`,
 
     (priceRange.min > 0 || priceRange.max < 5000) &&
       `Price: $${priceRange.min} - $${priceRange.max}`,
