@@ -8,7 +8,7 @@ export type Option = {
   label: string;
 };
 
-export type ProductProps = Tables<"products">
+export type ProductProps = Tables<"products">;
 
 export type FeatureItemProps = {
   title: string;
@@ -30,7 +30,7 @@ export type ProductFormData = {
   is_featured: boolean;
 };
 
-export type CategoryProp = { id: number; title: string; image: string };
+export type CategoryProp = Tables<"categories">;
 
 export type LoginPopoverProps = {
   isOpen: boolean;
