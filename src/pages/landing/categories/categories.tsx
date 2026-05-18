@@ -1,7 +1,6 @@
-import type { EmblaOptionsType } from 'embla-carousel';
-import './embela.css';
-import type { CategoryProp } from '../../../lib/types';
-import EmblaCarousel from './embela-carousel';
+import type { EmblaOptionsType } from "embla-carousel";
+import "./embela.css";
+import EmblaCarousel from "./embela-carousel";
 
 export default function Categories() {
   const OPTIONS: EmblaOptionsType = { loop: true, dragFree: true };
@@ -17,55 +16,55 @@ export default function Categories() {
   );
 }
 
-export const CATEGORY_DATA: CategoryProp[] = [
+export const CATEGORY_DATA: { id: number; title: string; image: string }[] = [
   {
     id: 1,
-    title: 'Electronics',
-    image: '/placeholder.svg',
+    title: "Electronics",
+    image: "/placeholder.svg",
   },
   {
     id: 2,
-    title: 'Fashion',
-    image: '/placeholder.svg',
+    title: "Fashion",
+    image: "/placeholder.svg",
   },
   {
     id: 3,
-    title: 'Living',
-    image: '/placeholder.svg',
+    title: "Living",
+    image: "/placeholder.svg",
   },
   {
     id: 4,
-    title: 'Beauty',
-    image: '/placeholder.svg',
+    title: "Beauty",
+    image: "/placeholder.svg",
   },
   {
     id: 5,
-    title: 'Sports',
-    image: '/placeholder.svg',
+    title: "Sports",
+    image: "/placeholder.svg",
   },
   {
     id: 6,
-    title: 'Toys',
-    image: '/placeholder.svg',
+    title: "Toys",
+    image: "/placeholder.svg",
   },
   {
     id: 7,
-    title: 'Books',
-    image: '/placeholder.svg',
+    title: "Books",
+    image: "/placeholder.svg",
   },
   {
     id: 8,
-    title: 'Groceries',
-    image: '/placeholder.svg',
+    title: "Groceries",
+    image: "/placeholder.svg",
   },
   {
     id: 9,
-    title: 'Furniture',
-    image: '/placeholder.svg',
+    title: "Furniture",
+    image: "/placeholder.svg",
   },
   {
     id: 10,
-    title: 'Shoes',
-    image: '/placeholder.svg',
+    title: "Shoes",
+    image: "/placeholder.svg",
   },
 ];
