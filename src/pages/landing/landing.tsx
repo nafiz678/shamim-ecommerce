@@ -28,12 +28,18 @@ type ProductsResponse = {
 export default function Landing() {
   const { data, isPending, isError, error, refetch } = useQuery({
     queryKey: ["products"],
-    queryFn: () => apiFetch<ProductsResponse>("/products/landing"),
+    queryFn: async () => {
+      const res = await apiFetch<ProductsResponse>("/products/landing");
+
+      return {
+        products: Array.isArray(res?.data) ? res.data : [],
+      };
+    },
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 30,
     select: (response) => ({
-      products: response.data,
-      productList: response.data.slice(0, 8),
+      products: response.products,
+      productList: response.products.slice(0, 8),
     }),
   });
 
