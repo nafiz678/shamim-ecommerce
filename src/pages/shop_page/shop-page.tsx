@@ -1,6 +1,10 @@
-import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
+import {
+  Menu01Icon,
+  Cancel01Icon,
+  ProductLoadingIcon,
+} from "@hugeicons/core-free-icons";
 import { useEffect, useMemo, useState } from "react";
-import type { ProductProps } from "../../lib/types";
+import type { CategoryProp, ProductProps } from "../../lib/types";
 
 import SearchAndSort from "./search-sort";
 import ShopSidebar from "./shop-sidebar";
@@ -12,6 +16,8 @@ import BreadcrumbHeading, {
   type BreadcrumbItemProps,
 } from "./breadcumb-heading";
 import { apiFetch } from "../../lib/api-fetch";
+import { useQuery } from "@tanstack/react-query";
+import Button from "../../components/ui/button";
 
 export type SortBy = "popular" | "price-low-high" | "price-high-low" | "rating";
 
@@ -27,54 +33,54 @@ const breadcrumbs: BreadcrumbItemProps[] = [
 ];
 
 export default function ShopPage() {
-  const [products, setProducts] = useState<ProductProps[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortBy>("popular");
 
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
     useState<boolean>(false);
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    "Electronics Devices",
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const [selectedPriceRange, setSelectedPriceRange] = useState<string | null>(
-    "All Price",
-  );
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        setIsLoading(true);
-        setError(null);
+  const [priceRange, setPriceRange] = useState({
+    min: 0,
+    max: 5000,
+  });
 
-        const data = await apiFetch<{
-          success: boolean;
-          message: string;
-          data: ProductProps[];
-        }>("/products");
+  const {
+    data: productsData = [],
+    isLoading: isProductsLoading,
+    error: productsError,
+  } = useQuery<ProductProps[]>({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const data = await apiFetch<{
+        success: boolean;
+        data: ProductProps[];
+      }>("/products");
 
-        if (!data.success) {
-          throw new Error(data.message || "Failed to load products");
-        }
+      return data.data;
+    },
+  });
 
-        if (!Array.isArray(data.data)) {
-          throw new Error("Invalid products JSON format");
-        }
+  const { data: categoriesData = [] } = useQuery<CategoryProp[]>({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const data = await apiFetch<{
+        success: boolean;
+        data: CategoryProp[];
+      }>("/categories");
 
-        setProducts(data.data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
-      } finally {
-        setIsLoading(false);
-      }
-    }
+      return data.data;
+    },
+  });
 
-    loadProducts();
-  }, []);
+  const availableBrands = useMemo(() => {
+    return Array.from(
+      new Set(productsData.map((product) => product.brand).filter(Boolean)),
+    ) as string[];
+  }, [productsData]);
 
   useEffect(() => {
     if (!isMobileSidebarOpen) return;
@@ -97,59 +103,50 @@ export default function ShopPage() {
   const finalProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    let filteredProducts = [...products];
+    let filtered = [...(productsData ?? [])];
 
-    // Search filter
+    /*
+     * Search
+     */
     if (normalizedQuery) {
-      filteredProducts = filteredProducts.filter((product) => {
+      filtered = filtered.filter((product) => {
         return (
           product.title.toLowerCase().includes(normalizedQuery) ||
-          product.brand?.toLowerCase().includes(normalizedQuery) ||
-          product.category_id?.toLowerCase().includes(normalizedQuery) ||
-          product.description?.toLowerCase().includes(normalizedQuery)
+          product.description?.toLowerCase().includes(normalizedQuery) ||
+          product.brand?.toLowerCase().includes(normalizedQuery)
         );
       });
     }
 
-    // Category filter
-    if (
-      selectedCategory &&
-      selectedCategory !== "All Categories" &&
-      selectedCategory !== "Electronics Devices"
-    ) {
-      filteredProducts = filteredProducts.filter((product) =>
-        product.category_id
-          ?.toLowerCase()
-          .includes(selectedCategory.toLowerCase()),
+    /*
+     * Category Filter
+     */
+    if (selectedCategory) {
+      filtered = filtered.filter(
+        (product) => product.category_id === selectedCategory,
       );
     }
 
-    // Price filter
-    if (selectedPriceRange && selectedPriceRange !== "All Price") {
-      filteredProducts = filteredProducts.filter((product) => {
-        const price = product.price;
-
-        switch (selectedPriceRange) {
-          case "Under $50":
-            return price < 50;
-
-          case "$50 - $100":
-            return price >= 50 && price <= 100;
-
-          case "$100 - $500":
-            return price >= 100 && price <= 500;
-
-          case "Above $500":
-            return price > 500;
-
-          default:
-            return true;
-        }
-      });
+    /*
+     * Brand Filter
+     */
+    if (selectedBrands.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedBrands.includes(product.brand || ""),
+      );
     }
 
-    // Sorting
-    return filteredProducts.sort((a, b) => {
+    /*
+     * Price Range Filter
+     */
+    filtered = filtered.filter((product) => {
+      return product.price >= priceRange.min && product.price <= priceRange.max;
+    });
+
+    /*
+     * Sorting
+     */
+    filtered.sort((a, b) => {
       switch (sortBy) {
         case "price-low-high":
           return a.price - b.price;
@@ -162,19 +159,32 @@ export default function ShopPage() {
 
         case "popular":
         default:
-          return b.rating - a.rating;
+          return (b.rating ?? 0) - (a.rating ?? 0);
       }
     });
-  }, [products, query, sortBy, selectedCategory, selectedPriceRange]);
+
+    return filtered;
+  }, [
+    productsData,
+    query,
+    selectedCategory,
+    selectedBrands,
+    priceRange,
+    sortBy,
+  ]);
 
   const activeFilters = [
     query && `Search: "${query}"`,
+
     selectedCategory &&
-      selectedCategory !== "Electronics Devices" &&
-      `Category: ${selectedCategory}`,
-    selectedPriceRange &&
-      selectedPriceRange !== "All Price" &&
-      `Price: ${selectedPriceRange}`,
+      `Category: ${
+        categoriesData.find((c) => c.id === selectedCategory)?.name
+      }`,
+
+    selectedBrands.length > 0 && `Brands: ${selectedBrands.join(", ")}`,
+
+    (priceRange.min > 0 || priceRange.max < 5000) &&
+      `Price: $${priceRange.min} - $${priceRange.max}`,
   ].filter(Boolean);
 
   return (
@@ -190,10 +200,14 @@ export default function ShopPage() {
           {/* Desktop Sidebar */}
           <aside className="hidden md:col-span-3 md:block">
             <ShopSidebar
-              onCategoryChange={setSelectedCategory}
+              categories={categoriesData}
+              brands={availableBrands}
               selectedCategory={selectedCategory}
-              onPriceRangeChange={setSelectedPriceRange}
-              selectedPriceRange={selectedPriceRange}
+              selectedBrands={selectedBrands}
+              priceRange={priceRange}
+              onCategoryChange={setSelectedCategory}
+              onBrandChange={setSelectedBrands}
+              onPriceRangeChange={setPriceRange}
             />
           </aside>
 
@@ -246,7 +260,7 @@ export default function ShopPage() {
             </div>
 
             {/* Loading */}
-            {isLoading && (
+            {isProductsLoading && (
               <div className="flex h-[50vh] items-center justify-center">
                 <p className="text-sm text-foreground/60">
                   Loading products...
@@ -255,27 +269,59 @@ export default function ShopPage() {
             )}
 
             {/* Error */}
-            {!isLoading && error && (
+            {!isProductsLoading && productsError && (
               <div className="rounded-sm border border-red-200 bg-red-50 p-4 text-sm text-red-600">
-                {error}
+                {productsError.message}
               </div>
             )}
 
-            {/* Empty */}
-            {!isLoading && !error && finalProducts.length === 0 && (
-              <div className="rounded-sm border border-border p-6 text-center text-sm text-foreground/60">
-                No products found.
-              </div>
-            )}
+            {/* Empty State */}
+            {!isProductsLoading &&
+              !productsError &&
+              finalProducts.length === 0 && (
+                <div className="flex min-h-70 flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/20 px-6 py-12 text-center shadow-sm">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-background shadow-sm">
+                    <HugeiconsIcon
+                      icon={ProductLoadingIcon}
+                      className="size-8 text-foreground/50"
+                    />
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-foreground">
+                    No products found
+                  </h3>
+
+                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-foreground/60">
+                    We couldn&apos;t find any products matching your current
+                    filters or search query. Try adjusting the filters or
+                    searching with different keywords.
+                  </p>
+
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => {
+                      setQuery("");
+                      setSelectedCategory(null);
+                      setPriceRange({ min: 0, max: 5000 });
+                    }}
+                    className="mt-6 rounded-md px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:scale-[1.02] hover:opacity-90 active:scale-[0.98] cursor-pointer"
+                  >
+                    Clear Filters
+                  </Button>
+                </div>
+              )}
 
             {/* Products */}
-            {!isLoading && !error && finalProducts.length > 0 && (
-              <div className="grid grid-cols-2 gap-3 py-4 lg:grid-cols-4">
-                {finalProducts.slice(0, 24).map((product) => (
-                  <ProductsCard key={product.id} product={product} featured />
-                ))}
-              </div>
-            )}
+            {!isProductsLoading &&
+              !productsError &&
+              finalProducts.length > 0 && (
+                <div className="grid grid-cols-2 gap-3 py-4 lg:grid-cols-4">
+                  {finalProducts.slice(0, 24).map((product) => (
+                    <ProductsCard key={product.id} product={product} featured />
+                  ))}
+                </div>
+              )}
           </main>
         </div>
       </div>
@@ -321,10 +367,14 @@ export default function ShopPage() {
 
           <div className="flex-1 overflow-y-auto px-4 py-5">
             <ShopSidebar
-              onCategoryChange={setSelectedCategory}
+              categories={categoriesData}
+              brands={availableBrands}
               selectedCategory={selectedCategory}
-              onPriceRangeChange={setSelectedPriceRange}
-              selectedPriceRange={selectedPriceRange}
+              selectedBrands={selectedBrands}
+              priceRange={priceRange}
+              onCategoryChange={setSelectedCategory}
+              onBrandChange={setSelectedBrands}
+              onPriceRangeChange={setPriceRange}
             />
           </div>
         </div>
