@@ -28,11 +28,9 @@ export const Route = createFileRoute("/(public)/shop/$slug")({
     const res = await apiFetch<ApiResponse<ProductDetailsProps>>(
       `/products/${params.slug}`,
     );
-
     if (!res.success || !res.data) {
       throw notFound();
     }
-
     return { product: res.data };
   },
 
