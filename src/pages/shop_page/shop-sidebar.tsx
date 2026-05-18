@@ -19,12 +19,12 @@ type PriceRange = {
 
 export type ShopSidebarProps = {
   categories: CategoryProp[];
-  brands: string[];
+  brands: (string | null)[];
   selectedCategory: string | null;
-  selectedBrands: string[];
+  selectedBrands: (string | null)[];
   priceRange: PriceRange;
   onCategoryChange: (category: string | null) => void;
-  onBrandChange: React.Dispatch<React.SetStateAction<string[]>>;
+  onBrandChange: React.Dispatch<React.SetStateAction<(string | null)[]>>;
   onPriceRangeChange: React.Dispatch<React.SetStateAction<PriceRange>>;
 };
 
@@ -131,8 +131,8 @@ export default function ShopSidebar({
                 <span
                   className={`flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                     isActive
-                      ? 'border-secondary border-2'
-                      : 'border-[#c7d0d6] bg-background'
+                      ? "border-secondary border-2"
+                      : "border-[#c7d0d6] bg-background"
                   }`}
                 ></span>
 
@@ -157,6 +157,9 @@ export default function ShopSidebar({
         </h3>
 
         <div className="grid grid-cols-2 gap-2">
+          {!brands.length && (
+            <p className="text-xxs text-foreground/70">No brands available.</p>
+          )}
           {brands.map((brand) => {
             const isActive = selectedBrands.includes(brand);
 
