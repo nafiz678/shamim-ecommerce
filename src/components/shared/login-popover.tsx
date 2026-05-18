@@ -223,6 +223,7 @@ export default function LoginPopover({
                   disabled={isSubmitting}
                   error={!!errorMessage && !fullName.trim()}
                   onChange={(event) => setFullName(event.target.value)}
+                  className="text-foreground"
                 />
               </FormField>
             )}
@@ -241,6 +242,7 @@ export default function LoginPopover({
                 disabled={isSubmitting}
                 error={!!errorMessage && !email.trim()}
                 onChange={(event) => setEmail(event.target.value)}
+                className="text-foreground"
               />
             </FormField>
 
@@ -260,7 +262,7 @@ export default function LoginPopover({
                   value={password}
                   disabled={isSubmitting}
                   error={!!errorMessage && !password}
-                  className="pr-10"
+                  className="pr-10 text-foreground"
                   onChange={(event) => setPassword(event.target.value)}
                 />
 
