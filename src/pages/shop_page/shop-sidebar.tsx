@@ -300,7 +300,7 @@ export default function ShopSidebar({
             <Button
               variant="secondary"
               leftIcon={ShoppingCart02Icon}
-              className="uppercase w-full md:w-auto md:px-10 text-sxs rounded-xs sm:text-xxs font-semibold text-nowrap"
+              className="uppercase w-full md:px-10 text-sxs rounded-xs sm:text-xxs font-semibold text-nowrap"
               iconClass="size-4"
             >
               Add to cart
