@@ -10,7 +10,7 @@ import type { CategoryProp } from "../../lib/types";
 import { useMemo } from "react";
 import { cn } from "../../lib/utils";
 import { pricePresets } from "./shop-data";
-import { Button } from "../../stories/Button";
+import { Button } from "../../components/ui/Button";
 
 type PriceRange = {
   min: number;
