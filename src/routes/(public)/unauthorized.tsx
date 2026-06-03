@@ -5,7 +5,7 @@ import {
   Shield02Icon,
   ShoppingBag02Icon,
 } from "@hugeicons/core-free-icons";
-import Button from "../../components/ui/button";
+import { Button } from "../../stories/Button";
 
 export const Route = createFileRoute("/(public)/unauthorized")({
   component: UnauthorizedPage,
