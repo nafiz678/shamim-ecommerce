@@ -15,9 +15,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12
+          cache: pnpm
 
-      - run: npm ci
+      - name: Enable Corepack (recommended for pnpm)
+        run: corepack enable
 
-      - run: npx chromatic
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build storybook
+        run: pnpm build-storybook
+
+      - name: Run Chromatic
+        run: pnpm chromatic
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
