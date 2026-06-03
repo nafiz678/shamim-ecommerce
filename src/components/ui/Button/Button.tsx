@@ -36,7 +36,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<ButtonVariant, string> = {
-  accent: "bg-accent/95 text-black hover:bg-accent",
+  accent: "bg-[#f59e0b] text-black hover:bg-[#d97706]",
   secondary: "bg-secondary/95 text-background hover:bg-secondary",
   outline: "border border-gray-300 text-gray-800 hover:bg-gray-100",
   ghost: "text-gray-800 hover:bg-gray-100",
