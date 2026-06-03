@@ -11,7 +11,7 @@ import {
 import LoginPopover from "./login-popover";
 import { useAppSelector } from "../../store/hooks";
 import { cn } from "../../lib/utils";
-import { Button } from "../../stories/Button";
+import { Button } from "../ui/Button";
 
 type PopoverType = "cart" | "user" | null;
 
