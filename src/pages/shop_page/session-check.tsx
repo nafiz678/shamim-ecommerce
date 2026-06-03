@@ -5,7 +5,7 @@ export default function SessionTimer() {
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
 
   useEffect(() => {
-    let interval: number | undefined ;
+    let interval: NodeJS.Timeout | undefined ;
 
     const startTimer = async () => {
       const {
