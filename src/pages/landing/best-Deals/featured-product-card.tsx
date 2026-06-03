@@ -8,8 +8,8 @@ import {
   ViewIcon,
 } from "@hugeicons/core-free-icons";
 
-import Button from "../../../components/ui/button";
-import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../stories/Button";
+import { Badge } from "../../../components/ui/Badge/Badge";
 
 export function FeaturedProductCard({ product }: { product: ProductProps }) {
   const rating = Math.round(product.rating ?? 0);
