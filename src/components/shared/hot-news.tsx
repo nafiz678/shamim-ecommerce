@@ -1,4 +1,4 @@
-import Button from "../ui/button";
+import { Button } from "../../stories/Button";
 import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { ArrowRight02Icon, X } from "@hugeicons/core-free-icons";
