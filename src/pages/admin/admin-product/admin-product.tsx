@@ -9,8 +9,6 @@ import {
   Image01Icon,
 } from "@hugeicons/core-free-icons";
 
-import Button from "../../../components/ui/button";
-
 import { deleteProductImage, getProductImageUrl } from "./image-upload";
 
 import { toast } from "sonner";
@@ -26,6 +24,7 @@ import {
 import { slugify } from "../../../lib/utils";
 import { StatusBadge, TableData, TableHead } from "./utils-components";
 import ProductModal from "./product-form-modal";
+import { Button } from "../../../stories/Button";
 
 type ProductsType = Tables<"products">;
 
