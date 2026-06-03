@@ -1,12 +1,12 @@
-import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
+import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
 import {
   AmazonLogoIcon,
   GoogleLogoIcon,
   PhilipsLogoIcon,
   SamsungLogoIcon,
   ToshibaLogoIcon,
-} from '../../components/icons/Icon';
-import { Button } from '../../stories/Button';
+} from "../../components/icons/Icon";
+import { Button } from "../../components/ui/Button";
 
 export default function NewsLatter() {
   return (
@@ -63,28 +63,28 @@ export default function NewsLatter() {
 
 const partnerLogos = [
   {
-    name: 'Google',
+    name: "Google",
     Icon: GoogleLogoIcon,
-    className: 'h-auto w-13.5 sm:w-16 lg:w-18',
+    className: "h-auto w-13.5 sm:w-16 lg:w-18",
   },
   {
-    name: 'Amazon',
+    name: "Amazon",
     Icon: AmazonLogoIcon,
-    className: 'h-auto w-13 sm:w-16 lg:w-18',
+    className: "h-auto w-13 sm:w-16 lg:w-18",
   },
   {
-    name: 'Philips',
+    name: "Philips",
     Icon: PhilipsLogoIcon,
-    className: 'h-auto w-13 sm:w-16 lg:w-18',
+    className: "h-auto w-13 sm:w-16 lg:w-18",
   },
   {
-    name: 'Toshiba',
+    name: "Toshiba",
     Icon: ToshibaLogoIcon,
-    className: 'h-auto w-13 sm:w-16 lg:w-18',
+    className: "h-auto w-13 sm:w-16 lg:w-18",
   },
   {
-    name: 'Samsung',
+    name: "Samsung",
     Icon: SamsungLogoIcon,
-    className: 'h-auto w-13 sm:w-16 lg:w-18',
+    className: "h-auto w-13 sm:w-16 lg:w-18",
   },
 ] as const;
