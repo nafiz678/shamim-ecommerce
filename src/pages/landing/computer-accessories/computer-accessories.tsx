@@ -1,4 +1,4 @@
-import Button from "../../../components/ui/button";
+import { Button } from "../../../stories/Button";
 import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
 import type { ProductProps } from "../../../lib/types";
 import ProductsCard from "../../../components/ui/products-card";
