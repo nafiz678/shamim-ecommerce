@@ -1,4 +1,4 @@
-import { Input } from "../../../stories/Input/Input";
+import { Input } from "../../../components/ui/Input/Input";
 
 export function TableHead({
   children,
