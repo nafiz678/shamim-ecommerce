@@ -8,10 +8,10 @@ import {
   ArrowRight02FreeIcons,
 } from "@hugeicons/core-free-icons";
 
-import Button from "../ui/button";
 import LoginPopover from "./login-popover";
 import { useAppSelector } from "../../store/hooks";
 import { cn } from "../../lib/utils";
+import { Button } from "../../stories/Button";
 
 type PopoverType = "cart" | "user" | null;
 
