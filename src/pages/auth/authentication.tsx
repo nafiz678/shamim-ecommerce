@@ -7,10 +7,10 @@ import {
   ViewOffSlashIcon,
 } from "@hugeicons/core-free-icons";
 import { supabaseClient } from "../../lib/supabase-client";
-import { Input } from "../../components/ui/input";
-import Button from "../../components/ui/button";
 import { cn } from "../../lib/utils";
 import { AppleIcon, GoogleIcon } from "../../components/icons/Icon";
+import { Button } from "../../stories/Button";
+import { Input } from "../../stories/Input/Input";
 
 type AuthMode = "signin" | "signup";
 
@@ -211,7 +211,9 @@ export default function AuthCard({ reason, onSuccess }: SignInCardProps) {
                 autoComplete="name"
                 value={fullName}
                 disabled={isSubmitting}
-                error={!!errorMessage && !fullName.trim()}
+                variant={
+                  !!errorMessage && !fullName.trim() ? "error" : "default"
+                }
                 className="h-9! rounded-none"
                 onChange={(event) => setFullName(event.target.value)}
               />
@@ -229,7 +231,7 @@ export default function AuthCard({ reason, onSuccess }: SignInCardProps) {
               autoComplete="email"
               value={email}
               disabled={isSubmitting}
-              error={!!errorMessage && !email.trim()}
+              variant={!!errorMessage && !email.trim() ? "error" : "default"}
               className="h-9! rounded-none"
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -275,7 +277,7 @@ export default function AuthCard({ reason, onSuccess }: SignInCardProps) {
                 }
                 value={password}
                 disabled={isSubmitting}
-                error={!!errorMessage && !password}
+                variant={!!errorMessage && !password ? "error" : "default"}
                 className="h-9! rounded-none pr-12"
                 onChange={(event) => setPassword(event.target.value)}
               />
