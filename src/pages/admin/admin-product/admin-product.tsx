@@ -24,7 +24,7 @@ import {
 import { slugify } from "../../../lib/utils";
 import { StatusBadge, TableData, TableHead } from "./utils-components";
 import ProductModal from "./product-form-modal";
-import { Button } from "../../../stories/Button";
+import { Button } from "../../../components/ui/Button";
 
 type ProductsType = Tables<"products">;
 
