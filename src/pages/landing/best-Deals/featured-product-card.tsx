@@ -8,13 +8,15 @@ import {
   ViewIcon,
 } from "@hugeicons/core-free-icons";
 
-import { Button } from "../../../stories/Button";
+import { Button } from "../../../components/ui/Button";
 import { Badge } from "../../../components/ui/Badge/Badge";
 
 export function FeaturedProductCard({ product }: { product: ProductProps }) {
   const rating = Math.round(product.rating ?? 0);
 
-  const image = product.images?.[0] ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${product.images[0]}` : "/placeholder.svg";
+  const image = product.images?.[0]
+    ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${product.images[0]}`
+    : "/placeholder.svg";
 
   const discountPercent =
     product.old_price && product.old_price > product.price
