@@ -17,7 +17,7 @@ import BreadcrumbHeading, {
 } from "./breadcumb-heading";
 import { apiFetch } from "../../lib/api-fetch";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "../../stories/Button";
+import { Button } from "../../components/ui/Button";
 
 export type SortBy = "popular" | "price-low-high" | "price-high-low" | "rating";
 
