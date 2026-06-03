@@ -1,5 +1,5 @@
 import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
-import { Button } from "../../../stories/Button";
+import { Button } from "../../../components/ui/Button";
 import FeatureBar from "./feature-bar";
 
 export default function Hero() {
