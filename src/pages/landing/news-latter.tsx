@@ -1,5 +1,4 @@
 import { ArrowRight02FreeIcons } from '@hugeicons/core-free-icons';
-import Button from '../../components/ui/button';
 import {
   AmazonLogoIcon,
   GoogleLogoIcon,
@@ -7,6 +6,7 @@ import {
   SamsungLogoIcon,
   ToshibaLogoIcon,
 } from '../../components/icons/Icon';
+import { Button } from '../../stories/Button';
 
 export default function NewsLatter() {
   return (
