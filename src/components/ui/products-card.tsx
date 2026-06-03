@@ -7,7 +7,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Link } from "@tanstack/react-router";
 import type { ProductProps } from "../../lib/types";
-import { Badge } from "./badge";
+import { Badge } from "./Badge/Badge";
 
 type ProductCardProps = {
   product: ProductProps;
