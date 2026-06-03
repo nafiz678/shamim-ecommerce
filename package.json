@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.1.1",
@@ -18,6 +20,7 @@
     "@tanstack/react-query": "^5.100.9",
     "@tanstack/react-router": "^1.168.23",
     "@tanstack/react-router-devtools": "^1.166.13",
+    "class-variance-authority": "^0.7.1",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "react": "^19.2.5",
@@ -29,8 +32,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
+    "@chromatic-com/storybook": "^5.2.1",
     "@eslint/js": "^9.39.4",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/addon-onboarding": "^10.4.1",
+    "@storybook/addon-vitest": "^10.4.1",
+    "@storybook/react-vite": "^10.4.1",
+    "@storybook/tanstack-react": "^10.4.1",
     "@tanstack/eslint-plugin-query": "^5.100.9",
     "@tanstack/router-plugin": "^1.167.22",
     "@types/babel__core": "^7.20.5",
@@ -38,13 +48,19 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-storybook": "^10.4.1",
     "globals": "^17.5.0",
+    "playwright": "^1.60.0",
+    "storybook": "^10.4.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
+    "vite": "^8.0.9",
+    "vitest": "^4.1.8"
   }
 }
