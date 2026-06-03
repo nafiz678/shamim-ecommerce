@@ -8,7 +8,7 @@ import {
 } from "@hugeicons/core-free-icons";
 
 import { supabaseClient } from "../../lib/supabase-client";
-import { Button } from "../../stories/Button";
+import { Button } from "../ui/Button";
 import type {
   BackendSignupResponse,
   LoginPopoverProps,
@@ -17,7 +17,7 @@ import type {
 import { Link } from "@tanstack/react-router";
 import { cn } from "../../lib/utils";
 import { getUserRole } from "../../features/auth/get-roles";
-import { Input } from "../../stories/Input/Input";
+import { Input } from "../ui/Input/Input";
 
 type AuthMode = "login" | "signup";
 
