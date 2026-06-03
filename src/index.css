@@ -1,29 +1,6 @@
 @import "tailwindcss";
-
-:root {
-  --background: white;
-  --foreground: #111;
-  --primary: #1B6392; 
-  --secondary: #FA8232;
-  --accent: #EBC80C;
-  --text: #222222;
-  --text-primary: #2DA5F3;    
-  --muted: #F2F4F5;   
-  --border: #e5e7eb;  
-  --surface: #ffffff; 
-  --badge: #EFD33D;
-  
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "../design-system/tokens/tokens.css";
+@import "../design-system/tokens/component-tokens.css";
 
 /* Tailwind theme tokens */
 @theme {
@@ -38,6 +15,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-text-primary: var(--text-primary);
+  --color-surface: var(--global-color-gray-00);
 
   --text-xxs: 10px;
   --text-sxs: 8px;
