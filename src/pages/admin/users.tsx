@@ -14,7 +14,7 @@ import {
   Users,
   UserX,
 } from "@hugeicons/core-free-icons";
-import { Badge } from "../../components/ui/badge";
+import { Badge } from "../../components/ui/Badge/Badge";
 import type { Tables } from "../../lib/supabase";
 
 type Profile = Tables<"profiles">;
