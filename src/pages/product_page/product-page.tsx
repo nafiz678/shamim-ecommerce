@@ -20,7 +20,7 @@ import {
 } from "../../components/icons/Icon";
 import type { ProductDetailsProps } from "../../routes/(public)/shop/$slug";
 import { getProductImageUrl } from "../admin/admin-product/image-upload";
-import { Button } from "../../stories/Button";
+import { Button } from "../../components/ui/Button";
 
 export default function ProductsDetailsPage({
   product,
