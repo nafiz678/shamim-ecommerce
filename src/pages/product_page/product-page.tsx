@@ -11,9 +11,8 @@ import { useState } from "react";
 import ProductCarousel from "./carousal/product-carousal";
 import type { EmblaOptionsType } from "embla-carousel";
 import "./carousal/carousal.css";
-import { Badge } from "../../components/ui/badge";
+import { Badge } from "../../components/ui/Badge/Badge";
 import Dropdown from "../../components/ui/dropdown";
-import Button from "../../components/ui/button";
 import {
   ProductShareFacebookIcon,
   ProductSharePinterestIcon,
@@ -21,6 +20,7 @@ import {
 } from "../../components/icons/Icon";
 import type { ProductDetailsProps } from "../../routes/(public)/shop/$slug";
 import { getProductImageUrl } from "../admin/admin-product/image-upload";
+import { Button } from "../../stories/Button";
 
 export default function ProductsDetailsPage({
   product,
