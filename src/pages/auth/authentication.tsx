@@ -9,8 +9,8 @@ import {
 import { supabaseClient } from "../../lib/supabase-client";
 import { cn } from "../../lib/utils";
 import { AppleIcon, GoogleIcon } from "../../components/icons/Icon";
-import { Button } from "../../stories/Button";
-import { Input } from "../../stories/Input/Input";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input/Input";
 
 type AuthMode = "signin" | "signup";
 
