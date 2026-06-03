@@ -121,7 +121,7 @@ export const AsLink: Story = {
 export const WithLeftIcon: Story = {
   args: {
     leftIcon: ArrowLeft02Icon,
-    children: "Go Back To Home",
+    children: "Go Back",
   },
 };
 
