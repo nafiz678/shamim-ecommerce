@@ -2,9 +2,9 @@ import {
   Calendar03Icon,
   Comment01Icon,
   UserCircleIcon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { Button } from "../../../stories/Button";
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Button } from "../../../components/ui/Button";
 
 export type PostProp = {
   author: string;
@@ -17,29 +17,29 @@ export type PostProp = {
 
 const posts: PostProp[] = [
   {
-    author: 'Kristin',
-    date: '19Dec, 2013',
-    comments: '453',
-    image: '/placeholder.svg',
+    author: "Kristin",
+    date: "19Dec, 2013",
+    comments: "453",
+    image: "/placeholder.svg",
     title:
-      'Cras nisl dolor, accumsan et metus sit amet, vulputate condimentum dolor.',
-    text: 'Maecenas scelerisque, arcu quis tempus egestas, ligula diam molestie lectus, tincidunt malesuada arcu metus posuere metus.',
+      "Cras nisl dolor, accumsan et metus sit amet, vulputate condimentum dolor.",
+    text: "Maecenas scelerisque, arcu quis tempus egestas, ligula diam molestie lectus, tincidunt malesuada arcu metus posuere metus.",
   },
   {
-    author: 'Robert',
-    date: '28 Nov, 2015',
-    comments: '738',
-    image: '/placeholder.svg',
-    title: 'Curabitur pulvinar aliquam lectus, non blandit erat mattis vitae.',
-    text: 'Mauris scelerisque odio id rutrum volutpat. Pellentesque urna odio, vulputate at tortor vitae, hendrerit blandit lorem.',
+    author: "Robert",
+    date: "28 Nov, 2015",
+    comments: "738",
+    image: "/placeholder.svg",
+    title: "Curabitur pulvinar aliquam lectus, non blandit erat mattis vitae.",
+    text: "Mauris scelerisque odio id rutrum volutpat. Pellentesque urna odio, vulputate at tortor vitae, hendrerit blandit lorem.",
   },
   {
-    author: 'Arlene',
-    date: '9 May, 2014',
-    comments: '826',
-    image: '/placeholder.svg',
-    title: 'Curabitur massa orci, consectetur et blandit ac, auctor et tellus.',
-    text: 'Pellentesque vestibulum lorem vel gravida aliquam. Morbi porta, odio id suscipit mattis, risus augue condimentum purus.',
+    author: "Arlene",
+    date: "9 May, 2014",
+    comments: "826",
+    image: "/placeholder.svg",
+    title: "Curabitur massa orci, consectetur et blandit ac, auctor et tellus.",
+    text: "Pellentesque vestibulum lorem vel gravida aliquam. Morbi porta, odio id suscipit mattis, risus augue condimentum purus.",
   },
 ];
 
