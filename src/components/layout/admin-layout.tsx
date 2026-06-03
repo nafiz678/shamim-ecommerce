@@ -17,7 +17,7 @@ import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import { cn } from "../../lib/utils";
 import { useIsMobile } from "../../hooks/use-is-mobile";
 import { useState } from "react";
-import { Input } from "../../stories/Input/Input";
+import { Input } from "../ui/Input/Input";
 
 type NavItem = {
   title: string;
