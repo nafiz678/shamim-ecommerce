@@ -4,7 +4,7 @@ import {
   UserCircleIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import Button from '../../../components/ui/button';
+import { Button } from "../../../stories/Button";
 
 export type PostProp = {
   author: string;
