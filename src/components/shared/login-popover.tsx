@@ -8,16 +8,16 @@ import {
 } from "@hugeicons/core-free-icons";
 
 import { supabaseClient } from "../../lib/supabase-client";
-import Button from "../ui/button";
+import { Button } from "../../stories/Button";
 import type {
   BackendSignupResponse,
   LoginPopoverProps,
   SignedInViewProps,
 } from "../../lib/types";
-import { Input } from "../ui/input";
 import { Link } from "@tanstack/react-router";
 import { cn } from "../../lib/utils";
 import { getUserRole } from "../../features/auth/get-roles";
+import { Input } from "../../stories/Input/Input";
 
 type AuthMode = "login" | "signup";
 
@@ -221,7 +221,9 @@ export default function LoginPopover({
                   value={fullName}
                   placeholder="Your name"
                   disabled={isSubmitting}
-                  error={!!errorMessage && !fullName.trim()}
+                  variant={
+                    !!errorMessage && !fullName.trim() ? "error" : "default"
+                  }
                   onChange={(event) => setFullName(event.target.value)}
                   className="text-foreground"
                 />
@@ -240,7 +242,7 @@ export default function LoginPopover({
                 value={email}
                 placeholder="Email"
                 disabled={isSubmitting}
-                error={!!errorMessage && !email.trim()}
+                variant={!!errorMessage && !email.trim() ? "error" : "default"}
                 onChange={(event) => setEmail(event.target.value)}
                 className="text-foreground"
               />
@@ -261,7 +263,7 @@ export default function LoginPopover({
                   }
                   value={password}
                   disabled={isSubmitting}
-                  error={!!errorMessage && !password}
+                  variant={!!errorMessage && !password ? "error" : "default"}
                   className="pr-10 text-foreground"
                   onChange={(event) => setPassword(event.target.value)}
                 />
