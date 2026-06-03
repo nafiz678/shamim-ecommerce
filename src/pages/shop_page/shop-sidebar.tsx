@@ -6,11 +6,11 @@ import {
   ShoppingCart02Icon,
   Tick02Icon,
 } from "@hugeicons/core-free-icons";
-import Button from "../../components/ui/button";
 import type { CategoryProp } from "../../lib/types";
 import { useMemo } from "react";
 import { cn } from "../../lib/utils";
 import { pricePresets } from "./shop-data";
+import { Button } from "../../stories/Button";
 
 type PriceRange = {
   min: number;
