@@ -18,6 +18,6 @@ jobs:
 
       - run: npm ci
 
-      - run: npx chromatic --exit-zero-on-changes
+      - run: npx chromatic
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
