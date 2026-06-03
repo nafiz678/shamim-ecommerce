@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../components/ui/button";
+import { Button } from "../../../stories/Button";
 import { ArrowRight02FreeIcons } from "@hugeicons/core-free-icons";
-import { Badge } from "../../../components/ui/badge";
+import { Badge } from "../../../components/ui/Badge/Badge";
 import { cn } from "../../../lib/utils";
 
 type BannerCardProps = {
