@@ -20,7 +20,7 @@ export default function Heading() {
     <div>
       <TopHeading />
 
-      <div className="bg-primary text-background flex items-center justify-between border-t border-border/20">
+      <div className="bg-primary text-background dark:text-white flex items-center justify-between border-t border-border/20">
         <div className="lg:w-[70%] w-[95%] mx-auto flex items-center justify-between py-3 md:gap-8 gap-4">
           {/* logo */}
           <Link

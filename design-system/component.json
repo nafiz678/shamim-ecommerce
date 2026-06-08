@@ -1,7 +1,7 @@
 {
   "component": {
     "button": {
-      "default-bg": "var(--global-color-gray-00)",
+      "default-bg": "var(--global-color-gray-100)",
       "default-border": "var(--global-color-gray-300)",
       "default-text": "var(--global-color-gray-900)",
 

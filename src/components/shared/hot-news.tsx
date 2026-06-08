@@ -18,7 +18,7 @@ export default function HotNews() {
         visible ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
       }`}
     >
-      <div className="relative bg-foreground text-background flex items-center justify-between">
+      <div className="relative bg-foreground/90 text-background flex items-center justify-between">
         <div className="lg:w-[70%] w-[85%] mx-auto min-[350px]:flex-row flex-col gap-1 flex items-center justify-between py-3 ">
           {/* black friday */}
           <div className="flex items-center gap-2 ">
@@ -52,7 +52,7 @@ export default function HotNews() {
 
         <button
           onClick={() => setVisible(false)}
-          className="p-1 bg-[#303639] mr-0 rounded-sm cursor-pointer absolute right-1"
+          className="p-1 bg-background/20 mr-0 rounded-sm cursor-pointer absolute right-1"
         >
           <HugeiconsIcon icon={X} className="md:size-4 size-3" />
         </button>

@@ -8,6 +8,7 @@ import { routeTree } from './routeTree.gen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from './store/store';
 import AuthProvider from './features/auth/auth-provider';
+import ThemeToggle from './components/shared/theme/theme-toggle';
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -43,6 +44,7 @@ if (!rootElement.innerHTML) {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <RouterProvider router={router} />
+            <ThemeToggle />
           </AuthProvider>
         </QueryClientProvider>
       </Provider>

@@ -1,21 +1,22 @@
 @import "tailwindcss";
 @import "../design-system/tokens/tokens.css";
 @import "../design-system/tokens/component-tokens.css";
+@import "../design-system/tokens/dark-theme.css";
 
 /* Tailwind theme tokens */
 @theme {
-  --color-primary: var(--primary);
-  --color-accent: var(--accent);
-  --color-secondary: var(--secondary);
-  --color-text: var(--text);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-surface: var(--surface);
-  --color-badge: var(--badge);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-text-primary: var(--text-primary);
-  --color-surface: var(--global-color-gray-00);
+  --color-primary: var(--global-color-secondary-700);
+  --color-accent: var(--global-color-warning-500);
+  --color-secondary: var(--global-color-primary-500);
+  --color-text: var(--global-color-gray-900);
+  --color-muted: var(--global-color-gray-50);
+  --color-border: var(--global-color-gray-100);
+  --color-surface: var(--global-token-white);
+  --color-badge: var(--global-color-warning-400);
+  --color-background: var(--global-token-white);
+  --color-foreground: var(--global-token-black);
+  --color-text-primary: var(--global-color-secondary-500);
+  --color-muted-background: var(--global-color-gray-50);
 
   --text-xxs: 10px;
   --text-sxs: 8px;
@@ -50,7 +51,7 @@ html {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-foreground);
+  background: var(--color-background);
   font-family: "Public Sans", sans-serif;
 }

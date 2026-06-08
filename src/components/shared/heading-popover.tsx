@@ -121,7 +121,7 @@ export default function HeaderActions() {
             icon={ShoppingCart02Icon}
           />
 
-          <span className="absolute -right-2 -top-2 flex size-3 items-center justify-center rounded-full bg-background text-xxs font-semibold leading-none text-primary sm:size-4 md:size-5">
+          <span className="absolute -right-2 -top-2 flex size-3 items-center justify-center rounded-full bg-background dark:bg-white text-xxs font-semibold leading-none text-primary sm:size-4 md:size-5">
             {cartItems.length}
           </span>
         </button>

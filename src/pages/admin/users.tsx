@@ -77,7 +77,7 @@ function StatsCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+    <div className="rounded-2xl border border-border bg-background p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-text/60">{title}</p>
@@ -202,7 +202,7 @@ export default function DashboardUsers() {
         </div>
 
         {/* FILTERS */}
-        <div className="rounded-2xl border border-border bg-surface p-4 shadow-sm">
+        <div className="rounded-2xl border border-border bg-background p-4 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="relative w-full lg:max-w-md">
               <HugeiconsIcon
@@ -244,7 +244,7 @@ export default function DashboardUsers() {
         </div>
 
         {/* TABLE */}
-        <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+        <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-border">
               <thead className="bg-muted">

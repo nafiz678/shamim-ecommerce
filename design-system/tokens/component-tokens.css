@@ -1,5 +1,5 @@
 :root {
-  --component-button-default-bg: var(--global-color-gray-00);
+  --component-button-default-bg: var(--global-color-gray-100);
   --component-button-default-border: var(--global-color-gray-300);
   --component-button-default-text: var(--global-color-gray-900);
   --component-button-primary-bg: var(--global-color-primary-500);
