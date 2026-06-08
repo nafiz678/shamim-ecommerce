@@ -14,7 +14,7 @@ export const Route = createFileRoute("/(public)/unauthorized")({
 function UnauthorizedPage() {
   return (
     <div className="flex items-center justify-center bg-background px-6 py-12">
-      <div className="w-full max-w-xl overflow-hidden rounded-3xl border border-border bg-surface shadow-lg">
+      <div className="w-full max-w-xl overflow-hidden rounded-3xl border border-border shadow-lg">
         {/* toP color */}
         <div className="h-2 w-full bg-primary" />
 
@@ -47,7 +47,7 @@ function UnauthorizedPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             <Button
               href="/"
-              className="group relative h-13 overflow-hidden border border-border bg-surface px-5 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-white"
+              className="group relative h-13 overflow-hidden border border-border bg-background px-5 text-foreground transition-all duration-300 hover:border-primary hover:bg-primary hover:text-background"
             >
               <span className="absolute inset-0 -translate-x-full bg-primary transition-transform duration-300 group-hover:translate-x-0" />
 
