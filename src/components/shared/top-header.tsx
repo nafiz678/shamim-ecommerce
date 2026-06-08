@@ -15,7 +15,7 @@ export default function TopHeading() {
   const [currency, setCurrency] = useState("usd");
 
   return (
-    <div className="bg-primary text-background">
+    <div className="bg-primary text-background dark:text-white">
       <div className="lg:w-[70%] w-[95%] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-1">
         {/* left part */}
         <div className="text-center sm:text-left">
