@@ -1,0 +1,40 @@
+.theme-toggle {
+  position: fixed;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 9999px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 9999;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.theme-toggle:active {
+  transform: translateY(-50%) scale(0.95);
+}
