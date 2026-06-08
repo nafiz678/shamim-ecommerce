@@ -7,7 +7,7 @@ export default function Hero() {
     <>
       <div className="flex items-center flex-col md:flex-row justify-between gap-5">
         {/* left box */}
-        <div className="bg-muted rounded-md relative">
+        <div className="bg-muted-background rounded-md relative">
           <div className="md:pl-14 pl-8 md:pr-8 pr-4 py-8 md:py-16 lg:py-16 xl:py-8 flex md:items-center items-end justify-center">
             {/* text section */}
             <div className="space-y-3 w-[50%]">
@@ -54,7 +54,7 @@ export default function Hero() {
         {/* right side */}
         <div className="space-y-5 lg:w-2/5 w-full">
           {/* top */}
-          <div className="relative flex items-center justify-center bg-[#191C1F] text-background rounded-md overflow-hidden px-4">
+          <div className="relative flex items-center justify-center bg-[#191C1F] text-background dark:text-white rounded-md overflow-hidden px-4">
             {/* title section */}
             <div className="p-3 space-y-4 py-8">
               <span className="uppercase text-xs tracking-tight text-accent">
